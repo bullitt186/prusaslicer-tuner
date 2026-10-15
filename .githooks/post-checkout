@@ -1,0 +1,4 @@
+#!/bin/sh
+# After a branch switch ($3 = 1); skip file checkouts. Rebuilds build/graph.html for the checked-out knowledge.
+[ "$3" = "1" ] || exit 0
+uv run --quiet kg.py fix -q >/dev/null 2>&1 || echo "post-checkout: knowledge graph invalid on this branch; run 'uv run kg.py check'." >&2

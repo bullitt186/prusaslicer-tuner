@@ -1,0 +1,3 @@
+#!/bin/sh
+# After pull/merge: rebuild generated output so build/graph.html matches the pulled knowledge.
+uv run --quiet kg.py fix -q >/dev/null 2>&1 || echo "post-merge: knowledge graph invalid after merge; run 'uv run kg.py check'." >&2

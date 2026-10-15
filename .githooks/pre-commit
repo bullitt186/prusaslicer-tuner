@@ -1,0 +1,27 @@
+#!/bin/sh
+# Enable once per clone: git config core.hooksPath .githooks   (never commit with --no-verify)
+
+# 1. Privacy gate: block added lines matching your private patterns (one ERE per line, '#' comments).
+#    The list lives outside the repo: $PRUSASLICER_TUNER_PRIVATE_PATTERNS or
+#    ~/.config/prusaslicer-tuner/private-patterns.txt. No list, no check.
+P="${PRUSASLICER_TUNER_PRIVATE_PATTERNS:-$HOME/.config/prusaslicer-tuner/private-patterns.txt}"
+if [ -f "$P" ]; then
+  pats=$(mktemp)
+  grep -v -e '^[[:space:]]*#' -e '^[[:space:]]*$' "$P" > "$pats"
+  leak=0
+  if [ -s "$pats" ]; then
+    git diff --cached --name-only --diff-filter=AM > "$pats.files"
+    while IFS= read -r f; do
+      hits=$(git diff --cached -U0 --no-color -- "$f" | grep '^+' | grep -v '^+++' | grep -i -E -o -f "$pats" | sort -u)
+      [ -n "$hits" ] && { echo "privacy gate: $f contains private pattern(s): $(echo $hits)" >&2; leak=1; }
+    done < "$pats.files"
+  fi
+  rm -f "$pats" "$pats.files"
+  [ $leak = 0 ] || { echo "Move environment-specific facts to your own notes/skill, then re-stage." >&2; exit 1; }
+fi
+
+# 2. Knowledge graph: block an invalid or un-integrated graph.
+# ponytail: checks the working tree, not the staged snapshot; stage everything you changed in knowledge/.
+git diff --cached --quiet -- knowledge kg.py kg_viewer.html test_kg.py prusaslicer_keys.json research && exit 0
+uv run --quiet kg.py check -q || { echo "kg check failed: fix the errors, run 'uv run kg.py fix', re-stage." >&2; exit 1; }
+uv run --quiet test_kg.py >/dev/null || { echo "test_kg.py failed." >&2; exit 1; }

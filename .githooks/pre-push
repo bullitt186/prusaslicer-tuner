@@ -1,0 +1,4 @@
+#!/bin/sh
+# Last local gate before GitHub (CI re-runs the same checks and mails on failure).
+uv run --quiet kg.py check -q && uv run --quiet test_kg.py >/dev/null && python3 test_profiles.py >/dev/null || {
+  echo "pre-push: knowledge graph or tests failing; push aborted." >&2; exit 1; }

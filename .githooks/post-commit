@@ -1,0 +1,4 @@
+#!/bin/sh
+# Keep the local graph viewer (build/graph.html) in sync with the committed graph.
+git diff --quiet HEAD~1 HEAD -- knowledge kg_viewer.html 2>/dev/null && exit 0
+uv run --quiet kg.py build -q >/dev/null 2>&1 || echo "post-commit: graph viewer rebuild failed (run 'uv run kg.py build')." >&2

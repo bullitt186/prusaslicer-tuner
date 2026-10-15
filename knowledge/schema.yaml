@@ -1,0 +1,115 @@
+# Knowledge graph schema: concept types, the fixed predicate list and controlled vocabularies.
+# kg.py reads this file; changing it changes what is valid. Field names follow SKOS where one exists:
+#   title = skos:prefLabel (kept as `title` because OKF requires it), altLabel = skos:altLabel,
+#   description = skos:definition, broader/related = skos:broader/skos:related.
+# Concept ID = path below knowledge/ without ".md" (e.g. defects/stringing). Generated nodes: key/<prusaslicer key>, klipper/<param>, prusa-fw/<param>.
+base_iri: https://github.com/bullitt186/prusaslicer-tuner/blob/main/knowledge/  # for a future JSON-LD/Turtle export
+
+# Folder -> concept type. Root-level files (index, log, maintenance, schema) are bundle infrastructure.
+folders:
+  defects: problem
+  causes: cause
+  tuning: procedure
+  materials: material
+  hardware: component
+  fundamentals: concept
+  slicer: concept
+  firmware: concept
+  mechanical-properties: concept
+  troubleshooting: concept
+
+# Index catalog sections, in order.
+sections:
+  troubleshooting: Diagnosis (start here for a symptom)
+  defects: Problems (defects)
+  causes: Causes
+  tuning: Procedures (tuning)
+  materials: Materials
+  slicer: Slicer
+  fundamentals: Fundamentals
+  hardware: Hardware
+  firmware: Firmware
+  mechanical-properties: Mechanical properties
+  "": Bundle maintenance
+
+# Typed relations. Only `inverse` names are generated; never write them in frontmatter.
+#   target: the item key naming the target concept (null = plain list of IDs)
+#   qualifiers: allowed item keys besides the target; `required` lists mandatory ones
+predicates:
+  caused_by:
+    label: Caused by
+    inverse: causes
+    inverse_label: Causes
+    domain: [problem]
+    range: [cause]
+    target: cause
+    qualifiers: [rank, evidence, when, source, note]
+    required: [rank, evidence]
+  fixed_by:
+    label: Fixed by
+    inverse: fixes
+    inverse_label: Fixes
+    domain: [cause]
+    range: [procedure, material, component, concept]
+    target: procedure       # optional: a fix can be settings (`sets`) and/or a physical `action` only
+    qualifiers: [action, sets, source, note]
+    required: [action]
+  prone_to:
+    label: Prone to
+    inverse: affects
+    inverse_label: Materials prone to this
+    domain: [material]
+    range: [problem]
+    target: problem
+    qualifiers: [via, evidence, when, source, note]
+    required: [evidence]
+  calibrates:
+    label: Calibrates
+    inverse: calibrated_by
+    inverse_label: Calibrated by
+    domain: [procedure]
+    range: [key, firmware_param]
+    target: null
+  broader:
+    label: Broader
+    inverse: narrower
+    inverse_label: Narrower
+    domain: [problem, cause, procedure, material, component, concept]
+    range: [problem, cause, procedure, material, component, concept]
+    target: null
+  related:
+    label: Related
+    inverse: related
+    inverse_label: Related
+    domain: [problem, cause, procedure, material, component, concept]
+    range: [problem, cause, procedure, material, component, concept]
+    target: null
+
+# Generated relations (never authored): key/filament_X overrides key/X; every key/param has set_in.
+generated_predicates:
+  overrides: {label: Overrides, inverse_label: Overridden by}
+  set_in: {label: Set in}
+
+evidence: [A, B, C, D]        # A spec/measurement, B official docs, C repeated community, D anecdote
+directions: [up, down, set, enable, disable, check]
+
+# Closed facet vocabularies (frontmatter `facets:` and edge qualifier `when:`).
+# `when.material` takes material concept IDs (short form `petg` = materials/petg).
+facets:
+  phase: [first-layer, extrusion, retraction-travel, cooling, walls-seams, top-bottom, infill, supports-bridges, motion, adhesion-warping, thermal, material-handling, mechanics, firmware, model]
+  printer_family: [voron-2.4, voron-0, prusa-core-one, prusa-mk3.5, ender-3-s1, bowden, direct-drive, any]
+
+# Firmware-side parameters (not slicer keys). ID = <namespace>/<name>.
+firmware_params:
+  klipper: [pressure_advance, pressure_advance_smooth_time, rotation_distance, firmware_retraction, max_accel, minimum_cruise_ratio, square_corner_velocity, input_shaper, run_current, z_offset, bed_mesh, max_temp]
+  prusa-fw: [linear_advance, z_offset, e_steps]
+
+# Graph completeness rules, switched on once the migration of a concept type is complete.
+require:
+  problem_has_cause: true      # every problem has >= 1 caused_by
+  cause_has_fix: true          # every cause has >= 1 fixed_by
+  cause_has_check: true        # every cause has a discriminating `check`
+  material_has_prone_to: false  # off: filament-moisture and engineering-materials are process topics, not single materials
+  altlabel_on_new_types: true  # problems and causes need >= 1 altLabel
+  v02_provenance: true        # every doc (except index/log) has `sources` + `generated`
+  no_dead_ends: true          # every topic links or relates to at least one other topic

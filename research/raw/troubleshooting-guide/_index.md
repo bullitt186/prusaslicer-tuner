@@ -1,0 +1,83 @@
+# Troubleshooting Guide dataset, split (https://github.com/hyungjungkim/3D-printing-troubleshooting-guide @ cedd5fb)
+
+Kang, J., Ahn, K., Kim, H. (Konkuk University): 3D Printing Troubleshooting Guide dataset, CC BY 4.0, https://data.mendeley.com/datasets/88pcwt65yp
+
+63 FDM entries; 12 resin/SLA entries skipped.
+
+- `simplify3d-01-not-extruding-at-start-of-print.md`: Not Extruding at Start of Print — Extruder was not primed before beginning the print; Nozzle starts too close to the bed; The filament has stripped against the drive gear; The extruder is clogged
+- `simplify3d-02-not-sticking-to-the-bed.md`: Not Sticking to the Bed — Build platform is not level; Nozzle starts too far away from bed; First layer is printing too fast; Temperature or cooling settings; The build platform surface (tape, glues, and materials); Brims and Rafts
+- `simplify3d-03-under-extrusion.md`: Under-Extrusion — Incorrect filament diameter; Increase the extrusion multiplier; First layer calibration too close; Slicer settings; Nozzle; Using specialty nozzles; Extruder gears; Insufficient hotend cooling; Filament
+- `simplify3d-04-over-extrusion.md`: Over-Extrusion
+- `simplify3d-05-gaps-in-top-layers.md`: Gaps in Top Layers — Not enough top solid layers; Infill percentage is too low; Under-Extrusion
+- `simplify3d-06-stringing-or-oozing.md`: Stringing or Oozing — Retraction distance; Retraction speed; Temperature is too high; Long movements over open spaces; Movement Speed; Solution #2; Stringing from material left on the nozzle; The retraction settings; Other settings that affect retraction:; Filament; Hotend; Enough settings, pass me my heat-gun.
+- `simplify3d-07-overheating.md`: Overheating — Insufficient Cooling; Printing at too high of a temperature; Printing too fast; Try printing multiple parts at once
+- `simplify3d-08-layer-shifting.md`: Layer Shifting — Toolhead is moving too fast; Mechanical or Electrical Issues
+- `simplify3d-09-layer-separation-and-splitting.md`: Layer Separation and Splitting — Layer height is too large; Print temperature is too low; Solution #2; How to prevent Layer separation and Splitting; Flow-rate / extrusion multiplier
+- `simplify3d-10-grinding-filament.md`: Grinding Filament — Aggressive Retraction Settings; Increase the extruder temperature; Printing too fast; Check for a nozzle clog
+- `simplify3d-11-clogged-extruder.md`: Clogged Extruder — Manually push the filament into the extruder; Reload the filament; Clean out the nozzle
+- `simplify3d-12-stops-extruding-mid-print.md`: Stops Extruding Mid Print — Out of filament; The filament has stripped against the drive gear; The extruder is clogged; Overheated extruder motor driver
+- `simplify3d-13-weak-infill.md`: Weak Infill — Try alternate infill patterns; Lower the print speed; Increase the infill extrusion width
+- `simplify3d-14-blobs-and-zits.md`: Blobs and Zits — Retraction and coasting settings; Avoid unnecessary retractions; Non-stationary retractions; Choose the location of your start points
+- `simplify3d-15-gaps-between-infill-and-outline.md`: Gaps Between Infill and Outline — Not enough outline overlap; Printing too fast
+- `simplify3d-16-curling-or-rough-corners.md`: Curling or Rough Corners
+- `simplify3d-17-scars-on-top-surface.md`: Scars on Top Surface — Extruding too much plastic; Vertical lift (Z-hop)
+- `simplify3d-18-gaps-in-floor-corners.md`: Gaps in Floor Corners — Not enough perimeters; Not enough top solid layers; Infill percentage is too low
+- `simplify3d-19-lines-on-the-side-of-print.md`: Lines on the Side of Print — Inconsistent extrusion; Temperature variation; Mechanical issues
+- `simplify3d-20-vibrations-and-ringing.md`: Vibrations and Ringing — Printing too fast; Firmware acceleration; Mechanical issues
+- `simplify3d-21-gaps-in-thin-walls.md`: Gaps in Thin Walls — Adjust the thin wall behavior; Change the extrusion width to fit better
+- `simplify3d-22-small-features-not-printed.md`: Small Features Not Printed — Enable single extrusion walls; Redesign the part to have thicker features; Install a nozzle with a smaller tip size
+- `simplify3d-23-inconsistent-extrusion.md`: Inconsistent Extrusion — Filament is getting stuck or tangled; Clogged Extruder; Very low layer height; Incorrect extrusion width; Poor quality filament; Mechanical extruder issues
+- `simplify3d-24-warping.md`: Warping — Use a Heated Bed; Disable Fan Cooling; Use a Heated Enclosure; Brims and Rafts; Troubleshooting
+- `simplify3d-25-poor-surface-above-supports.md`: Poor Surface Above Supports — Lower Your Layer Height; Support Infill Percentage; Vertical Separation Layers; Horizontal Part Offset; Use a Second Extruder
+- `simplify3d-26-dimensional-accuracy.md`: Dimensional Accuracy — First Layer Impact; Under or Over-Extrusion; Constant Dimensional Error; Increasing Dimensional Error
+- `simplify3d-27-poor-bridging.md`: Poor Bridging — Verify bridging settings are being used; Check the angle used for the bridging infill; Adjust settings for optimal performance; Use supports for longer bridges
+- `prusa-kb-28-first-layer-issues.md`: First Layer Issues — How to prepare your print surface; Resurface it; The nozzle is too close/far from the sheet (MK2/MK2.5/MK3/MK3.5); Speed and temperature; A full or partial clog; Uneven surface; Brim; Expansion joints (MK4, MK3.9, MK3.5); Nozzle conditions (MK4, MK3.9, XL); LoadCell check (MK4, MK3.9, XL); Mechanical checks (XL)
+- `prusa-kb-29-layer-shifting.md`: Layer Shifting — Check your printer’s power mode; Make sure the extruder and the heatbed can move freely; Check your X/Y axis motors and pulleys; Check the tension of your belts; Print geometry and settings
+- `all3dp-01-out-of-filament.md`: Out of Filament — Check the filament reel
+- `all3dp-02-nozzle-too-close-to-print-bed.md`: Nozzle Too Close to Print Bed — Z-AXIS OFFSET; LOWER THE PRINT BED
+- `all3dp-03-blocked-nozzle.md`: Blocked Nozzle — UNBLOCK WITH A NEEDLE; PUSH OLD FILAMENT THROUGH; DISMANTLE AND REBUILD THE HOT END
+- `all3dp-04-print-head-misses-the-bed.md`: Print Head Misses the Bed — CHECK SLICER FOR CORRECT PRINTER; UPDATE FIRMWARE; CHECK END STOPS
+- `all3dp-05-snapped-filament.md`: Snapped Filament — REMOVE THE FILAMENT; TRY ANOTHER FILAMENT; LOOSEN THE IDLER TENSION; CHECK THE NOZZLE; CHECK FLOW RATE AND TEMPERATURE
+- `all3dp-06-stripped-filament.md`: Stripped Filament — HELP FEED THE SYSTEM; ADJUST THE IDLER TENSION; REMOVE THE FILAMENT; CHECK THE HOT END TEMPERATURE
+- `all3dp-07-extrusion-stopped-mid-print.md`: Extrusion Stopped Mid-Print — CHECK YOU HAVE ENOUGH FILAMENT; CHECK FOR STRIPPED FILAMENT; CHECK FOR A CLOGGED NOZZLE; CHECK FOR SNAPPED FILAMENT
+- `all3dp-08-print-doesn-t-stick-to-print-bed.md`: Print Doesn't Stick to Print Bed — ADD TEXTURE; LEVEL THE PRINT BED; ADJUST THE NOZZLE HEIGHT; CLEAN THE PRINT PLATFORM; APPLY BUILD PLATE ADHESION; ADD SUPPORTS
+- `all3dp-09-supports-fell-apart.md`: Supports Fell Apart — SELECT THE CORRECT SUPPORTS; ADD PLATFORM ADHESION; INCREASE THE SUPPORT DENSITY; CREATE IN-MODEL SUPPORTS; CHANGE FILAMENT; CHECK EVERYTHING IS TIGHT
+- `all3dp-10-first-layer-is-messy.md`: First Layer is Messy — LEVEL THE PRINT BED; LOWER BED TEMPERATURE
+- `all3dp-11-print-bows-out-at-bottom-elephant-s-foot.md`: Print Bows Out at Bottom (Elephant's Foot) — BALANCE BED TEMP \& COOLING; LEVEL PRINT BED; RAISE THE NOZZLE; CHAMFER THE BASE
+- `all3dp-12-print-edges-are-bending-warping.md`: Print Edges are Bending (Warping) — USE A HEATED PRINT PLATFORM; APPLY AN ADHESIVE TO THE PRINT BED; TRY A DIFFERENT PLATFORM TYPE; LEVEL THE PRINT PLATFORM; INCREASE CONTACT; ADJUST ADVANCED TEMPERATURE SETTINGS
+- `all3dp-13-infill-looks-messy-and-incomplete.md`: Infill Looks Messy and Incomplete — CHECK THE FILL DENSITY; DECREASE INFILL SPEED; CHANGE THE INFILL PATTERN; CHECK YOUR NOZZLE
+- `all3dp-14-gaps-between-infill-and-outer-wall.md`: Gaps Between Infill and Outer Wall — CHECK THE INFILL OVERLAP; PRINT INFILL BEFORE THE PERIMETER SHELL; INCREASE HOT END TEMPERATURE; LOWER PRINT SPEED
+- `all3dp-15-infill-is-visible-from-the-outside.md`: Infill is Visible from the Outside — CHECK THE SHELL THICKNESS; INCREASE THE SHELL THICKNESS; USE INFILL AFTER PERIMETERS; CHECK PRINT PLATFORM; PRINT SHELLS TO YOUR ADVANTAGE
+- `all3dp-16-cracks-have-appeared-in-tall-objects.md`: Cracks Have Appeared in Tall Objects — EXTRUDER TEMPERATURE; FAN DIRECTION AND SPEED
+- `all3dp-17-layers-don-t-line-up-well.md`: Layers Don't Line Up Well — CHECK THE BELTS PART I; CHECK THE BELTS PART II; CHECK THE RODS ARE CLEAN AND OILED; CHECK FOR BENT OR MISALIGNED RODS PART I; CHECK FOR BENT OR MISALIGNED RODS PART II; CHECK THE DRIVE PULLEYS
+- `all3dp-18-some-layers-are-missing.md`: Some Layers are Missing — MECHANICAL CHECK; ROD ALIGNMENT CHECK; WORN BEARING; CHECK FOR OIL; UNDER-EXTRUSION
+- `all3dp-19-print-leans-when-it-shouldn-t.md`: Print Leans When it Shouldn't — CHECK X- AND Y-AXIS; CHECK THE BELTS AREN’T RUBBING; TIGHTEN THE STEPPER MOTOR COUPLER GRUB SCREW; CHECK ROD PULLEYS
+- `all3dp-20-overhangs-are-messy.md`: Overhangs are Messy — ADD SUPPORTS; CREATE IN-MODEL SUPPORTS; CREATE A SUPPORT PLATFORM; ANGLE THE WALLS; BREAK THE PART APART
+- `all3dp-21-surface-areas-beneath-supports-are-rough.md`: Surface Areas Beneath Supports are Rough — CHECK SUPPORT PLACEMENT; CHECK THE CAPABILITY OF YOUR PRINTER; ADJUST THE SUPPORT PATTERN; REDUCE SUPPORT DENSITY; REDUCE PRINT TEMPERATURE; DUAL EXTRUSION \& SOLUBLE SUPPORT MATERIALS
+- `all3dp-22-print-is-unusually-weak-looks-wrong-non-manifold-edges.md`: Print is Unusually Weak/Looks Wrong (Non-Manifold Edges) — USE LATEST SLICER SOFTWARE; FIX USING STL FILE REPAIR SOFTWARE; FIX ‘NON-MANIFOLD’ IN SIMPLIFY3D; USE THE LAYER VIEW; USE MODELING SOFTWARE TO FIX ISSUES; MERGE OBJECTS
+- `all3dp-23-fine-detail-not-printing-correctly.md`: Fine Detail Not Printing Correctly — INCREASE THE RESOLUTION; NOZZLE DIAMETER; MAINTAIN YOUR PRINTER; CLEAN YOUR NOZZLE; SLOW IT DOWN; USE QUALITY FILAMENT; CHECK PLATFORM LEVEL
+- `all3dp-24-ripples-and-echoes-in-print-ringing.md`: Ripples and "Echoes" in Print (Ringing) — REDUCE VIBRATIONS; CHECK THE BEARINGS; MAKE SURE EVERYTHING IS TIGHT; ADD OIL; SLOW DOWN THE PRINT; ADJUST THE FIRMWARE ACCELERATION
+- `all3dp-25-diagonal-scars-on-print.md`: Diagonal Scars on Print — COMBING; RETRACTION; CHECK THE EXTRUSION; NOZZLE TEMPERATURE; Z-LIFT
+- `all3dp-26-print-looks-stringy-and-droopy-over-extrusion.md`: Print Looks Stringy and Droopy (Over-Extrusion) — EXTRUSION MULTIPLIER; FLOW SETTING
+- `all3dp-27-print-layers-look-uniformly-thin-weak-under-extrusion.md`: Print Layers Look Uniformly Thin/Weak (Under-Extrusion) — CHECK THE FILAMENT DIAMETER; MEASURE THE FILAMENT; CHECK THE HOT END FOR DEBRIS; SET THE EXTRUSION MULTIPLIER
+- `all3dp-28-print-looks-melted-and-deformed.md`: Print Looks Melted and Deformed — CHECK THE RECOMMENDED MATERIAL SETTINGS; DECREASE HOT END TEMPERATURE; INCREASE PRINT SPEED; ADJUST FANS
+- `all3dp-29-pits-and-hollows-in-top-layer-pillowing.md`: Pits and Hollows in Top Layer (Pillowing) — FILAMENT SIZE; CHECK THE FAN POSITION; SET FAN SPEED IN G-CODE; INCREASE TOP LAYER THICKNESS
+- `all3dp-30-web-like-strings-cover-the-print-stringing.md`: Web-like Strings Cover the Print (Stringing) — ENABLE RETRACTION; MINIMUM TRAVEL (MM); JUST CUT THEM OFF
+- `all3dp-31-print-has-lost-dimensional-accuracy.md`: Print Has Lost Dimensional Accuracy — CHECK WORKING UNIT OF MEASUREMENT; DOUBLE-CHECK THE MEASUREMENTS; OVER-SCALE SCREW HOLES; INCREASE POLYGON COUNT; TEST PRINTER ACCURACY WITH TEST CUBE; CHECK NOZZLE TEMPERATURE; CHECK BELTS AND RAILS
+- `all3dp-32-print-offset-in-some-places.md`: Print Offset in Some Places — CHECK THE PRINTER HAS A STABLE BASE; CHECK THE PRINT BED IS SECURE; WATCH FOR WARPED UPPER LAYERS; REDUCE PRINT SPEED; CHECK THE BELTS; CHECK THE DRIVE COUPLERS; CLEAN AND OIL THE RODS; CHECK FOR DEFORMED RODS
+- `all3dp-33-bridges-are-messy.md`: Bridges are Messy — CHECK THE BRIDGING CAPABILITIES; ADD SUPPORTS; INCREASE FAN SPEEDS; DECREASE EXTRUSION SPEED; USE SIMPLIFY3D
+- `all3dp-34-print-is-stuck-to-print-bed.md`: Print is Stuck to Print Bed — HAVE A LITTLE PATIENCE; USE A PALETTE KNIFE; GIVE THE PRINT PLATFORM A CLEAN; STICK IT IN THE OVEN; DON’T USE CHEAP FILAMENT; MAKE SOME HOLES
+
+Skipped (resin/SLA):
+- prusa-kb #30 Print doesn't appear / Resin does not solidify
+- prusa-kb #31 Watertight Prints
+- prusa-kb #32 Object missing details
+- prusa-kb #33 Scratches/bubbles on prints
+- all3dp #35 Resin too Cold
+- all3dp #36 Printing too Fast
+- all3dp #37 Underpowered Laser
+- all3dp #38 Prints Not Adhering to Print Plate
+- all3dp #39 A Section of the Print/Supports Detached or Moved
+- all3dp #40 Layers Have Separated (Delamination)
+- all3dp #41 Small Fins and Disks Attached to Print (Ragging)
+- all3dp #42 Fine Details of the Print are Lost

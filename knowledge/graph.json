@@ -1,0 +1,7501 @@
+{
+ "version": 1,
+ "base_iri": "https://github.com/bullitt186/prusaslicer-tuner/blob/main/knowledge/",
+ "nodes": {
+  "causes/acceleration-too-high": {
+   "type": "cause",
+   "label": "Acceleration or corner velocity too high",
+   "altLabel": [
+    "accel too high",
+    "square corner velocity too high",
+    "Beschleunigung zu hoch"
+   ],
+   "description": "High accelerations excite resonances, cause bulging at corners and can skip steps.",
+   "path": "causes/acceleration-too-high.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   },
+   "check": "Print at lower acceleration (or run TEST_SPEED); ringing, bulges or shifts shrink."
+  },
+  "causes/adhesion-too-strong": {
+   "type": "cause",
+   "label": "Adhesion too strong",
+   "altLabel": [
+    "print stuck to bed",
+    "Druck klebt fest"
+   ],
+   "description": "Large contact areas, glue build-up or materials like PETG on smooth PEI bond too well.",
+   "path": "causes/adhesion-too-strong.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "The part releases only after full cooling or with a release agent."
+  },
+  "causes/bed-not-level-or-unmeshed": {
+   "type": "cause",
+   "label": "Bed not level or mesh missing",
+   "altLabel": [
+    "no bed mesh",
+    "gantry out of square",
+    "Bett nicht gelevelt",
+    "kein Bed Mesh"
+   ],
+   "description": "Nozzle height varies across the bed when the gantry is racked or no heat-soaked mesh is used.",
+   "path": "causes/bed-not-level-or-unmeshed.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Squish patches across the bed differ; PROBE_ACCURACY and mesh range show it."
+  },
+  "causes/bed-temp-too-high": {
+   "type": "cause",
+   "label": "Bed temperature too high",
+   "altLabel": [
+    "Bett zu heiß",
+    "Druckbett zu heiß"
+   ],
+   "description": "Lower layers stay soft and sag under the weight of the part.",
+   "path": "causes/bed-temp-too-high.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Bottom flare shrinks with a cooler bed (5 °C steps as a starting value)."
+  },
+  "causes/bed-temp-too-low": {
+   "type": "cause",
+   "label": "Bed temperature too low",
+   "altLabel": [
+    "Bett zu kalt",
+    "Druckbett zu kalt"
+   ],
+   "description": "The first layer does not stay soft enough to bond and contracts early.",
+   "path": "causes/bed-temp-too-low.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Adhesion improves with a hotter bed (5–10 °C steps as a starting value, within the material window)."
+  },
+  "causes/belt-or-pulley-artifacts": {
+   "type": "cause",
+   "label": "Belt or pulley tooth artifacts",
+   "altLabel": [
+    "2 mm artifacts",
+    "belt teeth",
+    "Riemenzahn-Artefakte"
+   ],
+   "description": "Belt, pulley or idler teeth print as fine vertical lines at about the tooth pitch (≈2 mm).",
+   "path": "causes/belt-or-pulley-artifacts.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Measure artifact spacing on the wall; ≈2 mm points to belt-path parts."
+  },
+  "causes/bridge-flow-or-speed-wrong": {
+   "type": "cause",
+   "label": "Bridge flow or speed wrong",
+   "altLabel": [
+    "bridge flow ratio",
+    "Brückenfluss"
+   ],
+   "description": "Bridge flow above 100 % sags and bulges the layers above; too fast bridges droop.",
+   "path": "causes/bridge-flow-or-speed-wrong.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   },
+   "check": "Problems only above bridges; preview shows bridge detection and direction."
+  },
+  "causes/brittle-filament": {
+   "type": "cause",
+   "label": "Brittle filament snaps",
+   "altLabel": [
+    "snapped filament",
+    "Filament bricht",
+    "sprödes Filament"
+   ],
+   "description": "Old, sun-exposed or cheap filament becomes brittle and snaps in the feed path, often unseen in a Bowden tube.",
+   "path": "causes/brittle-filament.md",
+   "facets": {
+    "phase": [
+     "material-handling"
+    ]
+   },
+   "check": "Filament breaks when bent by hand; a fresh spool feeds fine."
+  },
+  "causes/chamber-too-cold": {
+   "type": "cause",
+   "label": "Chamber too cold for the material",
+   "altLabel": [
+    "no heat soak",
+    "Bauraum zu kalt",
+    "kein Heat Soak"
+   ],
+   "description": "Shrinking materials (ABS, ASA, PC, PA) build stress against a cool chamber and lift or crack.",
+   "path": "causes/chamber-too-cold.md",
+   "facets": {
+    "phase": [
+     "adhesion-warping"
+    ]
+   },
+   "check": "Warping drops with an enclosed, heat-soaked chamber."
+  },
+  "causes/chamber-too-hot-for-material": {
+   "type": "cause",
+   "label": "Chamber too hot for the material",
+   "altLabel": [
+    "PLA in enclosure",
+    "Bauraum zu warm"
+   ],
+   "description": "Low-temperature materials like PLA soften and heat-creep in a closed, warm chamber.",
+   "path": "causes/chamber-too-hot-for-material.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "Problems disappear with doors open or panels removed."
+  },
+  "causes/contaminated-build-surface": {
+   "type": "cause",
+   "label": "Contaminated build surface",
+   "altLabel": [
+    "greasy bed",
+    "fingerprints",
+    "verschmutztes Druckbett",
+    "Fingerabdrücke"
+   ],
+   "description": "Skin oils and residue block adhesion.",
+   "path": "causes/contaminated-build-surface.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Adhesion returns after washing with dish soap and water."
+  },
+  "causes/elephant-foot-compensation-missing": {
+   "type": "cause",
+   "label": "No elephant-foot compensation",
+   "altLabel": [
+    "Elefantenfuß-Kompensation fehlt"
+   ],
+   "description": "Some first-layer flare is inherent; without compensation the bottom stays wider than the wall.",
+   "path": "causes/elephant-foot-compensation-missing.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Bottom edge wider than the wall even with correct squish."
+  },
+  "causes/elephant-foot-compensation-too-high": {
+   "type": "cause",
+   "label": "Elephant-foot compensation too high",
+   "altLabel": [
+    "Elefantenfuß-Kompensation zu hoch"
+   ],
+   "description": "Over-compensation pulls bottom perimeters apart.",
+   "path": "causes/elephant-foot-compensation-too-high.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Perimeter gaps only in the lowest layers."
+  },
+  "causes/em-too-high": {
+   "type": "cause",
+   "label": "Extrusion multiplier too high",
+   "altLabel": [
+    "flow too high",
+    "overextrusion flow",
+    "Flow zu hoch",
+    "Extrusionsmultiplikator zu hoch"
+   ],
+   "description": "More plastic than the line volume: ridged top surfaces, oversize parts, pushed-out perimeters and extra ooze.",
+   "path": "causes/em-too-high.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Print the EM cubes; top surfaces become smooth and dimensions correct at a lower value."
+  },
+  "causes/em-too-low": {
+   "type": "cause",
+   "label": "Extrusion multiplier too low",
+   "altLabel": [
+    "flow too low",
+    "Flow zu niedrig",
+    "Extrusionsmultiplikator zu niedrig"
+   ],
+   "description": "Less plastic than the line volume: gaps between lines, thin walls and weak bonding everywhere at all speeds.",
+   "path": "causes/em-too-low.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "EM cubes: gaps close at a higher value; the defect does not depend on speed."
+  },
+  "causes/excessive-cooling": {
+   "type": "cause",
+   "label": "Too much part cooling",
+   "altLabel": [
+    "fan too high",
+    "zu viel Kühlung",
+    "Lüfter zu stark"
+   ],
+   "description": "Strong cooling freezes the line before it fuses: weak layers, perimeter separation and warping in shrinking materials.",
+   "path": "causes/excessive-cooling.md",
+   "facets": {
+    "phase": [
+     "cooling"
+    ]
+   },
+   "check": "Lower fan and compare bonding or warping on identical geometry."
+  },
+  "causes/external-perimeter-too-narrow": {
+   "type": "cause",
+   "label": "External perimeter too narrow",
+   "altLabel": [
+    "outer wall too thin",
+    "Außenwand zu schmal"
+   ],
+   "description": "With layer heights above about half the nozzle size, a narrow outer line cannot reach the neighbouring perimeter.",
+   "path": "causes/external-perimeter-too-narrow.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Gaps between outer and inner wall everywhere; layer height > 50 % of the nozzle."
+  },
+  "causes/extruder-gear-backlash-or-wear": {
+   "type": "cause",
+   "label": "Extruder gear backlash, play or wear",
+   "altLabel": [
+    "extruder backlash",
+    "loose grub screw",
+    "worn drive gear",
+    "Extruder-Spiel",
+    "Zahnradspiel"
+   ],
+   "description": "A dead zone on reversal or worn/eccentric gears makes extrusion uneven: repeating texture, inconsistent PA and stringing.",
+   "path": "causes/extruder-gear-backlash-or-wear.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Mark the gears and watch reversals; inspect teeth; wood-grain texture with a fixed period points here."
+  },
+  "causes/extruder-motor-current": {
+   "type": "cause",
+   "label": "Extruder motor current wrong",
+   "altLabel": [
+    "extruder stepper current",
+    "Extruder-Motorstrom"
+   ],
+   "description": "Too little current loses steps under load; too much overheats the motor and softens the filament.",
+   "path": "causes/extruder-motor-current.md",
+   "facets": {
+    "phase": [
+     "firmware"
+    ]
+   },
+   "check": "Compare configured run_current with the motor rating (Klipper: keep ≤ 50–60 % of rated as a starting point)."
+  },
+  "causes/extruder-not-calibrated": {
+   "type": "cause",
+   "label": "Extruder not calibrated",
+   "altLabel": [
+    "wrong rotation distance",
+    "wrong e-steps",
+    "Extruder nicht kalibriert"
+   ],
+   "description": "The extruder moves a different length than commanded, so every flow value is scaled wrong.",
+   "path": "causes/extruder-not-calibrated.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Mark and extrude 100 mm slowly; measure the actual length."
+  },
+  "causes/extruder-not-primed": {
+   "type": "cause",
+   "label": "Extruder not primed",
+   "altLabel": [
+    "nozzle not primed",
+    "Düse nicht vorgefüllt"
+   ],
+   "description": "During heat-up the nozzle oozes empty, so the first moves extrude nothing until pressure rebuilds.",
+   "path": "causes/extruder-not-primed.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Extrusion starts a few seconds late or only after the skirt."
+  },
+  "causes/filament-tension-or-drag": {
+   "type": "cause",
+   "label": "Filament tension or path drag",
+   "altLabel": [
+    "spool drag",
+    "tangled filament",
+    "idler tension",
+    "Spule hakt",
+    "Filament verheddert"
+   ],
+   "description": "Too much or too little idler tension, a tangled or binding spool or a tight PTFE path makes feeding inconsistent.",
+   "path": "causes/filament-tension-or-drag.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Pull the filament by hand through the path; check spool rotation and idler marks on the filament."
+  },
+  "causes/first-layer-lines-too-thin": {
+   "type": "cause",
+   "label": "First-layer lines too thin",
+   "altLabel": [
+    "first layer width too small",
+    "erste Schicht zu dünn"
+   ],
+   "description": "Narrow first-layer lines have little contact area.",
+   "path": "causes/first-layer-lines-too-thin.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Adhesion improves with a wider first layer."
+  },
+  "causes/first-layer-too-fast": {
+   "type": "cause",
+   "label": "First layer printed too fast",
+   "altLabel": [
+    "erste Schicht zu schnell"
+   ],
+   "description": "A fast first layer gets too little time to bond to the build surface.",
+   "path": "causes/first-layer-too-fast.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Adhesion improves when the first layer runs at about half speed."
+  },
+  "causes/frame-thermal-drift": {
+   "type": "cause",
+   "label": "Frame thermal drift",
+   "altLabel": [
+    "thermal expansion",
+    "Z drift",
+    "thermische Drift"
+   ],
+   "description": "Frame and gantry expand during the first hour of chamber heating and shift Z.",
+   "path": "causes/frame-thermal-drift.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "First layer differs between cold and heat-soaked starts."
+  },
+  "causes/heat-creep": {
+   "type": "cause",
+   "label": "Heat creep",
+   "altLabel": [
+    "Wärmekriechen",
+    "heatbreak too hot"
+   ],
+   "description": "Heat rises past the heatbreak, filament softens early and jams; typical for PLA in a warm enclosure or a weak hotend fan.",
+   "path": "causes/heat-creep.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "Jams appear after some time printing and in warm chambers; hotend fan below 100 % or chamber hot."
+  },
+  "causes/infill-line-too-thin": {
+   "type": "cause",
+   "label": "Infill lines too thin",
+   "altLabel": [
+    "infill extrusion width",
+    "Infill-Linien zu dünn"
+   ],
+   "description": "Thin infill lines make weak infill walls; wider lines are stronger at the same density.",
+   "path": "causes/infill-line-too-thin.md",
+   "facets": {
+    "phase": [
+     "infill"
+    ]
+   },
+   "check": "Infill strength improves with a wider infill extrusion width."
+  },
+  "causes/infill-overlap-wrong": {
+   "type": "cause",
+   "label": "Infill/perimeter overlap wrong",
+   "altLabel": [
+    "infill overlap",
+    "Infill-Überlappung"
+   ],
+   "description": "Too much overlap pushes walls out; too little leaves pinholes where infill meets perimeters.",
+   "path": "causes/infill-overlap-wrong.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   },
+   "check": "Pinholes or bulges exactly at the infill/perimeter boundary after EM and PA are tuned."
+  },
+  "causes/infill-too-fast": {
+   "type": "cause",
+   "label": "Infill printed too fast",
+   "altLabel": [
+    "infill speed too high",
+    "Infill zu schnell"
+   ],
+   "description": "Infill usually runs fastest; when the extruder cannot keep up it under-extrudes and fails to bond.",
+   "path": "causes/infill-too-fast.md",
+   "facets": {
+    "phase": [
+     "infill"
+    ]
+   },
+   "check": "Infill becomes solid at about half the speed."
+  },
+  "causes/infill-too-sparse": {
+   "type": "cause",
+   "label": "Infill too sparse",
+   "altLabel": [
+    "infill percentage too low",
+    "zu wenig Infill"
+   ],
+   "description": "Low infill density leaves wide air gaps for top layers and corners to span.",
+   "path": "causes/infill-too-sparse.md",
+   "facets": {
+    "phase": [
+     "infill"
+    ]
+   },
+   "check": "Top gaps shrink when infill density rises (e.g. 30 % → 50 %)."
+  },
+  "causes/insufficient-cooling": {
+   "type": "cause",
+   "label": "Insufficient part cooling",
+   "altLabel": [
+    "not enough fan",
+    "zu wenig Kühlung",
+    "Lüfter zu schwach"
+   ],
+   "description": "Plastic stays soft: sagging bridges, curled overhangs, melted small features.",
+   "path": "causes/insufficient-cooling.md",
+   "facets": {
+    "phase": [
+     "cooling"
+    ]
+   },
+   "check": "Compare with higher fan and a cooler ambient; problems concentrate on small or overhanging features."
+  },
+  "causes/layer-height-too-large": {
+   "type": "cause",
+   "label": "Layer height too large for the nozzle",
+   "altLabel": [
+    "layer too thick",
+    "Schichthöhe zu groß"
+   ],
+   "description": "Each layer must be pressed onto the one below; above about 80 % of the nozzle diameter it is not.",
+   "path": "causes/layer-height-too-large.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Layer separation disappears with layer height ≤ ~80 % of nozzle diameter."
+  },
+  "causes/layer-height-too-small": {
+   "type": "cause",
+   "label": "Layer height too small",
+   "altLabel": [
+    "very low layer height",
+    "Schichthöhe zu klein"
+   ],
+   "description": "A tiny gap under the nozzle restricts flow and makes extrusion uneven.",
+   "path": "causes/layer-height-too-small.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Extrusion evens out at a more typical layer height."
+  },
+  "causes/layer-time-too-short": {
+   "type": "cause",
+   "label": "Layer time too short",
+   "altLabel": [
+    "minimum layer time",
+    "Schichtzeit zu kurz"
+   ],
+   "description": "Small layers are printed before the previous one has solidified.",
+   "path": "causes/layer-time-too-short.md",
+   "facets": {
+    "phase": [
+     "cooling"
+    ]
+   },
+   "check": "Defects only on small cross-sections or tips; printing several parts at once helps."
+  },
+  "causes/load-along-layer-lines": {
+   "type": "cause",
+   "label": "Load along layer lines (orientation)",
+   "altLabel": [
+    "anisotropy",
+    "Belastung entlang der Schichten",
+    "Bauteilausrichtung"
+   ],
+   "description": "FDM parts are weakest across layers; loads that pull layers apart fail regardless of tuning.",
+   "path": "causes/load-along-layer-lines.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   },
+   "check": "Fracture follows one layer plane; strength changes with orientation."
+  },
+  "causes/loose-mechanics": {
+   "type": "cause",
+   "label": "Loose belts, pulleys or toolhead parts",
+   "altLabel": [
+    "belt tension",
+    "loose pulley",
+    "loose toolhead",
+    "Riemenspannung",
+    "lockere Riemenscheibe"
+   ],
+   "description": "Slack belts, loose pulley grub screws or loose toolhead parts let the toolhead lag or slip.",
+   "path": "causes/loose-mechanics.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Check belt tension by frequency, pulley set screws and wobble on the toolhead by hand."
+  },
+  "causes/material-shrinkage": {
+   "type": "cause",
+   "label": "Material shrinkage stress",
+   "altLabel": [
+    "thermal contraction",
+    "Schrumpfung"
+   ],
+   "description": "Cooling plastic contracts; in high-shrink materials the stress beats bed adhesion at sharp corners.",
+   "path": "causes/material-shrinkage.md",
+   "facets": {
+    "phase": [
+     "adhesion-warping"
+    ]
+   },
+   "check": "Lifting starts at sharp corners and grows with part size."
+  },
+  "causes/missing-supports": {
+   "type": "cause",
+   "label": "Unsupported overhang or bridge",
+   "altLabel": [
+    "no supports",
+    "fehlender Support"
+   ],
+   "description": "Overhangs and long bridges beyond the printer's ability need support or redesign.",
+   "path": "causes/missing-supports.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   },
+   "check": "Failure only on steep overhangs or long spans."
+  },
+  "causes/no-z-hop": {
+   "type": "cause",
+   "label": "No z-hop over printed surfaces",
+   "altLabel": [
+    "nozzle drags on top",
+    "kein Z-Hop"
+   ],
+   "description": "Without a small lift the nozzle drags across finished top layers during travel.",
+   "path": "causes/no-z-hop.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Scars follow travel paths over top surfaces."
+  },
+  "causes/non-manifold-mesh": {
+   "type": "cause",
+   "label": "Broken (non-manifold) model",
+   "altLabel": [
+    "non-manifold edges",
+    "defektes Modell",
+    "kaputtes STL"
+   ],
+   "description": "Intersecting or open meshes slice into missing or wrong regions.",
+   "path": "causes/non-manifold-mesh.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   },
+   "check": "The slicer warns about errors, or the layer preview differs from the model."
+  },
+  "causes/nozzle-strike-on-curled-part": {
+   "type": "cause",
+   "label": "Nozzle hits curled print",
+   "altLabel": [
+    "nozzle collision",
+    "Düse kollidiert"
+   ],
+   "description": "Curled overhangs or warped corners catch the nozzle, knocking the toolhead or part.",
+   "path": "causes/nozzle-strike-on-curled-part.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   },
+   "check": "Shift happens at a layer with curling; scuff marks on the part."
+  },
+  "causes/nozzle-temp-too-high": {
+   "type": "cause",
+   "label": "Nozzle temperature too high",
+   "altLabel": [
+    "hotend too hot",
+    "printing too hot",
+    "Düsentemperatur zu hoch",
+    "zu heiß gedruckt"
+   ],
+   "description": "Low melt viscosity lets plastic ooze during travel and small features stay soft.",
+   "path": "causes/nozzle-temp-too-high.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "Print a temperature tower; stringing or sagging that improves at lower steps confirms it."
+  },
+  "causes/nozzle-temp-too-low": {
+   "type": "cause",
+   "label": "Nozzle temperature too low",
+   "altLabel": [
+    "hotend too cold",
+    "printing too cold",
+    "Düsentemperatur zu niedrig",
+    "zu kalt gedruckt"
+   ],
+   "description": "Plastic that is too cold flows poorly and bonds weakly to the previous layer or perimeter; at high flow it can make the extruder skip.",
+   "path": "causes/nozzle-temp-too-low.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "Raise temperature in 5–10 °C steps (starting value) with everything else fixed; better bonding or fewer skips confirm it."
+  },
+  "causes/nozzle-too-large-for-detail": {
+   "type": "cause",
+   "label": "Nozzle too large for the detail",
+   "altLabel": [
+    "nozzle diameter too big",
+    "Düse zu groß"
+   ],
+   "description": "Features smaller than the nozzle cannot be reproduced in XY.",
+   "path": "causes/nozzle-too-large-for-detail.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   },
+   "check": "Missing features are thinner than the nozzle diameter."
+  },
+  "causes/nozzle-worn-or-leaking": {
+   "type": "cause",
+   "label": "Worn, dirty or leaking nozzle",
+   "altLabel": [
+    "damaged nozzle",
+    "nozzle leak",
+    "verschlissene Düse",
+    "undichte Düse"
+   ],
+   "description": "A worn bore, debris or a nozzle that is not hot-tightened changes flow and leaks plastic.",
+   "path": "causes/nozzle-worn-or-leaking.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Inspect the tip and the nozzle threads for plastic; compare with a new nozzle."
+  },
+  "causes/out-of-filament": {
+   "type": "cause",
+   "label": "Out of filament",
+   "altLabel": [
+    "empty spool",
+    "Filament leer",
+    "Spule leer"
+   ],
+   "description": "The spool ran out or the filament end left the extruder.",
+   "path": "causes/out-of-filament.md",
+   "facets": {
+    "phase": [
+     "material-handling"
+    ]
+   },
+   "check": "Check the spool and the filament path to the nozzle."
+  },
+  "causes/overhang-too-fast": {
+   "type": "cause",
+   "label": "Overhangs printed too fast",
+   "altLabel": [
+    "overhang speed",
+    "Überhang zu schnell"
+   ],
+   "description": "Fast overhangs do not get enough time to cool.",
+   "path": "causes/overhang-too-fast.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   },
+   "check": "Overhang quality improves with dynamic overhang speeds."
+  },
+  "causes/pa-smooth-time-too-high": {
+   "type": "cause",
+   "label": "Pressure advance smoothing too long",
+   "altLabel": [
+    "pressure_advance_smooth_time too high",
+    "PA-Glättung zu lang"
+   ],
+   "description": "Klipper smooths PA over a time window; on short top-infill segments a long window leaves excess pressure.",
+   "path": "causes/pa-smooth-time-too-high.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Lower pressure_advance_smooth_time (then re-test PA) and compare small top islands."
+  },
+  "causes/pa-too-high": {
+   "type": "cause",
+   "label": "Pressure advance too high",
+   "altLabel": [
+    "linear advance too high",
+    "PA zu hoch",
+    "Pressure Advance zu hoch"
+   ],
+   "description": "Pressure is pulled too early: gaps at line starts, thin corners and under-extruded starts.",
+   "path": "causes/pa-too-high.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "PA tower: line starts recover at a lower value."
+  },
+  "causes/pa-too-low": {
+   "type": "cause",
+   "label": "Pressure advance too low",
+   "altLabel": [
+    "linear advance too low",
+    "PA zu niedrig",
+    "Pressure Advance zu niedrig"
+   ],
+   "description": "Nozzle pressure lags the toolhead: corners bulge, line ends blob and residual pressure oozes on travel.",
+   "path": "causes/pa-too-low.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Print a PA tower or pattern; sharper corners at a higher value confirm it."
+  },
+  "causes/partial-clog": {
+   "type": "cause",
+   "label": "Partial clog",
+   "altLabel": [
+    "clogged nozzle",
+    "blocked nozzle",
+    "Teilverstopfung",
+    "verstopfte Düse",
+    "clogged extruder"
+   ],
+   "description": "A restricted nozzle or heatbreak limits flow; the extruder skips and extrusion is thin or stops.",
+   "path": "causes/partial-clog.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Manual extrusion at temperature is weak or deflected; a cold pull pulls debris."
+  },
+  "causes/perimeter-order": {
+   "type": "cause",
+   "label": "Perimeter order pushes walls out",
+   "altLabel": [
+    "inner perimeters first",
+    "Perimeter-Reihenfolge"
+   ],
+   "description": "Printing inner walls first lets them push the outer wall outward.",
+   "path": "causes/perimeter-order.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Bulges near features; improves with external perimeters first (can hurt extreme overhangs)."
+  },
+  "causes/poor-filament-quality": {
+   "type": "cause",
+   "label": "Poor or degraded filament",
+   "altLabel": [
+    "cheap filament",
+    "diameter variation",
+    "schlechtes Filament",
+    "Filament-Toleranz"
+   ],
+   "description": "Diameter variation, additives or aged material change the extruded volume from layer to layer.",
+   "path": "causes/poor-filament-quality.md",
+   "facets": {
+    "phase": [
+     "material-handling"
+    ]
+   },
+   "check": "Measure diameter along the spool; compare with a fresh high-quality spool."
+  },
+  "causes/print-speed-too-high": {
+   "type": "cause",
+   "label": "Print speed too high",
+   "altLabel": [
+    "printing too fast",
+    "zu schnell gedruckt",
+    "Geschwindigkeit zu hoch"
+   ],
+   "description": "High feature speeds raise flow demand, vibration and bonding time pressure.",
+   "path": "causes/print-speed-too-high.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   },
+   "check": "Print the same part at reduced speed; the defect shrinks."
+  },
+  "causes/resonance-uncompensated": {
+   "type": "cause",
+   "label": "Resonance not compensated",
+   "altLabel": [
+    "no input shaper",
+    "input shaper not calibrated",
+    "Resonanz",
+    "Input Shaper fehlt"
+   ],
+   "description": "Frame and toolhead resonances echo after sharp features when input shaping is missing or stale.",
+   "path": "causes/resonance-uncompensated.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   },
+   "check": "Ripples decay after corners with a spacing that changes with speed; measure with an accelerometer."
+  },
+  "causes/retraction-excessive": {
+   "type": "cause",
+   "label": "Retraction too long or too fast",
+   "altLabel": [
+    "too much retraction",
+    "Retraktion zu stark",
+    "Rückzug zu lang"
+   ],
+   "description": "Long or fast retractions grind filament, pull molten plastic into the cold zone and jam soft filaments like TPU.",
+   "path": "causes/retraction-excessive.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Clicking or chewed filament near the drive gear after many retractions; problem shrinks with shorter retraction."
+  },
+  "causes/retraction-insufficient": {
+   "type": "cause",
+   "label": "Retraction too short or too slow",
+   "altLabel": [
+    "not enough retraction",
+    "Retraktion zu gering",
+    "Rückzug zu kurz"
+   ],
+   "description": "Pressure is not relieved before travel, so the nozzle oozes between islands.",
+   "path": "causes/retraction-insufficient.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Retraction test: strings shrink as length/speed increase (after PA, EM, temperature and moisture are ruled out)."
+  },
+  "causes/seam-random": {
+   "type": "cause",
+   "label": "Random seam placement",
+   "altLabel": [
+    "random seam",
+    "zufällige Naht"
+   ],
+   "description": "Each layer starts at a new spot, leaving start/stop pits all over the walls.",
+   "path": "causes/seam-random.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Pits scattered on walls, not on one line."
+  },
+  "causes/seam-start-stop-pressure": {
+   "type": "cause",
+   "label": "Seam start/stop pressure",
+   "altLabel": [
+    "seam blob",
+    "restart extra",
+    "Naht-Blob"
+   ],
+   "description": "Pressure at loop starts and ends leaves a zit; extra restart or no wipe makes it worse.",
+   "path": "causes/seam-start-stop-pressure.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Observe one perimeter: the blob is at the start or the end of the loop."
+  },
+  "causes/sheet-not-seated": {
+   "type": "cause",
+   "label": "Sheet not seated flat",
+   "altLabel": [
+    "debris under sheet",
+    "Dreck unter der Platte"
+   ],
+   "description": "Debris under the flex sheet creates a local bump.",
+   "path": "causes/sheet-not-seated.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "A local high spot that moves with the sheet."
+  },
+  "causes/shrinkage-uncompensated": {
+   "type": "cause",
+   "label": "Shrinkage not compensated",
+   "altLabel": [
+    "scaling error",
+    "Schrumpfung nicht kompensiert"
+   ],
+   "description": "Constant errors need an XY offset; errors that grow with part size are shrinkage and need scaling.",
+   "path": "causes/shrinkage-uncompensated.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   },
+   "check": "Measure a small and a large part: same error = offset, proportional error = shrinkage."
+  },
+  "causes/small-contact-area": {
+   "type": "cause",
+   "label": "Small contact area",
+   "altLabel": [
+    "small footprint",
+    "kleine Auflagefläche"
+   ],
+   "description": "Small or sharp-cornered footprints have too little area to resist lifting forces.",
+   "path": "causes/small-contact-area.md",
+   "facets": {
+    "phase": [
+     "adhesion-warping"
+    ]
+   },
+   "check": "Lifting starts at corners or thin feet."
+  },
+  "causes/small-island-geometry": {
+   "type": "cause",
+   "label": "Small top islands (inherent)",
+   "altLabel": [
+    "small infill areas",
+    "kleine Inseln"
+   ],
+   "description": "Short top-infill segments always look slightly overextruded; partly normal.",
+   "path": "causes/small-island-geometry.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   },
+   "check": "Only small islands look rough while wide areas are fine: judge EM on wide areas."
+  },
+  "causes/stepper-driver-or-wiring": {
+   "type": "cause",
+   "label": "Stepper driver or wiring fault",
+   "altLabel": [
+    "overheating driver",
+    "broken wire",
+    "bad crimp",
+    "Treiber überhitzt",
+    "Kabelbruch"
+   ],
+   "description": "Intermittent wiring, poor crimps or overheating drivers lose steps on motion axes or the extruder.",
+   "path": "causes/stepper-driver-or-wiring.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Mark the motor shaft: shuddering points to wiring, no movement to electrics or driver heat."
+  },
+  "causes/stepper-driver-tuning": {
+   "type": "cause",
+   "label": "Stepper driver tuning artifacts",
+   "altLabel": [
+    "TMC tuning",
+    "Treiber-Tuning"
+   ],
+   "description": "Driver chopper settings can add fine periodic wall artifacts on X/Y. Community values are experimental.",
+   "path": "causes/stepper-driver-tuning.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Artifacts only on one motion pair and unchanged by belts/bearings."
+  },
+  "causes/support-interface-settings": {
+   "type": "cause",
+   "label": "Support interface or gap wrong",
+   "altLabel": [
+    "support contact distance",
+    "Support-Abstand"
+   ],
+   "description": "Too little gap welds supports to the part; too much or too sparse a top lets the surface droop.",
+   "path": "causes/support-interface-settings.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   },
+   "check": "The underside is either torn on removal or droopy; vary one support setting at a time."
+  },
+  "causes/support-too-weak": {
+   "type": "cause",
+   "label": "Supports too weak",
+   "altLabel": [
+    "support density too low",
+    "Support zu schwach"
+   ],
+   "description": "Sparse or tall supports wobble, crack or detach mid-print.",
+   "path": "causes/support-too-weak.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   },
+   "check": "Supports look uneven or stringy before the overhang reaches them."
+  },
+  "causes/temperature-fluctuation": {
+   "type": "cause",
+   "label": "Hotend temperature fluctuation",
+   "altLabel": [
+    "PID not tuned",
+    "Temperaturschwankung"
+   ],
+   "description": "A poorly tuned PID loop swings the nozzle temperature cyclically, changing flow layer by layer.",
+   "path": "causes/temperature-fluctuation.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   },
+   "check": "Temperature graph varies by more than about ±2 °C during printing."
+  },
+  "causes/too-few-perimeters": {
+   "type": "cause",
+   "label": "Too few perimeters",
+   "altLabel": [
+    "walls too thin",
+    "zu wenige Wände"
+   ],
+   "description": "Thin shells let infill show through and give step-downs a weak foundation.",
+   "path": "causes/too-few-perimeters.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Defect disappears with more perimeters (e.g. 2 → 4)."
+  },
+  "causes/too-many-retractions": {
+   "type": "cause",
+   "label": "Unnecessary retractions",
+   "altLabel": [
+    "too many retractions",
+    "unnötige Retraktionen"
+   ],
+   "description": "Every retract/prime cycle risks a zit; retracting on moves that never cross open space adds defects for nothing.",
+   "path": "causes/too-many-retractions.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Zits sit at travel starts inside a single island."
+  },
+  "causes/top-layers-insufficient": {
+   "type": "cause",
+   "label": "Too few top solid layers",
+   "altLabel": [
+    "top layers too thin",
+    "zu wenige Deckschichten"
+   ],
+   "description": "Top solid layers must bridge the infill gaps; a thin top sags into them.",
+   "path": "causes/top-layers-insufficient.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   },
+   "check": "Gaps disappear with more top layers (aim for a top shell of at least ~0.5 mm as a starting point)."
+  },
+  "causes/travel-over-open-space": {
+   "type": "cause",
+   "label": "Travel crosses open air",
+   "altLabel": [
+    "travel over gaps",
+    "Leerfahrten über Lücken"
+   ],
+   "description": "Every travel over empty space is a chance to ooze. Avoiding it only works inside one island; between separate islands the nozzle must cross air.",
+   "path": "causes/travel-over-open-space.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Strings only where travel crosses holes or gaps; compare a preview with avoid crossing perimeters on."
+  },
+  "causes/travel-too-slow": {
+   "type": "cause",
+   "label": "Travel moves too slow",
+   "altLabel": [
+    "slow travel",
+    "Leerfahrt zu langsam"
+   ],
+   "description": "Slow travel gives the nozzle more time to ooze over open space.",
+   "path": "causes/travel-too-slow.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Stringing drops when travel speed rises (if the machine can handle it)."
+  },
+  "causes/unsuitable-build-surface": {
+   "type": "cause",
+   "label": "Unsuitable build surface",
+   "altLabel": [
+    "fake PEI",
+    "wrong plate side",
+    "ungeeignete Druckplatte"
+   ],
+   "description": "Fake or worn PEI, the wrong side of the sheet or a surface that does not suit the material.",
+   "path": "causes/unsuitable-build-surface.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Compare on a known-good genuine sheet."
+  },
+  "causes/volumetric-flow-exceeded": {
+   "type": "cause",
+   "label": "Volumetric flow above the hotend limit",
+   "altLabel": [
+    "max flow exceeded",
+    "hotend can't keep up",
+    "Volumenstrom zu hoch",
+    "Hotend zu langsam"
+   ],
+   "description": "Speed asks for more mm³/s than the hotend can melt: under-extrusion on fast sections, skipping and weak layers.",
+   "path": "causes/volumetric-flow-exceeded.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Defect only on fast sections or high line widths; disappears when slowed down."
+  },
+  "causes/wall-thinner-than-line-width": {
+   "type": "cause",
+   "label": "Wall thinner than the extrusion width",
+   "altLabel": [
+    "thin wall",
+    "Wand dünner als Linienbreite"
+   ],
+   "description": "Walls only a few line widths thick leave gaps, or vanish below one line width.",
+   "path": "causes/wall-thinner-than-line-width.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   },
+   "check": "Preview shows gaps or missing thin features."
+  },
+  "causes/wet-filament": {
+   "type": "cause",
+   "label": "Wet filament",
+   "altLabel": [
+    "moisture",
+    "damp filament",
+    "nasses Filament",
+    "feuchtes Filament",
+    "Feuchtigkeit"
+   ],
+   "description": "Absorbed water boils in the nozzle: popping, steam, ooze, rough walls and weak layers. Common with PETG, nylon, TPU and PC; new spools can be wet too.",
+   "path": "causes/wet-filament.md",
+   "facets": {
+    "phase": [
+     "material-handling"
+    ]
+   },
+   "check": "Extrude into air: popping, hissing or steam bubbles confirm it. Print the same part from a freshly dried spool and compare."
+  },
+  "causes/worn-or-binding-motion-parts": {
+   "type": "cause",
+   "label": "Binding or worn bearings, rails or motors",
+   "altLabel": [
+    "binding rail",
+    "worn bearing",
+    "schwergängige Achse",
+    "verschlissene Lager"
+   ],
+   "description": "Rough bearings, rails or motors add periodic artifacts and resistance that can skip steps.",
+   "path": "causes/worn-or-binding-motion-parts.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   },
+   "check": "Move each axis by hand with motors off; print square samples aligned and at 45° to isolate the axis."
+  },
+  "causes/wrong-filament-diameter": {
+   "type": "cause",
+   "label": "Wrong filament diameter setting",
+   "altLabel": [
+    "filament diameter mismatch",
+    "falscher Filamentdurchmesser"
+   ],
+   "description": "The slicer computes volume from the configured diameter; a mismatch scales all extrusion.",
+   "path": "causes/wrong-filament-diameter.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   },
+   "check": "Measure the filament with calipers at several points and compare with the profile."
+  },
+  "causes/z-offset-too-high": {
+   "type": "cause",
+   "label": "Nozzle too far from the bed",
+   "altLabel": [
+    "too little squish",
+    "z offset too high",
+    "zu wenig gequetscht",
+    "Düse zu hoch"
+   ],
+   "description": "First-layer lines are round and barely touch: poor adhesion, gaps in the second layer, separated bottom perimeters.",
+   "path": "causes/z-offset-too-high.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "Inspect first-layer patches: gaps between lines, rounded tops."
+  },
+  "causes/z-offset-too-low": {
+   "type": "cause",
+   "label": "Nozzle too close to the bed",
+   "altLabel": [
+    "too much squish",
+    "z offset too low",
+    "zu stark gequetscht",
+    "Düse zu tief",
+    "nozzle too close to print bed"
+   ],
+   "description": "Over-squished first layer: flare, rough surface, the extruder struggles on the first layer.",
+   "path": "causes/z-offset-too-low.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   },
+   "check": "First-layer patches are translucent or ridged; skipping only on the first layer."
+  },
+  "causes/zhop-too-high": {
+   "type": "cause",
+   "label": "Z-hop too high",
+   "altLabel": [
+    "excessive z hop",
+    "retract lift too high",
+    "Z-Hop zu hoch"
+   ],
+   "description": "A high lift gives the nozzle time and height to drag a string on every travel.",
+   "path": "causes/zhop-too-high.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   },
+   "check": "Strings appear mainly at travel starts; they shrink with z-hop at 0.2–0.3 mm or off."
+  },
+  "defects/bridging-overhangs": {
+   "type": "problem",
+   "label": "Poor bridges & overhangs",
+   "altLabel": [
+    "sagging bridges",
+    "droopy overhangs",
+    "Brücken hängen durch",
+    "Überhänge",
+    "poor bridging",
+    "messy bridges",
+    "messy overhangs"
+   ],
+   "description": "Sagging bridges, curled/droopy overhangs.",
+   "path": "defects/bridging-overhangs.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   }
+  },
+  "defects/bulging": {
+   "type": "problem",
+   "label": "Bulging",
+   "altLabel": [
+    "walls bulge",
+    "Ausbeulungen",
+    "Beulen"
+   ],
+   "description": "Plastic pushed outward from perimeters — layers, sharp corners, around features, above overhangs.",
+   "path": "defects/bulging.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/dimensional-inaccuracy": {
+   "type": "problem",
+   "label": "Dimensional inaccuracy",
+   "altLabel": [
+    "dimensional accuracy",
+    "wrong size",
+    "Maßhaltigkeit",
+    "Maße stimmen nicht"
+   ],
+   "description": "Printed parts are larger or smaller than designed.",
+   "path": "defects/dimensional-inaccuracy.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   }
+  },
+  "defects/elephant-foot": {
+   "type": "problem",
+   "label": "Elephant foot",
+   "altLabel": [
+    "elephants foot",
+    "bottom flare",
+    "Elefantenfuß",
+    "print bows out at bottom"
+   ],
+   "description": "Bottom layers flare outward beyond the wall line.",
+   "path": "defects/elephant-foot.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   }
+  },
+  "defects/extruder-skipping": {
+   "type": "problem",
+   "label": "Extruder skipping / clicking",
+   "altLabel": [
+    "extruder clicking",
+    "grinding filament",
+    "Extruder klickt",
+    "Extruder rutscht durch",
+    "stripped filament"
+   ],
+   "description": "Wide periodic gaps, clicking extruder; clogs, heat creep, tension, flow above limit, current.",
+   "path": "defects/extruder-skipping.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/extrusion-patterns": {
+   "type": "problem",
+   "label": "Extrusion patterns (\"wood grain\")",
+   "altLabel": [
+    "wood grain",
+    "Holzmaserung",
+    "Extrusionsmuster"
+   ],
+   "description": "Repeating innie-outie texture along lines, often from extruder gear backlash.",
+   "path": "defects/extrusion-patterns.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/extrusion-stops": {
+   "type": "problem",
+   "label": "Extrusion stops mid-print",
+   "altLabel": [
+    "stops extruding mid print",
+    "Extrusion stoppt"
+   ],
+   "description": "The print continues moving but no plastic comes out.",
+   "path": "defects/extrusion-stops.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/first-layer-inconsistency": {
+   "type": "problem",
+   "label": "First layer inconsistency",
+   "altLabel": [
+    "uneven first layer",
+    "ungleichmäßige erste Schicht",
+    "messy first layer"
+   ],
+   "description": "Squish varies across the bed or between prints.",
+   "path": "defects/first-layer-inconsistency.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   }
+  },
+  "defects/inconsistent-extrusion": {
+   "type": "problem",
+   "label": "Inconsistent extrusion",
+   "altLabel": [
+    "uneven extrusion",
+    "bumpy lines",
+    "ungleichmäßige Extrusion"
+   ],
+   "description": "Line width varies along a single straight extrusion.",
+   "path": "defects/inconsistent-extrusion.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/infill-visible-through-walls": {
+   "type": "problem",
+   "label": "Infill visible through walls",
+   "altLabel": [
+    "infill visible from outside",
+    "infill ghosting",
+    "Infill scheint durch"
+   ],
+   "description": "The infill pattern shows through the outer walls.",
+   "path": "defects/infill-visible-through-walls.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/infill-wall-gaps": {
+   "type": "problem",
+   "label": "Gaps between infill and walls",
+   "altLabel": [
+    "gaps between infill and outline",
+    "gaps between infill and outer wall",
+    "Lücken zwischen Infill und Wand"
+   ],
+   "description": "Infill does not fuse to the innermost perimeter.",
+   "path": "defects/infill-wall-gaps.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/layer-shift": {
+   "type": "problem",
+   "label": "Layer shifting",
+   "altLabel": [
+    "layer shifting",
+    "shifted layers",
+    "Schichtversatz",
+    "verschobene Schichten",
+    "layers don't line up",
+    "print leans",
+    "print offset in some places"
+   ],
+   "description": "Horizontal offset between layers — belts, nozzle strikes on curled parts, current, drivers, too much accel.",
+   "path": "defects/layer-shift.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   }
+  },
+  "defects/model-errors": {
+   "type": "problem",
+   "label": "Model errors (non-manifold geometry)",
+   "altLabel": [
+    "print looks wrong",
+    "Modellfehler"
+   ],
+   "description": "Sections are missing or the print differs from the model although the printer works.",
+   "path": "defects/model-errors.md",
+   "facets": {
+    "phase": [
+     "model"
+    ]
+   }
+  },
+  "defects/no-extrusion-at-start": {
+   "type": "problem",
+   "label": "No extrusion at print start",
+   "altLabel": [
+    "not extruding at start of print",
+    "extrudiert nicht am Anfang"
+   ],
+   "description": "Nothing or too little comes out during the first moves or layers.",
+   "path": "defects/no-extrusion-at-start.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   }
+  },
+  "defects/over-extrusion": {
+   "type": "problem",
+   "label": "Over-extrusion",
+   "altLabel": [
+    "overextrusion",
+    "Überextrusion",
+    "zu viel Material",
+    "stringy and droopy"
+   ],
+   "description": "Rough/ridged top surfaces, blobby small areas, dimensional oversize, nozzle dragging through top layers.",
+   "path": "defects/over-extrusion.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/overheating": {
+   "type": "problem",
+   "label": "Overheating (esp. PLA in enclosures)",
+   "altLabel": [
+    "melted features",
+    "PLA overheating",
+    "Überhitzung",
+    "geschmolzene Details",
+    "curling or rough corners",
+    "melted and deformed"
+   ],
+   "description": "Droopy/melted small features, curled overhangs, heat creep jams with PLA in a closed printer.",
+   "path": "defects/overheating.md",
+   "facets": {
+    "phase": [
+     "cooling"
+    ]
+   }
+  },
+  "defects/part-stuck-to-bed": {
+   "type": "problem",
+   "label": "Print stuck to the bed",
+   "altLabel": [
+    "print welded to bed",
+    "PETG sticks too well",
+    "Druck klebt am Bett"
+   ],
+   "description": "The finished part will not release from the build plate.",
+   "path": "defects/part-stuck-to-bed.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   }
+  },
+  "defects/perimeter-separation": {
+   "type": "problem",
+   "label": "Perimeter separation",
+   "altLabel": [
+    "wall separation",
+    "perimeters not bonding",
+    "Perimeter lösen sich"
+   ],
+   "description": "Walls not bonding to each other or layer below — lower layers (elephant foot comp) or everywhere (width, speed, temp).",
+   "path": "defects/perimeter-separation.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/pockmarks": {
+   "type": "problem",
+   "label": "Pockmarks",
+   "altLabel": [
+    "pits",
+    "pinholes on walls",
+    "Löcher in der Wand",
+    "Pockennarben"
+   ],
+   "description": "Small pits on walls — random seam, wet filament, bad nozzle.",
+   "path": "defects/pockmarks.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/poor-bed-adhesion": {
+   "type": "problem",
+   "label": "Poor bed adhesion",
+   "altLabel": [
+    "not sticking to the bed",
+    "first layer not sticking",
+    "haftet nicht",
+    "Betthaftung",
+    "print doesn't stick to bed"
+   ],
+   "description": "Prints don't stick, corners lift, parts pop off mid-print.",
+   "path": "defects/poor-bed-adhesion.md",
+   "facets": {
+    "phase": [
+     "first-layer"
+    ]
+   }
+  },
+  "defects/poor-layer-adhesion": {
+   "type": "problem",
+   "label": "Poor layer adhesion",
+   "altLabel": [
+    "delamination",
+    "layer separation",
+    "layers splitting",
+    "Schichthaftung",
+    "Delamination",
+    "cracks in tall objects",
+    "layer splitting"
+   ],
+   "description": "Layers split under modest force because interlayer bonding is weaker than the applied load or because the process is inconsistent.",
+   "path": "defects/poor-layer-adhesion.md",
+   "facets": {
+    "phase": [
+     "thermal"
+    ]
+   }
+  },
+  "defects/ringing": {
+   "type": "problem",
+   "label": "Ringing / ghosting",
+   "altLabel": [
+    "ghosting",
+    "echoes",
+    "rippling",
+    "Geisterbilder",
+    "Ringing",
+    "vibrations"
+   ],
+   "description": "Echo ripples after sharp corners or features on walls.",
+   "path": "defects/ringing.md",
+   "facets": {
+    "phase": [
+     "motion"
+    ]
+   }
+  },
+  "defects/small-infill-overextruded": {
+   "type": "problem",
+   "label": "Small infill areas look overextruded",
+   "altLabel": [
+    "rough small top areas",
+    "kleine Deckflächen rau"
+   ],
+   "description": "Blobby short top-infill segments in small islands; partly normal.",
+   "path": "defects/small-infill-overextruded.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   }
+  },
+  "defects/stringing": {
+   "type": "problem",
+   "label": "Stringing / oozing",
+   "altLabel": [
+    "oozing",
+    "whiskers",
+    "hairy prints",
+    "spider webs",
+    "Fäden",
+    "Fädenziehen",
+    "Spinnweben",
+    "web-like strings"
+   ],
+   "description": "Thin strings or wisps between separate parts of a print. Usually moisture, temperature, PA or retraction — in that rough order.",
+   "path": "defects/stringing.md",
+   "facets": {
+    "phase": [
+     "retraction-travel"
+    ]
+   }
+  },
+  "defects/support-surface-quality": {
+   "type": "problem",
+   "label": "Poor surface above or below supports",
+   "altLabel": [
+    "poor surface above supports",
+    "rough surface beneath supports",
+    "Support-Oberfläche rau"
+   ],
+   "description": "Surfaces resting on supports droop, or supports leave scars when removed.",
+   "path": "defects/support-surface-quality.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   }
+  },
+  "defects/supports-fail": {
+   "type": "problem",
+   "label": "Supports fail during the print",
+   "altLabel": [
+    "supports fell apart",
+    "Support bricht ab"
+   ],
+   "description": "Support structures crack, wobble or detach before the overhang is printed.",
+   "path": "defects/supports-fail.md",
+   "facets": {
+    "phase": [
+     "supports-bridges"
+    ]
+   }
+  },
+  "defects/thin-walls-and-small-features": {
+   "type": "problem",
+   "label": "Thin walls and small features missing",
+   "altLabel": [
+    "gaps in thin walls",
+    "small features not printed",
+    "fine detail not printing",
+    "dünne Wände fehlen"
+   ],
+   "description": "Thin walls get gaps in the middle or small features do not print.",
+   "path": "defects/thin-walls-and-small-features.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "defects/top-surface-gaps": {
+   "type": "problem",
+   "label": "Gaps or pillowing in top layers",
+   "altLabel": [
+    "gaps in top layers",
+    "pillowing",
+    "pits in top layer",
+    "gaps in floor corners",
+    "Löcher in der Deckschicht",
+    "Kissenbildung"
+   ],
+   "description": "Top surfaces show holes, bumps or gaps where solid layers sag into the infill.",
+   "path": "defects/top-surface-gaps.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   }
+  },
+  "defects/top-surface-scars": {
+   "type": "problem",
+   "label": "Scars on top surfaces",
+   "altLabel": [
+    "diagonal scars",
+    "nozzle drag marks",
+    "Kratzer auf der Oberfläche"
+   ],
+   "description": "Travel moves leave marks across top layers.",
+   "path": "defects/top-surface-scars.md",
+   "facets": {
+    "phase": [
+     "top-bottom"
+    ]
+   }
+  },
+  "defects/under-extrusion": {
+   "type": "problem",
+   "label": "Under-extrusion",
+   "altLabel": [
+    "underextrusion",
+    "gaps between lines",
+    "Unterextrusion",
+    "zu wenig Material",
+    "some layers missing",
+    "uniformly thin layers"
+   ],
+   "description": "Gaps between lines, thin/weak walls, missing layers, holes in top surfaces.",
+   "path": "defects/under-extrusion.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/vfas": {
+   "type": "problem",
+   "label": "VFAs (vertical fine artifacts)",
+   "altLabel": [
+    "vertical fine artifacts",
+    "vertical lines on walls",
+    "vertikale Linien"
+   ],
+   "description": "Fine vertical lines on walls — belts/pulleys/idlers (2 mm spacing) or bearings/rails/motor drivers.",
+   "path": "defects/vfas.md",
+   "facets": {
+    "phase": [
+     "mechanics"
+    ]
+   }
+  },
+  "defects/warping": {
+   "type": "problem",
+   "label": "Warping / corner lifting",
+   "altLabel": [
+    "corner lifting",
+    "curling corners",
+    "Verzug",
+    "Ecken heben sich",
+    "print edges bending"
+   ],
+   "description": "Corners curl up during print, mainly ABS/ASA/PC/nylon; shrinkage stress beats adhesion.",
+   "path": "defects/warping.md",
+   "facets": {
+    "phase": [
+     "adhesion-warping"
+    ]
+   }
+  },
+  "defects/weak-infill": {
+   "type": "problem",
+   "label": "Weak or messy infill",
+   "altLabel": [
+    "infill messy and incomplete",
+    "stringy infill",
+    "schwaches Infill"
+   ],
+   "description": "Infill is stringy, incomplete or fails to support the surfaces above.",
+   "path": "defects/weak-infill.md",
+   "facets": {
+    "phase": [
+     "infill"
+    ]
+   }
+  },
+  "defects/z-banding": {
+   "type": "problem",
+   "label": "Lines or ridges on the sides (Z banding)",
+   "altLabel": [
+    "lines on the side of print",
+    "horizontal lines",
+    "Z-Banding",
+    "Querrillen"
+   ],
+   "description": "Individual layers stand out as lines, often in a repeating pattern.",
+   "path": "defects/z-banding.md",
+   "facets": {
+    "phase": [
+     "extrusion"
+    ]
+   }
+  },
+  "defects/zits-blobs": {
+   "type": "problem",
+   "label": "Zits, blobs & visible seam",
+   "altLabel": [
+    "zits",
+    "blobs",
+    "visible seam",
+    "Pickel",
+    "Naht sichtbar"
+   ],
+   "description": "Small bumps on walls, usually at layer starts/seams or retraction points.",
+   "path": "defects/zits-blobs.md",
+   "facets": {
+    "phase": [
+     "walls-seams"
+    ]
+   }
+  },
+  "firmware/klipper-current": {
+   "type": "concept",
+   "label": "Current Klipper calibration and compatibility notes",
+   "altLabel": [],
+   "description": "Klipper firmware state is versioned and authoritative for pressure advance, input shaping, extrusion calibration, retraction and motion limits.",
+   "path": "firmware/klipper-current.md"
+  },
+  "firmware/klipper-operating-boundaries": {
+   "type": "concept",
+   "label": "Klipper operating boundaries",
+   "altLabel": [],
+   "description": "Keep Klipper motion, extrusion and calibration limits consistent with slicer output and distinguish firmware state from profile settings.",
+   "path": "firmware/klipper-operating-boundaries.md"
+  },
+  "fundamentals/layer-height-extrusion-width": {
+   "type": "concept",
+   "label": "Layer height and extrusion width",
+   "altLabel": [],
+   "description": "Layer height and line width trade vertical detail, XY resolution, bonding, throughput and machine limits.",
+   "path": "fundamentals/layer-height-extrusion-width.md"
+  },
+  "hardware/nozzle-selection": {
+   "type": "component",
+   "label": "Nozzle selection",
+   "altLabel": [],
+   "description": "Select nozzle diameter, geometry and material for the required detail, throughput, wear resistance and polymer.",
+   "path": "hardware/nozzle-selection.md"
+  },
+  "hardware/voron-thermal-mechanics": {
+   "type": "component",
+   "label": "Voron thermal and motion mechanics",
+   "altLabel": [],
+   "description": "Voron calibration must account for model-specific gantry architecture, belt tension, heat soak, chamber temperature and Klipper procedures.",
+   "path": "hardware/voron-thermal-mechanics.md"
+  },
+  "key/avoid_crossing_perimeters": {
+   "type": "key",
+   "label": "avoid_crossing_perimeters",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/bed_temperature": {
+   "type": "key",
+   "label": "bed_temperature",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/bridge_flow_ratio": {
+   "type": "key",
+   "label": "bridge_flow_ratio",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/bridge_speed": {
+   "type": "key",
+   "label": "bridge_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/brim_width": {
+   "type": "key",
+   "label": "brim_width",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/chamber_temperature": {
+   "type": "key",
+   "label": "chamber_temperature",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/deretract_speed": {
+   "type": "key",
+   "label": "deretract_speed",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/elefant_foot_compensation": {
+   "type": "key",
+   "label": "elefant_foot_compensation",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/enable_dynamic_overhang_speeds": {
+   "type": "key",
+   "label": "enable_dynamic_overhang_speeds",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/external_perimeter_acceleration": {
+   "type": "key",
+   "label": "external_perimeter_acceleration",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/external_perimeter_extrusion_width": {
+   "type": "key",
+   "label": "external_perimeter_extrusion_width",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/external_perimeter_speed": {
+   "type": "key",
+   "label": "external_perimeter_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/external_perimeters_first": {
+   "type": "key",
+   "label": "external_perimeters_first",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/extrusion_multiplier": {
+   "type": "key",
+   "label": "extrusion_multiplier",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/extrusion_width": {
+   "type": "key",
+   "label": "extrusion_width",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/fan_below_layer_time": {
+   "type": "key",
+   "label": "fan_below_layer_time",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_deretract_speed": {
+   "type": "key",
+   "label": "filament_deretract_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_diameter": {
+   "type": "key",
+   "label": "filament_diameter",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_max_volumetric_speed": {
+   "type": "key",
+   "label": "filament_max_volumetric_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_retract_length": {
+   "type": "key",
+   "label": "filament_retract_length",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_retract_lift": {
+   "type": "key",
+   "label": "filament_retract_lift",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_retract_speed": {
+   "type": "key",
+   "label": "filament_retract_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_shrinkage_compensation_xy": {
+   "type": "key",
+   "label": "filament_shrinkage_compensation_xy",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/filament_wipe": {
+   "type": "key",
+   "label": "filament_wipe",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/fill_density": {
+   "type": "key",
+   "label": "fill_density",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/first_layer_bed_temperature": {
+   "type": "key",
+   "label": "first_layer_bed_temperature",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/first_layer_extrusion_width": {
+   "type": "key",
+   "label": "first_layer_extrusion_width",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/first_layer_speed": {
+   "type": "key",
+   "label": "first_layer_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/first_layer_temperature": {
+   "type": "key",
+   "label": "first_layer_temperature",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/infill_extrusion_width": {
+   "type": "key",
+   "label": "infill_extrusion_width",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/infill_overlap": {
+   "type": "key",
+   "label": "infill_overlap",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/infill_speed": {
+   "type": "key",
+   "label": "infill_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/layer_height": {
+   "type": "key",
+   "label": "layer_height",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/max_fan_speed": {
+   "type": "key",
+   "label": "max_fan_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/max_volumetric_speed": {
+   "type": "key",
+   "label": "max_volumetric_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/min_fan_speed": {
+   "type": "key",
+   "label": "min_fan_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/min_print_speed": {
+   "type": "key",
+   "label": "min_print_speed",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/only_retract_when_crossing_perimeters": {
+   "type": "key",
+   "label": "only_retract_when_crossing_perimeters",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/perimeter_acceleration": {
+   "type": "key",
+   "label": "perimeter_acceleration",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/perimeter_speed": {
+   "type": "key",
+   "label": "perimeter_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/perimeters": {
+   "type": "key",
+   "label": "perimeters",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/retract_before_travel": {
+   "type": "key",
+   "label": "retract_before_travel",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/retract_length": {
+   "type": "key",
+   "label": "retract_length",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/retract_lift": {
+   "type": "key",
+   "label": "retract_lift",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/retract_restart_extra": {
+   "type": "key",
+   "label": "retract_restart_extra",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/retract_speed": {
+   "type": "key",
+   "label": "retract_speed",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/seam_position": {
+   "type": "key",
+   "label": "seam_position",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/skirts": {
+   "type": "key",
+   "label": "skirts",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/slowdown_below_layer_time": {
+   "type": "key",
+   "label": "slowdown_below_layer_time",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/support_material": {
+   "type": "key",
+   "label": "support_material",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/support_material_contact_distance": {
+   "type": "key",
+   "label": "support_material_contact_distance",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/support_material_interface_layers": {
+   "type": "key",
+   "label": "support_material_interface_layers",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/support_material_spacing": {
+   "type": "key",
+   "label": "support_material_spacing",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/support_material_xy_spacing": {
+   "type": "key",
+   "label": "support_material_xy_spacing",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/temperature": {
+   "type": "key",
+   "label": "temperature",
+   "altLabel": [],
+   "scope": "filament",
+   "set_in": "slicer"
+  },
+  "key/thin_walls": {
+   "type": "key",
+   "label": "thin_walls",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/top_fill_pattern": {
+   "type": "key",
+   "label": "top_fill_pattern",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/top_solid_infill_speed": {
+   "type": "key",
+   "label": "top_solid_infill_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/top_solid_layers": {
+   "type": "key",
+   "label": "top_solid_layers",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/top_solid_min_thickness": {
+   "type": "key",
+   "label": "top_solid_min_thickness",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/travel_speed": {
+   "type": "key",
+   "label": "travel_speed",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "key/wipe": {
+   "type": "key",
+   "label": "wipe",
+   "altLabel": [],
+   "scope": "printer",
+   "set_in": "slicer"
+  },
+  "key/xy_size_compensation": {
+   "type": "key",
+   "label": "xy_size_compensation",
+   "altLabel": [],
+   "scope": "print",
+   "set_in": "slicer"
+  },
+  "klipper/bed_mesh": {
+   "type": "firmware_param",
+   "label": "bed_mesh",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/firmware_retraction": {
+   "type": "firmware_param",
+   "label": "firmware_retraction",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/input_shaper": {
+   "type": "firmware_param",
+   "label": "input_shaper",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/max_accel": {
+   "type": "firmware_param",
+   "label": "max_accel",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/pressure_advance": {
+   "type": "firmware_param",
+   "label": "pressure_advance",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/pressure_advance_smooth_time": {
+   "type": "firmware_param",
+   "label": "pressure_advance_smooth_time",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/rotation_distance": {
+   "type": "firmware_param",
+   "label": "rotation_distance",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/run_current": {
+   "type": "firmware_param",
+   "label": "run_current",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "klipper/z_offset": {
+   "type": "firmware_param",
+   "label": "z_offset",
+   "altLabel": [],
+   "set_in": "klipper"
+  },
+  "materials/asa-abs": {
+   "type": "material",
+   "label": "ABS / ASA",
+   "altLabel": [
+    "ABS",
+    "ASA"
+   ],
+   "description": "Needs enclosure & heat soak; warps; surprisingly high fan OK in a hot chamber.",
+   "path": "materials/asa-abs.md"
+  },
+  "materials/engineering-materials": {
+   "type": "material",
+   "label": "Engineering materials and reinforced filaments",
+   "altLabel": [],
+   "description": "Engineering polymers and fiber-filled filaments require product-specific drying, thermal, nozzle and chamber conditions; datasheet values are test-condition values.",
+   "path": "materials/engineering-materials.md"
+  },
+  "materials/filament-moisture": {
+   "type": "material",
+   "label": "Filament drying and moisture",
+   "altLabel": [],
+   "description": "Moisture changes extrusion behavior and surface quality; drying must follow the polymer and product's validated limits.",
+   "path": "materials/filament-moisture.md"
+  },
+  "materials/nylon": {
+   "type": "material",
+   "label": "Nylon (PA)",
+   "altLabel": [
+    "PA",
+    "polyamide",
+    "Polyamid"
+   ],
+   "description": "Extremely hygroscopic, warps, needs dry box during printing.",
+   "path": "materials/nylon.md"
+  },
+  "materials/pc-cf": {
+   "type": "material",
+   "label": "PC / PC-CF",
+   "altLabel": [
+    "PC",
+    "polycarbonate",
+    "Polycarbonat",
+    "carbon fiber PC"
+   ],
+   "description": "High temp, abrasive (CF → hardened nozzle), enclosure, warps; temperature trades stringing against surface and layer bonding; brand-specific EM.",
+   "path": "materials/pc-cf.md"
+  },
+  "materials/petg": {
+   "type": "material",
+   "label": "PETG",
+   "altLabel": [
+    "PET-G",
+    "Polyethylenterephthalat-Glykol"
+   ],
+   "description": "Stringy, hygroscopic, sticks too well to smooth PEI; moderate cooling.",
+   "path": "materials/petg.md"
+  },
+  "materials/pla": {
+   "type": "material",
+   "label": "PLA",
+   "altLabel": [
+    "Polylactid"
+   ],
+   "description": "Easy, low-temp, loves cooling; overheats in enclosures.",
+   "path": "materials/pla.md"
+  },
+  "materials/tpu": {
+   "type": "material",
+   "label": "TPU (flexible)",
+   "altLabel": [
+    "flexible filament",
+    "TPE",
+    "flexibles Filament"
+   ],
+   "description": "Slow, low retraction, very hygroscopic; direct drive strongly preferred.",
+   "path": "materials/tpu.md"
+  },
+  "mechanical-properties/part-orientation": {
+   "type": "concept",
+   "label": "Part orientation and anisotropy",
+   "altLabel": [],
+   "description": "FDM parts are direction-dependent because layer interfaces and raster paths create anisotropic strength and failure modes.",
+   "path": "mechanical-properties/part-orientation.md"
+  },
+  "mechanical-properties/strength-and-testing": {
+   "type": "concept",
+   "label": "Mechanical strength and test interpretation",
+   "altLabel": [],
+   "description": "FDM mechanical performance depends on orientation, process history, geometry and conditioning; strength claims need reproducible test context.",
+   "path": "mechanical-properties/strength-and-testing.md"
+  },
+  "prusa-fw/e_steps": {
+   "type": "firmware_param",
+   "label": "e_steps",
+   "altLabel": [],
+   "set_in": "prusa-fw"
+  },
+  "prusa-fw/linear_advance": {
+   "type": "firmware_param",
+   "label": "linear_advance",
+   "altLabel": [],
+   "set_in": "prusa-fw"
+  },
+  "prusa-fw/z_offset": {
+   "type": "firmware_param",
+   "label": "z_offset",
+   "altLabel": [],
+   "set_in": "prusa-fw"
+  },
+  "slicer/flow-width-and-gcode": {
+   "type": "concept",
+   "label": "Slicer flow, width and firmware output",
+   "altLabel": [],
+   "description": "PrusaSlicer and OrcaSlicer derive extrusion geometry and firmware commands from nozzle, layer, width, material and firmware context; profile values are not portable defaults.",
+   "path": "slicer/flow-width-and-gcode.md"
+  },
+  "slicer/profile-knowledge-map": {
+   "type": "concept",
+   "label": "PrusaSlicer profile to knowledge map",
+   "altLabel": [],
+   "description": "Map observable print symptoms and tuning concepts to effective PrusaSlicer profile keys, authority boundaries and diagnostic knowledge topics.",
+   "path": "slicer/profile-knowledge-map.md"
+  },
+  "troubleshooting/diagnostic-matrix": {
+   "type": "concept",
+   "label": "FDM print defect diagnostic matrix",
+   "altLabel": [],
+   "description": "A symptom-first diagnostic workflow that separates material, hardware, slicer and firmware hypotheses before changing settings.",
+   "path": "troubleshooting/diagnostic-matrix.md"
+  },
+  "tuning/build-surface": {
+   "type": "procedure",
+   "label": "Build surface prep & handling",
+   "altLabel": [],
+   "description": "Wash plates with dish soap, air dry, don't touch; scuff smooth PEI.",
+   "path": "tuning/build-surface.md"
+  },
+  "tuning/calibration-matrix": {
+   "type": "procedure",
+   "label": "Calibration matrix and dependency order",
+   "altLabel": [],
+   "description": "A context-preserving calibration sequence that separates machine, firmware, material and slicer variables.",
+   "path": "tuning/calibration-matrix.md"
+  },
+  "tuning/cooling-layer-times": {
+   "type": "procedure",
+   "label": "Cooling and layer times",
+   "altLabel": [],
+   "description": "Enough part cooling plus a minimum layer time so each layer solidifies before the next.",
+   "path": "tuning/cooling-layer-times.md"
+  },
+  "tuning/extruder-calibration": {
+   "type": "procedure",
+   "label": "Extruder calibration (rotation_distance / e-steps)",
+   "altLabel": [],
+   "description": "Make 100 mm commanded equal 100 mm extruded; per-printer firmware value, not a slicer setting.",
+   "path": "tuning/extruder-calibration.md"
+  },
+  "tuning/extrusion-multiplier": {
+   "type": "procedure",
+   "label": "Extrusion multiplier (flow)",
+   "altLabel": [],
+   "description": "Per-filament flow tuned visually on top surfaces of 30x30x3 cubes; 2% then 0.5% steps.",
+   "path": "tuning/extrusion-multiplier.md"
+  },
+  "tuning/first-layer-squish": {
+   "type": "procedure",
+   "label": "First layer squish (Z offset)",
+   "altLabel": [],
+   "description": "Fine-tune nozzle-to-bed distance live with 0.01 mm babysteps using scattered test patches.",
+   "path": "tuning/first-layer-squish.md"
+  },
+  "tuning/infill-perimeter-overlap": {
+   "type": "procedure",
+   "label": "Infill/perimeter overlap",
+   "altLabel": [],
+   "description": "Pinholes where top infill meets perimeters after EM/PA are tuned — adjust overlap.",
+   "path": "tuning/infill-perimeter-overlap.md"
+  },
+  "tuning/input-shaping": {
+   "type": "procedure",
+   "label": "Input shaping",
+   "altLabel": [],
+   "description": "Reduce ringing by measuring printer resonances and selecting a shaper while controlling smoothing and acceleration.",
+   "path": "tuning/input-shaping.md"
+  },
+  "tuning/max-volumetric-flow": {
+   "type": "procedure",
+   "label": "Max volumetric flow",
+   "altLabel": [],
+   "description": "Find how many mm³/s the hotend can melt; cap it per filament so speed never outruns the hotend.",
+   "path": "tuning/max-volumetric-flow.md"
+  },
+  "tuning/pressure-advance": {
+   "type": "procedure",
+   "label": "Pressure advance / Linear advance",
+   "altLabel": [],
+   "description": "Compensates extruder pressure lag on accel/decel; fixes corner bulges and line-start gaps. Per filament and per printer.",
+   "path": "tuning/pressure-advance.md"
+  },
+  "tuning/retraction": {
+   "type": "procedure",
+   "label": "Retraction",
+   "altLabel": [],
+   "description": "Tune retraction length/speed only after PA, EM, moisture and mechanics are ruled out; small values for direct drive.",
+   "path": "tuning/retraction.md"
+  },
+  "tuning/temperature-tuning": {
+   "type": "procedure",
+   "label": "Temperature tuning",
+   "altLabel": [],
+   "description": "Establish a material- and hardware-specific temperature window before optimizing cooling, flow or retraction.",
+   "path": "tuning/temperature-tuning.md"
+  },
+  "tuning/thermal-drift": {
+   "type": "procedure",
+   "label": "Thermal drift (enclosed Klipper printers)",
+   "altLabel": [],
+   "description": "Frame/gantry expansion shifts Z during the first ~hour of chamber heating; heat soak or compensate.",
+   "path": "tuning/thermal-drift.md"
+  },
+  "tuning/tuning-order": {
+   "type": "procedure",
+   "label": "Tuning order",
+   "altLabel": [],
+   "description": "The order in which to calibrate a printer/filament so later steps aren't invalidated by earlier ones.",
+   "path": "tuning/tuning-order.md"
+  }
+ },
+ "edges": [
+  {
+   "s": "causes/acceleration-too-high",
+   "p": "fixed_by",
+   "o": "tuning/input-shaping",
+   "action": "lower accel within what the shaper supports",
+   "sets": [
+    {
+     "key": "key/external_perimeter_acceleration",
+     "direction": "down"
+    },
+    {
+     "key": "key/perimeter_acceleration",
+     "direction": "down"
+    },
+    {
+     "key": "klipper/max_accel",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/adhesion-too-strong",
+   "p": "fixed_by",
+   "o": "tuning/build-surface",
+   "action": "let it cool, use a release agent or textured sheet, clean old glue"
+  },
+  {
+   "s": "causes/bed-not-level-or-unmeshed",
+   "p": "fixed_by",
+   "o": null,
+   "action": "heat-soaked mesh before each print, square the gantry, tighten hardware",
+   "sets": [
+    {
+     "key": "klipper/bed_mesh",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/bed-temp-too-high",
+   "p": "fixed_by",
+   "o": null,
+   "action": "lower bed temperature by 5 °C steps",
+   "sets": [
+    {
+     "key": "key/first_layer_bed_temperature",
+     "direction": "down"
+    },
+    {
+     "key": "key/bed_temperature",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/bed-temp-too-low",
+   "p": "fixed_by",
+   "o": null,
+   "action": "raise bed temperature within the material window",
+   "sets": [
+    {
+     "key": "key/first_layer_bed_temperature",
+     "direction": "up"
+    },
+    {
+     "key": "key/bed_temperature",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/belt-or-pulley-artifacts",
+   "p": "fixed_by",
+   "o": null,
+   "action": "fix belt rubbing and pulley height, clean teeth, use quality belts/idlers"
+  },
+  {
+   "s": "causes/bridge-flow-or-speed-wrong",
+   "p": "fixed_by",
+   "o": null,
+   "action": "bridge flow back to 1, slow bridges",
+   "sets": [
+    {
+     "key": "key/bridge_flow_ratio",
+     "direction": "down"
+    },
+    {
+     "key": "key/bridge_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/brittle-filament",
+   "p": "fixed_by",
+   "o": null,
+   "action": "replace the spool; reduce idler tension until it just does not slip"
+  },
+  {
+   "s": "causes/chamber-too-cold",
+   "p": "fixed_by",
+   "o": "hardware/voron-thermal-mechanics",
+   "action": "enclose and heat soak",
+   "sets": [
+    {
+     "key": "key/chamber_temperature",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/chamber-too-hot-for-material",
+   "p": "fixed_by",
+   "o": null,
+   "action": "open doors or remove panels; bed heater off for PLA"
+  },
+  {
+   "s": "causes/contaminated-build-surface",
+   "p": "fixed_by",
+   "o": "tuning/build-surface",
+   "action": "wash with dish soap, air dry, don't touch"
+  },
+  {
+   "s": "causes/elephant-foot-compensation-missing",
+   "p": "fixed_by",
+   "o": null,
+   "action": "set elephant-foot compensation (or chamfer the model)",
+   "sets": [
+    {
+     "key": "key/elefant_foot_compensation",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/elephant-foot-compensation-too-high",
+   "p": "fixed_by",
+   "o": null,
+   "action": "reduce elephant-foot compensation",
+   "sets": [
+    {
+     "key": "key/elefant_foot_compensation",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/em-too-high",
+   "p": "fixed_by",
+   "o": "tuning/extrusion-multiplier",
+   "action": "lower in 2 % then 0.5 % steps",
+   "sets": [
+    {
+     "key": "key/extrusion_multiplier",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/em-too-low",
+   "p": "fixed_by",
+   "o": "tuning/extrusion-multiplier",
+   "action": "raise in 2 % then 0.5 % steps",
+   "sets": [
+    {
+     "key": "key/extrusion_multiplier",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/excessive-cooling",
+   "p": "fixed_by",
+   "o": "tuning/cooling-layer-times",
+   "action": "reduce part cooling",
+   "sets": [
+    {
+     "key": "key/max_fan_speed",
+     "direction": "down"
+    },
+    {
+     "key": "key/min_fan_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/external-perimeter-too-narrow",
+   "p": "fixed_by",
+   "o": "fundamentals/layer-height-extrusion-width",
+   "action": "widen the external perimeter",
+   "sets": [
+    {
+     "key": "key/external_perimeter_extrusion_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/extruder-gear-backlash-or-wear",
+   "p": "fixed_by",
+   "o": null,
+   "action": "set small nonzero backlash, replace worn gears, tighten grub screws; then re-tune PA and rotation distance"
+  },
+  {
+   "s": "causes/extruder-motor-current",
+   "p": "fixed_by",
+   "o": null,
+   "action": "adjust extruder run_current",
+   "sets": [
+    {
+     "key": "klipper/run_current",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/extruder-not-calibrated",
+   "p": "fixed_by",
+   "o": "tuning/extruder-calibration",
+   "action": "calibrate rotation distance / e-steps",
+   "sets": [
+    {
+     "key": "klipper/rotation_distance",
+     "direction": "set"
+    },
+    {
+     "key": "prusa-fw/e_steps",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/extruder-not-primed",
+   "p": "fixed_by",
+   "o": null,
+   "action": "print a skirt or purge line before the part; add skirt loops if needed",
+   "sets": [
+    {
+     "key": "key/skirts",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/filament-tension-or-drag",
+   "p": "fixed_by",
+   "o": null,
+   "action": "free the spool and PTFE path, set idler tension"
+  },
+  {
+   "s": "causes/first-layer-lines-too-thin",
+   "p": "fixed_by",
+   "o": null,
+   "action": "widen the first layer",
+   "sets": [
+    {
+     "key": "key/first_layer_extrusion_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/first-layer-too-fast",
+   "p": "fixed_by",
+   "o": null,
+   "action": "slow the first layer",
+   "sets": [
+    {
+     "key": "key/first_layer_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/frame-thermal-drift",
+   "p": "fixed_by",
+   "o": "tuning/thermal-drift",
+   "action": "heat soak or compensate"
+  },
+  {
+   "s": "causes/heat-creep",
+   "p": "fixed_by",
+   "o": null,
+   "action": "run hotend fan at 100 %, open the enclosure for PLA, reduce retraction"
+  },
+  {
+   "s": "causes/infill-line-too-thin",
+   "p": "fixed_by",
+   "o": null,
+   "action": "widen infill lines",
+   "sets": [
+    {
+     "key": "key/infill_extrusion_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/infill-overlap-wrong",
+   "p": "fixed_by",
+   "o": "tuning/infill-perimeter-overlap",
+   "action": "adjust overlap (≈20–25 % as a starting point)",
+   "sets": [
+    {
+     "key": "key/infill_overlap",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/infill-too-fast",
+   "p": "fixed_by",
+   "o": null,
+   "action": "lower infill speed",
+   "sets": [
+    {
+     "key": "key/infill_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/infill-too-sparse",
+   "p": "fixed_by",
+   "o": null,
+   "action": "raise infill density",
+   "sets": [
+    {
+     "key": "key/fill_density",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/insufficient-cooling",
+   "p": "fixed_by",
+   "o": "tuning/cooling-layer-times",
+   "action": "raise part cooling",
+   "sets": [
+    {
+     "key": "key/max_fan_speed",
+     "direction": "up"
+    },
+    {
+     "key": "key/min_fan_speed",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/layer-height-too-large",
+   "p": "fixed_by",
+   "o": "fundamentals/layer-height-extrusion-width",
+   "action": "reduce layer height relative to the nozzle",
+   "sets": [
+    {
+     "key": "key/layer_height",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/layer-height-too-small",
+   "p": "fixed_by",
+   "o": "fundamentals/layer-height-extrusion-width",
+   "action": "use a layer height suited to the nozzle",
+   "sets": [
+    {
+     "key": "key/layer_height",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/layer-time-too-short",
+   "p": "fixed_by",
+   "o": "tuning/cooling-layer-times",
+   "action": "raise minimum layer time / slow down small layers",
+   "sets": [
+    {
+     "key": "key/slowdown_below_layer_time",
+     "direction": "up"
+    },
+    {
+     "key": "key/fan_below_layer_time",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/load-along-layer-lines",
+   "p": "fixed_by",
+   "o": "mechanical-properties/part-orientation",
+   "action": "reorient the part so load runs along layers"
+  },
+  {
+   "s": "causes/loose-mechanics",
+   "p": "fixed_by",
+   "o": "hardware/voron-thermal-mechanics",
+   "action": "tension belts, tighten pulleys and toolhead hardware"
+  },
+  {
+   "s": "causes/material-shrinkage",
+   "p": "fixed_by",
+   "o": null,
+   "action": "brim or mouse ears, rounded corners in the model",
+   "sets": [
+    {
+     "key": "key/brim_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/missing-supports",
+   "p": "fixed_by",
+   "o": null,
+   "action": "enable supports or redesign/orient the part",
+   "sets": [
+    {
+     "key": "key/support_material",
+     "direction": "enable"
+    }
+   ]
+  },
+  {
+   "s": "causes/no-z-hop",
+   "p": "fixed_by",
+   "o": null,
+   "action": "enable a small lift on retraction",
+   "sets": [
+    {
+     "key": "key/retract_lift",
+     "direction": "up"
+    },
+    {
+     "key": "key/filament_retract_lift",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/non-manifold-mesh",
+   "p": "fixed_by",
+   "o": null,
+   "action": "repair the mesh (slicer repair, Meshmixer, Blender) or merge bodies with a boolean"
+  },
+  {
+   "s": "causes/nozzle-strike-on-curled-part",
+   "p": "fixed_by",
+   "o": "tuning/cooling-layer-times",
+   "action": "fix curling; use a small z-hop",
+   "sets": [
+    {
+     "key": "key/retract_lift",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/nozzle-temp-too-high",
+   "p": "fixed_by",
+   "o": "tuning/temperature-tuning",
+   "action": "lower in 5 °C steps inside the material window",
+   "sets": [
+    {
+     "key": "key/temperature",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/nozzle-temp-too-low",
+   "p": "fixed_by",
+   "o": "tuning/temperature-tuning",
+   "action": "raise within the material window",
+   "sets": [
+    {
+     "key": "key/temperature",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/nozzle-too-large-for-detail",
+   "p": "fixed_by",
+   "o": "hardware/nozzle-selection",
+   "action": "use a smaller nozzle or thicken the features in CAD"
+  },
+  {
+   "s": "causes/nozzle-worn-or-leaking",
+   "p": "fixed_by",
+   "o": "hardware/nozzle-selection",
+   "action": "clean or replace the nozzle; hot-tighten it"
+  },
+  {
+   "s": "causes/out-of-filament",
+   "p": "fixed_by",
+   "o": null,
+   "action": "load a new spool; use a runout sensor if available"
+  },
+  {
+   "s": "causes/overhang-too-fast",
+   "p": "fixed_by",
+   "o": null,
+   "action": "enable dynamic overhang speeds",
+   "sets": [
+    {
+     "key": "key/enable_dynamic_overhang_speeds",
+     "direction": "enable"
+    }
+   ]
+  },
+  {
+   "s": "causes/pa-smooth-time-too-high",
+   "p": "fixed_by",
+   "o": "tuning/pressure-advance",
+   "action": "lower smooth time, then re-tune PA",
+   "sets": [
+    {
+     "key": "klipper/pressure_advance_smooth_time",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/pa-too-high",
+   "p": "fixed_by",
+   "o": "tuning/pressure-advance",
+   "action": "lower PA per filament",
+   "sets": [
+    {
+     "key": "klipper/pressure_advance",
+     "direction": "down"
+    },
+    {
+     "key": "prusa-fw/linear_advance",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/pa-too-low",
+   "p": "fixed_by",
+   "o": "tuning/pressure-advance",
+   "action": "raise PA per filament",
+   "sets": [
+    {
+     "key": "klipper/pressure_advance",
+     "direction": "up"
+    },
+    {
+     "key": "prusa-fw/linear_advance",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/partial-clog",
+   "p": "fixed_by",
+   "o": null,
+   "action": "cold pull, clean or replace nozzle, check heatbreak"
+  },
+  {
+   "s": "causes/perimeter-order",
+   "p": "fixed_by",
+   "o": null,
+   "action": "print external perimeters first",
+   "sets": [
+    {
+     "key": "key/external_perimeters_first",
+     "direction": "enable"
+    }
+   ]
+  },
+  {
+   "s": "causes/poor-filament-quality",
+   "p": "fixed_by",
+   "o": null,
+   "action": "swap to a fresh, tightly toleranced spool; store filament dry"
+  },
+  {
+   "s": "causes/print-speed-too-high",
+   "p": "fixed_by",
+   "o": null,
+   "action": "lower the relevant feature speeds",
+   "sets": [
+    {
+     "key": "key/perimeter_speed",
+     "direction": "down"
+    },
+    {
+     "key": "key/external_perimeter_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/resonance-uncompensated",
+   "p": "fixed_by",
+   "o": "tuning/input-shaping",
+   "action": "calibrate the input shaper",
+   "sets": [
+    {
+     "key": "klipper/input_shaper",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/retraction-excessive",
+   "p": "fixed_by",
+   "o": "tuning/retraction",
+   "action": "shorten and slow retraction",
+   "sets": [
+    {
+     "key": "key/filament_retract_length",
+     "direction": "down"
+    },
+    {
+     "key": "key/filament_retract_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/retraction-insufficient",
+   "p": "fixed_by",
+   "o": "tuning/retraction",
+   "action": "raise length, then speed (direct drive stays small)",
+   "sets": [
+    {
+     "key": "key/filament_retract_length",
+     "direction": "up"
+    },
+    {
+     "key": "key/filament_retract_speed",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/seam-random",
+   "p": "fixed_by",
+   "o": null,
+   "action": "use aligned, nearest or rear seam",
+   "sets": [
+    {
+     "key": "key/seam_position",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/seam-start-stop-pressure",
+   "p": "fixed_by",
+   "o": "tuning/pressure-advance",
+   "action": "tune PA first, then restart/wipe",
+   "sets": [
+    {
+     "key": "key/retract_restart_extra",
+     "direction": "down"
+    },
+    {
+     "key": "key/wipe",
+     "direction": "enable"
+    },
+    {
+     "key": "key/filament_wipe",
+     "direction": "enable"
+    }
+   ]
+  },
+  {
+   "s": "causes/sheet-not-seated",
+   "p": "fixed_by",
+   "o": null,
+   "action": "clean under the sheet and reseat it"
+  },
+  {
+   "s": "causes/shrinkage-uncompensated",
+   "p": "fixed_by",
+   "o": null,
+   "action": "compensate shrinkage (scale) or a constant XY offset",
+   "sets": [
+    {
+     "key": "key/filament_shrinkage_compensation_xy",
+     "direction": "set"
+    },
+    {
+     "key": "key/xy_size_compensation",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/small-contact-area",
+   "p": "fixed_by",
+   "o": null,
+   "action": "add brim or mouse ears; use adhesive",
+   "sets": [
+    {
+     "key": "key/brim_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/small-island-geometry",
+   "p": "fixed_by",
+   "o": null,
+   "action": "monotonic top fill, slower top infill",
+   "sets": [
+    {
+     "key": "key/top_fill_pattern",
+     "direction": "set"
+    },
+    {
+     "key": "key/top_solid_infill_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/stepper-driver-or-wiring",
+   "p": "fixed_by",
+   "o": null,
+   "action": "repair wiring/crimps, cool drivers, check run_current",
+   "sets": [
+    {
+     "key": "klipper/run_current",
+     "direction": "check"
+    }
+   ]
+  },
+  {
+   "s": "causes/stepper-driver-tuning",
+   "p": "fixed_by",
+   "o": null,
+   "action": "experiment with driver settings (microsteps, interpolate, stealthChop off)"
+  },
+  {
+   "s": "causes/support-interface-settings",
+   "p": "fixed_by",
+   "o": null,
+   "action": "tune support Z gap, XY offset and interface layers",
+   "sets": [
+    {
+     "key": "key/support_material_contact_distance",
+     "direction": "set"
+    },
+    {
+     "key": "key/support_material_xy_spacing",
+     "direction": "set"
+    },
+    {
+     "key": "key/support_material_interface_layers",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/support-too-weak",
+   "p": "fixed_by",
+   "o": null,
+   "action": "denser or stronger supports, brim, shorter supports",
+   "sets": [
+    {
+     "key": "key/support_material_spacing",
+     "direction": "down"
+    },
+    {
+     "key": "key/brim_width",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/temperature-fluctuation",
+   "p": "fixed_by",
+   "o": null,
+   "action": "run PID tuning (Klipper PID_CALIBRATE / Prusa firmware)"
+  },
+  {
+   "s": "causes/too-few-perimeters",
+   "p": "fixed_by",
+   "o": null,
+   "action": "add perimeters",
+   "sets": [
+    {
+     "key": "key/perimeters",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/too-many-retractions",
+   "p": "fixed_by",
+   "o": null,
+   "action": "only retract when crossing perimeters; set a minimum travel before retracting",
+   "sets": [
+    {
+     "key": "key/only_retract_when_crossing_perimeters",
+     "direction": "enable"
+    },
+    {
+     "key": "key/retract_before_travel",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/top-layers-insufficient",
+   "p": "fixed_by",
+   "o": null,
+   "action": "increase top solid layers / minimum top thickness",
+   "sets": [
+    {
+     "key": "key/top_solid_layers",
+     "direction": "up"
+    },
+    {
+     "key": "key/top_solid_min_thickness",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/travel-over-open-space",
+   "p": "fixed_by",
+   "o": null,
+   "action": "route travel inside perimeters and wipe before travel",
+   "sets": [
+    {
+     "key": "key/avoid_crossing_perimeters",
+     "direction": "enable"
+    },
+    {
+     "key": "key/filament_wipe",
+     "direction": "enable"
+    }
+   ]
+  },
+  {
+   "s": "causes/travel-too-slow",
+   "p": "fixed_by",
+   "o": null,
+   "action": "raise travel speed",
+   "sets": [
+    {
+     "key": "key/travel_speed",
+     "direction": "up"
+    }
+   ]
+  },
+  {
+   "s": "causes/unsuitable-build-surface",
+   "p": "fixed_by",
+   "o": "tuning/build-surface",
+   "action": "use a suitable genuine sheet or an adhesive/release agent"
+  },
+  {
+   "s": "causes/volumetric-flow-exceeded",
+   "p": "fixed_by",
+   "o": "tuning/max-volumetric-flow",
+   "action": "measure the limit and cap flow per filament",
+   "sets": [
+    {
+     "key": "key/filament_max_volumetric_speed",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "causes/wall-thinner-than-line-width",
+   "p": "fixed_by",
+   "o": "fundamentals/layer-height-extrusion-width",
+   "action": "enable thin-wall handling or adjust line width to fit the wall",
+   "sets": [
+    {
+     "key": "key/thin_walls",
+     "direction": "enable"
+    },
+    {
+     "key": "key/extrusion_width",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/wet-filament",
+   "p": "fixed_by",
+   "o": "materials/filament-moisture",
+   "action": "dry the spool and print from a dry box"
+  },
+  {
+   "s": "causes/worn-or-binding-motion-parts",
+   "p": "fixed_by",
+   "o": null,
+   "action": "clean, lubricate or replace bearings, rails and motors"
+  },
+  {
+   "s": "causes/wrong-filament-diameter",
+   "p": "fixed_by",
+   "o": null,
+   "action": "set the measured diameter",
+   "sets": [
+    {
+     "key": "key/filament_diameter",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/z-offset-too-high",
+   "p": "fixed_by",
+   "o": "tuning/first-layer-squish",
+   "action": "lower Z in 0.01 mm babysteps",
+   "sets": [
+    {
+     "key": "klipper/z_offset",
+     "direction": "set"
+    },
+    {
+     "key": "prusa-fw/z_offset",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/z-offset-too-low",
+   "p": "fixed_by",
+   "o": "tuning/first-layer-squish",
+   "action": "raise Z in 0.01 mm babysteps",
+   "sets": [
+    {
+     "key": "klipper/z_offset",
+     "direction": "set"
+    },
+    {
+     "key": "prusa-fw/z_offset",
+     "direction": "set"
+    }
+   ]
+  },
+  {
+   "s": "causes/zhop-too-high",
+   "p": "fixed_by",
+   "o": null,
+   "action": "reduce lift",
+   "sets": [
+    {
+     "key": "key/filament_retract_lift",
+     "direction": "down"
+    },
+    {
+     "key": "key/retract_lift",
+     "direction": "down"
+    }
+   ]
+  },
+  {
+   "s": "defects/bridging-overhangs",
+   "p": "caused_by",
+   "o": "causes/insufficient-cooling",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/bridging-overhangs",
+   "p": "caused_by",
+   "o": "causes/bridge-flow-or-speed-wrong",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/bridging-overhangs",
+   "p": "caused_by",
+   "o": "causes/overhang-too-fast",
+   "rank": 3,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/bridging-overhangs",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 4,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/bridging-overhangs",
+   "p": "caused_by",
+   "o": "causes/missing-supports",
+   "rank": 5,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/perimeter-order",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/acceleration-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/em-too-high",
+   "rank": 3,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/infill-overlap-wrong",
+   "rank": 4,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/bridge-flow-or-speed-wrong",
+   "rank": 5,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/bulging",
+   "p": "caused_by",
+   "o": "causes/insufficient-cooling",
+   "rank": 6,
+   "evidence": "B",
+   "source": "ellis-bulging"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "caused_by",
+   "o": "causes/em-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "caused_by",
+   "o": "causes/em-too-low",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "caused_by",
+   "o": "causes/shrinkage-uncompensated",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "caused_by",
+   "o": "causes/loose-mechanics",
+   "rank": 5,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "related",
+   "o": "defects/elephant-foot"
+  },
+  {
+   "s": "defects/dimensional-inaccuracy",
+   "p": "related",
+   "o": "defects/thin-walls-and-small-features"
+  },
+  {
+   "s": "defects/elephant-foot",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 1,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/elephant-foot",
+   "p": "caused_by",
+   "o": "causes/bed-temp-too-high",
+   "rank": 2,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/elephant-foot",
+   "p": "caused_by",
+   "o": "causes/elephant-foot-compensation-missing",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "ellis-extruder-skipping",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/heat-creep",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-extruder-skipping"
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/filament-tension-or-drag",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-extruder-skipping",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/retraction-excessive",
+   "rank": 4,
+   "evidence": "B",
+   "source": [
+    "ellis-extruder-skipping",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/extruder-motor-current",
+   "rank": 5,
+   "evidence": "B",
+   "source": "ellis-extruder-skipping"
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/volumetric-flow-exceeded",
+   "rank": 6,
+   "evidence": "B",
+   "source": [
+    "ellis-extruder-skipping",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-low",
+   "rank": 7,
+   "evidence": "B",
+   "source": [
+    "ellis-extruder-skipping",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/stepper-driver-or-wiring",
+   "rank": 8,
+   "evidence": "B",
+   "source": "ellis-extruder-skipping"
+  },
+  {
+   "s": "defects/extruder-skipping",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 9,
+   "evidence": "B",
+   "source": "ellis-extruder-skipping"
+  },
+  {
+   "s": "defects/extrusion-patterns",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-extrusion-patterns"
+  },
+  {
+   "s": "defects/extrusion-patterns",
+   "p": "caused_by",
+   "o": "causes/filament-tension-or-drag",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-extrusion-patterns"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/out-of-filament",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/stepper-driver-or-wiring",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/brittle-filament",
+   "rank": 5,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "caused_by",
+   "o": "causes/filament-tension-or-drag",
+   "rank": 6,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "related",
+   "o": "defects/extruder-skipping"
+  },
+  {
+   "s": "defects/extrusion-stops",
+   "p": "related",
+   "o": "defects/no-extrusion-at-start"
+  },
+  {
+   "s": "defects/first-layer-inconsistency",
+   "p": "caused_by",
+   "o": "causes/bed-not-level-or-unmeshed",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "ellis-first-layer-inconsistency",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/first-layer-inconsistency",
+   "p": "caused_by",
+   "o": "causes/frame-thermal-drift",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-first-layer-inconsistency"
+  },
+  {
+   "s": "defects/first-layer-inconsistency",
+   "p": "caused_by",
+   "o": "causes/sheet-not-seated",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-first-layer-inconsistency",
+    "tsg-prusa"
+   ]
+  },
+  {
+   "s": "defects/first-layer-inconsistency",
+   "p": "caused_by",
+   "o": "causes/bed-temp-too-high",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "caused_by",
+   "o": "causes/filament-tension-or-drag",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "caused_by",
+   "o": "causes/layer-height-too-small",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "caused_by",
+   "o": "causes/poor-filament-quality",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 5,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "related",
+   "o": "defects/extrusion-patterns"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "related",
+   "o": "defects/under-extrusion"
+  },
+  {
+   "s": "defects/inconsistent-extrusion",
+   "p": "related",
+   "o": "defects/z-banding"
+  },
+  {
+   "s": "defects/infill-visible-through-walls",
+   "p": "caused_by",
+   "o": "causes/too-few-perimeters",
+   "rank": 1,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/infill-visible-through-walls",
+   "p": "caused_by",
+   "o": "causes/perimeter-order",
+   "rank": 2,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/infill-visible-through-walls",
+   "p": "related",
+   "o": "defects/infill-wall-gaps"
+  },
+  {
+   "s": "defects/infill-wall-gaps",
+   "p": "caused_by",
+   "o": "causes/infill-overlap-wrong",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/infill-wall-gaps",
+   "p": "caused_by",
+   "o": "causes/print-speed-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/infill-wall-gaps",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-low",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/infill-wall-gaps",
+   "p": "related",
+   "o": "defects/infill-visible-through-walls"
+  },
+  {
+   "s": "defects/infill-wall-gaps",
+   "p": "related",
+   "o": "defects/weak-infill"
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/loose-mechanics",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-shifting",
+    "tsg-s3d",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/worn-or-binding-motion-parts",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-shifting",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/nozzle-strike-on-curled-part",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-shifting",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/stepper-driver-or-wiring",
+   "rank": 4,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-shifting",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/acceleration-too-high",
+   "rank": 5,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-shifting",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/layer-shift",
+   "p": "caused_by",
+   "o": "causes/print-speed-too-high",
+   "rank": 6,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/model-errors",
+   "p": "caused_by",
+   "o": "causes/non-manifold-mesh",
+   "rank": 1,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/model-errors",
+   "p": "related",
+   "o": "defects/dimensional-inaccuracy"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "caused_by",
+   "o": "causes/extruder-not-primed",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "related",
+   "o": "defects/extruder-skipping"
+  },
+  {
+   "s": "defects/no-extrusion-at-start",
+   "p": "related",
+   "o": "defects/extrusion-stops"
+  },
+  {
+   "s": "defects/over-extrusion",
+   "p": "caused_by",
+   "o": "causes/em-too-high",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/over-extrusion",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 2,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/over-extrusion",
+   "p": "caused_by",
+   "o": "causes/pa-too-low",
+   "rank": 3,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/over-extrusion",
+   "p": "caused_by",
+   "o": "causes/wrong-filament-diameter",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/overheating",
+   "p": "caused_by",
+   "o": "causes/chamber-too-hot-for-material",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-pla-overheating"
+  },
+  {
+   "s": "defects/overheating",
+   "p": "caused_by",
+   "o": "causes/insufficient-cooling",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "ellis-pla-overheating",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/overheating",
+   "p": "caused_by",
+   "o": "causes/layer-time-too-short",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-pla-overheating",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/overheating",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 4,
+   "evidence": "B",
+   "source": [
+    "ellis-pla-overheating",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/part-stuck-to-bed",
+   "p": "caused_by",
+   "o": "causes/adhesion-too-strong",
+   "rank": 1,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/part-stuck-to-bed",
+   "p": "related",
+   "o": "defects/poor-bed-adhesion"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-high",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/elephant-foot-compensation-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/external-perimeter-too-narrow",
+   "rank": 3,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/em-too-low",
+   "rank": 4,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/print-speed-too-high",
+   "rank": 5,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-low",
+   "rank": 6,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/excessive-cooling",
+   "rank": 7,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/perimeter-separation",
+   "p": "caused_by",
+   "o": "causes/wet-filament",
+   "rank": 8,
+   "evidence": "B",
+   "source": "ellis-perimeter-separation"
+  },
+  {
+   "s": "defects/pockmarks",
+   "p": "caused_by",
+   "o": "causes/seam-random",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-pockmarks"
+  },
+  {
+   "s": "defects/pockmarks",
+   "p": "caused_by",
+   "o": "causes/wet-filament",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-pockmarks"
+  },
+  {
+   "s": "defects/pockmarks",
+   "p": "caused_by",
+   "o": "causes/nozzle-worn-or-leaking",
+   "rank": 3,
+   "evidence": "B",
+   "source": "ellis-pockmarks"
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/contaminated-build-surface",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "ellis-build-surface-adhesion",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/bed-temp-too-low",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "ellis-build-surface-adhesion",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-high",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-build-surface-adhesion",
+    "tsg-s3d",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/first-layer-lines-too-thin",
+   "rank": 4,
+   "evidence": "B",
+   "source": "ellis-build-surface-adhesion"
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/unsuitable-build-surface",
+   "rank": 5,
+   "evidence": "B",
+   "source": [
+    "ellis-build-surface-adhesion",
+    "tsg-s3d",
+    "tsg-prusa"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/small-contact-area",
+   "rank": 6,
+   "evidence": "B",
+   "source": [
+    "ellis-build-surface-adhesion",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/bed-not-level-or-unmeshed",
+   "rank": 7,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-prusa",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/first-layer-too-fast",
+   "rank": 8,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/poor-bed-adhesion",
+   "p": "caused_by",
+   "o": "causes/excessive-cooling",
+   "rank": 9,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/em-too-low",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-adhesion",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/volumetric-flow-exceeded",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-layer-adhesion"
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-low",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-adhesion",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/excessive-cooling",
+   "rank": 4,
+   "evidence": "B",
+   "source": [
+    "ellis-layer-adhesion",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/wet-filament",
+   "rank": 5,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/load-along-layer-lines",
+   "rank": 6,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/poor-layer-adhesion",
+   "p": "caused_by",
+   "o": "causes/layer-height-too-large",
+   "rank": 7,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/ringing",
+   "p": "caused_by",
+   "o": "causes/resonance-uncompensated",
+   "rank": 1,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/ringing",
+   "p": "caused_by",
+   "o": "causes/loose-mechanics",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/ringing",
+   "p": "caused_by",
+   "o": "causes/acceleration-too-high",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/ringing",
+   "p": "caused_by",
+   "o": "causes/print-speed-too-high",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/ringing",
+   "p": "caused_by",
+   "o": "causes/worn-or-binding-motion-parts",
+   "rank": 5,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/small-infill-overextruded",
+   "p": "caused_by",
+   "o": "causes/small-island-geometry",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-small-infill"
+  },
+  {
+   "s": "defects/small-infill-overextruded",
+   "p": "caused_by",
+   "o": "causes/pa-smooth-time-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-small-infill"
+  },
+  {
+   "s": "defects/small-infill-overextruded",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 3,
+   "evidence": "B",
+   "source": "ellis-small-infill"
+  },
+  {
+   "s": "defects/small-infill-overextruded",
+   "p": "caused_by",
+   "o": "causes/infill-overlap-wrong",
+   "rank": 4,
+   "evidence": "B",
+   "source": "ellis-small-infill"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/wet-filament",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-retraction"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 2,
+   "evidence": "B",
+   "source": [
+    "ellis-retraction",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/pa-too-low",
+   "rank": 3,
+   "evidence": "B",
+   "source": "ellis-retraction"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/em-too-high",
+   "rank": 4,
+   "evidence": "B",
+   "source": "ellis-retraction"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/zhop-too-high",
+   "rank": 5,
+   "evidence": "B",
+   "source": "ellis-retraction"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/retraction-insufficient",
+   "rank": 6,
+   "evidence": "B",
+   "source": [
+    "ellis-retraction",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/travel-over-open-space",
+   "rank": 7,
+   "evidence": "B",
+   "source": [
+    "ellis-retraction",
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 8,
+   "evidence": "B",
+   "source": "ellis-retraction"
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/nozzle-worn-or-leaking",
+   "rank": 9,
+   "evidence": "B",
+   "source": [
+    "ellis-retraction",
+    "tsg-s3d"
+   ]
+  },
+  {
+   "s": "defects/stringing",
+   "p": "caused_by",
+   "o": "causes/travel-too-slow",
+   "rank": 10,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/support-surface-quality",
+   "p": "caused_by",
+   "o": "causes/support-interface-settings",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/support-surface-quality",
+   "p": "caused_by",
+   "o": "causes/layer-height-too-large",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/support-surface-quality",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/support-surface-quality",
+   "p": "related",
+   "o": "defects/bridging-overhangs"
+  },
+  {
+   "s": "defects/support-surface-quality",
+   "p": "related",
+   "o": "defects/supports-fail"
+  },
+  {
+   "s": "defects/supports-fail",
+   "p": "caused_by",
+   "o": "causes/support-too-weak",
+   "rank": 1,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/supports-fail",
+   "p": "caused_by",
+   "o": "causes/small-contact-area",
+   "rank": 2,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/supports-fail",
+   "p": "caused_by",
+   "o": "causes/brittle-filament",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/supports-fail",
+   "p": "caused_by",
+   "o": "causes/loose-mechanics",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/supports-fail",
+   "p": "related",
+   "o": "defects/support-surface-quality"
+  },
+  {
+   "s": "defects/thin-walls-and-small-features",
+   "p": "caused_by",
+   "o": "causes/wall-thinner-than-line-width",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/thin-walls-and-small-features",
+   "p": "caused_by",
+   "o": "causes/nozzle-too-large-for-detail",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/thin-walls-and-small-features",
+   "p": "caused_by",
+   "o": "causes/print-speed-too-high",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/thin-walls-and-small-features",
+   "p": "related",
+   "o": "defects/dimensional-inaccuracy"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "caused_by",
+   "o": "causes/top-layers-insufficient",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "caused_by",
+   "o": "causes/infill-too-sparse",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "caused_by",
+   "o": "causes/em-too-low",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "caused_by",
+   "o": "causes/insufficient-cooling",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "caused_by",
+   "o": "causes/too-few-perimeters",
+   "rank": 5,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "related",
+   "o": "defects/small-infill-overextruded"
+  },
+  {
+   "s": "defects/top-surface-gaps",
+   "p": "related",
+   "o": "defects/under-extrusion"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "caused_by",
+   "o": "causes/em-too-high",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "caused_by",
+   "o": "causes/no-z-hop",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "caused_by",
+   "o": "causes/travel-over-open-space",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "related",
+   "o": "defects/over-extrusion"
+  },
+  {
+   "s": "defects/top-surface-scars",
+   "p": "related",
+   "o": "defects/stringing"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/em-too-low",
+   "rank": 1,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/extruder-not-calibrated",
+   "rank": 2,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/wrong-filament-diameter",
+   "rank": 3,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/volumetric-flow-exceeded",
+   "rank": 5,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/pa-too-high",
+   "rank": 6,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-high",
+   "rank": 7,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/z-offset-too-low",
+   "rank": 8,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/nozzle-worn-or-leaking",
+   "rank": 9,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/extruder-gear-backlash-or-wear",
+   "rank": 10,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/heat-creep",
+   "rank": 11,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/poor-filament-quality",
+   "rank": 12,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/under-extrusion",
+   "p": "caused_by",
+   "o": "causes/worn-or-binding-motion-parts",
+   "rank": 13,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/vfas",
+   "p": "caused_by",
+   "o": "causes/belt-or-pulley-artifacts",
+   "rank": 1,
+   "evidence": "B",
+   "source": "ellis-vfas"
+  },
+  {
+   "s": "defects/vfas",
+   "p": "caused_by",
+   "o": "causes/worn-or-binding-motion-parts",
+   "rank": 2,
+   "evidence": "B",
+   "source": "ellis-vfas"
+  },
+  {
+   "s": "defects/vfas",
+   "p": "caused_by",
+   "o": "causes/stepper-driver-tuning",
+   "rank": 3,
+   "evidence": "D",
+   "source": "ellis-vfas"
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/chamber-too-cold",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/excessive-cooling",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/material-shrinkage",
+   "rank": 3,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/bed-temp-too-low",
+   "rank": 4,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/small-contact-area",
+   "rank": 5,
+   "evidence": "B",
+   "source": [
+    "tsg-s3d",
+    "tsg-all3dp"
+   ]
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/unsuitable-build-surface",
+   "rank": 6,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/warping",
+   "p": "caused_by",
+   "o": "causes/bed-not-level-or-unmeshed",
+   "rank": 7,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "caused_by",
+   "o": "causes/infill-too-fast",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "caused_by",
+   "o": "causes/infill-line-too-thin",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "caused_by",
+   "o": "causes/infill-too-sparse",
+   "rank": 3,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "caused_by",
+   "o": "causes/partial-clog",
+   "rank": 4,
+   "evidence": "C",
+   "source": "tsg-all3dp"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "related",
+   "o": "defects/infill-wall-gaps"
+  },
+  {
+   "s": "defects/weak-infill",
+   "p": "related",
+   "o": "defects/under-extrusion"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "caused_by",
+   "o": "causes/poor-filament-quality",
+   "rank": 1,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "caused_by",
+   "o": "causes/temperature-fluctuation",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "caused_by",
+   "o": "causes/worn-or-binding-motion-parts",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "caused_by",
+   "o": "causes/filament-tension-or-drag",
+   "rank": 4,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "related",
+   "o": "defects/inconsistent-extrusion"
+  },
+  {
+   "s": "defects/z-banding",
+   "p": "related",
+   "o": "defects/vfas"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/pa-too-low",
+   "rank": 1,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/seam-start-stop-pressure",
+   "rank": 2,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/seam-random",
+   "rank": 3,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/wet-filament",
+   "rank": 4,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/retraction-insufficient",
+   "rank": 5,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/nozzle-temp-too-high",
+   "rank": 6,
+   "evidence": "C"
+  },
+  {
+   "s": "defects/zits-blobs",
+   "p": "caused_by",
+   "o": "causes/too-many-retractions",
+   "rank": 7,
+   "evidence": "B",
+   "source": "tsg-s3d"
+  },
+  {
+   "s": "firmware/klipper-current",
+   "p": "related",
+   "o": "firmware/klipper-operating-boundaries"
+  },
+  {
+   "s": "firmware/klipper-current",
+   "p": "related",
+   "o": "tuning/input-shaping"
+  },
+  {
+   "s": "firmware/klipper-current",
+   "p": "related",
+   "o": "tuning/pressure-advance"
+  },
+  {
+   "s": "firmware/klipper-current",
+   "p": "related",
+   "o": "tuning/retraction"
+  },
+  {
+   "s": "fundamentals/layer-height-extrusion-width",
+   "p": "related",
+   "o": "defects/poor-layer-adhesion"
+  },
+  {
+   "s": "fundamentals/layer-height-extrusion-width",
+   "p": "related",
+   "o": "hardware/nozzle-selection"
+  },
+  {
+   "s": "fundamentals/layer-height-extrusion-width",
+   "p": "related",
+   "o": "slicer/flow-width-and-gcode"
+  },
+  {
+   "s": "hardware/nozzle-selection",
+   "p": "related",
+   "o": "defects/thin-walls-and-small-features"
+  },
+  {
+   "s": "hardware/nozzle-selection",
+   "p": "related",
+   "o": "fundamentals/layer-height-extrusion-width"
+  },
+  {
+   "s": "hardware/nozzle-selection",
+   "p": "related",
+   "o": "materials/engineering-materials"
+  },
+  {
+   "s": "key/filament_deretract_speed",
+   "p": "overrides",
+   "o": "key/deretract_speed",
+   "note": "unless nil"
+  },
+  {
+   "s": "key/filament_max_volumetric_speed",
+   "p": "overrides",
+   "o": "key/max_volumetric_speed",
+   "note": "unless nil"
+  },
+  {
+   "s": "key/filament_retract_length",
+   "p": "overrides",
+   "o": "key/retract_length",
+   "note": "unless nil"
+  },
+  {
+   "s": "key/filament_retract_lift",
+   "p": "overrides",
+   "o": "key/retract_lift",
+   "note": "unless nil"
+  },
+  {
+   "s": "key/filament_retract_speed",
+   "p": "overrides",
+   "o": "key/retract_speed",
+   "note": "unless nil"
+  },
+  {
+   "s": "key/filament_wipe",
+   "p": "overrides",
+   "o": "key/wipe",
+   "note": "unless nil"
+  },
+  {
+   "s": "materials/asa-abs",
+   "p": "prone_to",
+   "o": "defects/warping",
+   "via": "causes/chamber-too-cold",
+   "evidence": "B",
+   "source": "prusa-warping"
+  },
+  {
+   "s": "materials/asa-abs",
+   "p": "prone_to",
+   "o": "defects/warping",
+   "via": "causes/material-shrinkage",
+   "evidence": "B",
+   "source": "prusa-warping"
+  },
+  {
+   "s": "materials/nylon",
+   "p": "prone_to",
+   "o": "defects/pockmarks",
+   "via": "causes/wet-filament",
+   "evidence": "B",
+   "source": "prusa-drying"
+  },
+  {
+   "s": "materials/nylon",
+   "p": "prone_to",
+   "o": "defects/stringing",
+   "via": "causes/wet-filament",
+   "evidence": "B",
+   "source": "prusa-drying"
+  },
+  {
+   "s": "materials/nylon",
+   "p": "prone_to",
+   "o": "defects/warping",
+   "via": "causes/material-shrinkage",
+   "evidence": "C"
+  },
+  {
+   "s": "materials/pc-cf",
+   "p": "prone_to",
+   "o": "defects/stringing",
+   "evidence": "C"
+  },
+  {
+   "s": "materials/pc-cf",
+   "p": "prone_to",
+   "o": "defects/warping",
+   "via": "causes/material-shrinkage",
+   "evidence": "C"
+  },
+  {
+   "s": "materials/petg",
+   "p": "prone_to",
+   "o": "defects/part-stuck-to-bed",
+   "via": "causes/adhesion-too-strong",
+   "evidence": "B",
+   "source": "prusa-petg"
+  },
+  {
+   "s": "materials/petg",
+   "p": "prone_to",
+   "o": "defects/stringing",
+   "via": "causes/wet-filament",
+   "evidence": "B",
+   "source": "prusa-drying"
+  },
+  {
+   "s": "materials/petg",
+   "p": "prone_to",
+   "o": "defects/stringing",
+   "evidence": "B",
+   "source": "ellis-retraction",
+   "note": "some stringing is inherent to PETG"
+  },
+  {
+   "s": "materials/pla",
+   "p": "prone_to",
+   "o": "defects/extruder-skipping",
+   "via": "causes/heat-creep",
+   "evidence": "B",
+   "source": "ellis-extruder-skipping"
+  },
+  {
+   "s": "materials/pla",
+   "p": "prone_to",
+   "o": "defects/overheating",
+   "via": "causes/chamber-too-hot-for-material",
+   "evidence": "B",
+   "source": "ellis-pla-overheating"
+  },
+  {
+   "s": "materials/tpu",
+   "p": "prone_to",
+   "o": "defects/extruder-skipping",
+   "via": "causes/retraction-excessive",
+   "evidence": "C"
+  },
+  {
+   "s": "materials/tpu",
+   "p": "prone_to",
+   "o": "defects/stringing",
+   "via": "causes/wet-filament",
+   "evidence": "B",
+   "source": "prusa-drying"
+  },
+  {
+   "s": "mechanical-properties/strength-and-testing",
+   "p": "related",
+   "o": "defects/poor-layer-adhesion"
+  },
+  {
+   "s": "mechanical-properties/strength-and-testing",
+   "p": "related",
+   "o": "mechanical-properties/part-orientation"
+  },
+  {
+   "s": "slicer/flow-width-and-gcode",
+   "p": "related",
+   "o": "fundamentals/layer-height-extrusion-width"
+  },
+  {
+   "s": "slicer/flow-width-and-gcode",
+   "p": "related",
+   "o": "slicer/profile-knowledge-map"
+  },
+  {
+   "s": "slicer/flow-width-and-gcode",
+   "p": "related",
+   "o": "tuning/extrusion-multiplier"
+  },
+  {
+   "s": "tuning/calibration-matrix",
+   "p": "related",
+   "o": "tuning/extrusion-multiplier"
+  },
+  {
+   "s": "tuning/calibration-matrix",
+   "p": "related",
+   "o": "tuning/pressure-advance"
+  },
+  {
+   "s": "tuning/calibration-matrix",
+   "p": "related",
+   "o": "tuning/tuning-order"
+  },
+  {
+   "s": "tuning/cooling-layer-times",
+   "p": "calibrates",
+   "o": "key/fan_below_layer_time"
+  },
+  {
+   "s": "tuning/cooling-layer-times",
+   "p": "calibrates",
+   "o": "key/max_fan_speed"
+  },
+  {
+   "s": "tuning/cooling-layer-times",
+   "p": "calibrates",
+   "o": "key/min_fan_speed"
+  },
+  {
+   "s": "tuning/cooling-layer-times",
+   "p": "calibrates",
+   "o": "key/min_print_speed"
+  },
+  {
+   "s": "tuning/cooling-layer-times",
+   "p": "calibrates",
+   "o": "key/slowdown_below_layer_time"
+  },
+  {
+   "s": "tuning/extruder-calibration",
+   "p": "calibrates",
+   "o": "klipper/rotation_distance"
+  },
+  {
+   "s": "tuning/extruder-calibration",
+   "p": "calibrates",
+   "o": "prusa-fw/e_steps"
+  },
+  {
+   "s": "tuning/extrusion-multiplier",
+   "p": "calibrates",
+   "o": "key/extrusion_multiplier"
+  },
+  {
+   "s": "tuning/first-layer-squish",
+   "p": "calibrates",
+   "o": "klipper/z_offset"
+  },
+  {
+   "s": "tuning/first-layer-squish",
+   "p": "calibrates",
+   "o": "prusa-fw/z_offset"
+  },
+  {
+   "s": "tuning/infill-perimeter-overlap",
+   "p": "calibrates",
+   "o": "key/infill_overlap"
+  },
+  {
+   "s": "tuning/input-shaping",
+   "p": "calibrates",
+   "o": "klipper/input_shaper"
+  },
+  {
+   "s": "tuning/input-shaping",
+   "p": "calibrates",
+   "o": "klipper/max_accel"
+  },
+  {
+   "s": "tuning/max-volumetric-flow",
+   "p": "calibrates",
+   "o": "key/filament_max_volumetric_speed"
+  },
+  {
+   "s": "tuning/max-volumetric-flow",
+   "p": "calibrates",
+   "o": "key/max_volumetric_speed"
+  },
+  {
+   "s": "tuning/pressure-advance",
+   "p": "calibrates",
+   "o": "klipper/pressure_advance"
+  },
+  {
+   "s": "tuning/pressure-advance",
+   "p": "calibrates",
+   "o": "klipper/pressure_advance_smooth_time"
+  },
+  {
+   "s": "tuning/pressure-advance",
+   "p": "calibrates",
+   "o": "prusa-fw/linear_advance"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/deretract_speed"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/filament_deretract_speed"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/filament_retract_length"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/filament_retract_speed"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/retract_length"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "key/retract_speed"
+  },
+  {
+   "s": "tuning/retraction",
+   "p": "calibrates",
+   "o": "klipper/firmware_retraction"
+  },
+  {
+   "s": "tuning/temperature-tuning",
+   "p": "calibrates",
+   "o": "key/first_layer_temperature"
+  },
+  {
+   "s": "tuning/temperature-tuning",
+   "p": "calibrates",
+   "o": "key/temperature"
+  }
+ ],
+ "aliases": {
+  "2 mm artifacts": [
+   "causes/belt-or-pulley-artifacts"
+  ],
+  "abs": [
+   "materials/asa-abs"
+  ],
+  "abs asa": [
+   "materials/asa-abs"
+  ],
+  "accel too high": [
+   "causes/acceleration-too-high"
+  ],
+  "acceleration or corner velocity too high": [
+   "causes/acceleration-too-high"
+  ],
+  "adhesion too strong": [
+   "causes/adhesion-too-strong"
+  ],
+  "anisotropy": [
+   "causes/load-along-layer-lines"
+  ],
+  "asa": [
+   "materials/asa-abs"
+  ],
+  "ausbeulungen": [
+   "defects/bulging"
+  ],
+  "aussenwand zu schmal": [
+   "causes/external-perimeter-too-narrow"
+  ],
+  "avoid crossing perimeters": [
+   "key/avoid_crossing_perimeters"
+  ],
+  "bad crimp": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "bauraum zu kalt": [
+   "causes/chamber-too-cold"
+  ],
+  "bauraum zu warm": [
+   "causes/chamber-too-hot-for-material"
+  ],
+  "bauteilausrichtung": [
+   "causes/load-along-layer-lines"
+  ],
+  "bed mesh": [
+   "klipper/bed_mesh"
+  ],
+  "bed not level or mesh missing": [
+   "causes/bed-not-level-or-unmeshed"
+  ],
+  "bed temperature": [
+   "key/bed_temperature"
+  ],
+  "bed temperature too high": [
+   "causes/bed-temp-too-high"
+  ],
+  "bed temperature too low": [
+   "causes/bed-temp-too-low"
+  ],
+  "belastung entlang der schichten": [
+   "causes/load-along-layer-lines"
+  ],
+  "belt or pulley tooth artifacts": [
+   "causes/belt-or-pulley-artifacts"
+  ],
+  "belt teeth": [
+   "causes/belt-or-pulley-artifacts"
+  ],
+  "belt tension": [
+   "causes/loose-mechanics"
+  ],
+  "beschleunigung zu hoch": [
+   "causes/acceleration-too-high"
+  ],
+  "bett nicht gelevelt": [
+   "causes/bed-not-level-or-unmeshed"
+  ],
+  "bett zu heiss": [
+   "causes/bed-temp-too-high"
+  ],
+  "bett zu kalt": [
+   "causes/bed-temp-too-low"
+  ],
+  "betthaftung": [
+   "defects/poor-bed-adhesion"
+  ],
+  "beulen": [
+   "defects/bulging"
+  ],
+  "binding or worn bearings rails or motors": [
+   "causes/worn-or-binding-motion-parts"
+  ],
+  "binding rail": [
+   "causes/worn-or-binding-motion-parts"
+  ],
+  "blobs": [
+   "defects/zits-blobs"
+  ],
+  "blocked nozzle": [
+   "causes/partial-clog"
+  ],
+  "bottom flare": [
+   "defects/elephant-foot"
+  ],
+  "bridge flow or speed wrong": [
+   "causes/bridge-flow-or-speed-wrong"
+  ],
+  "bridge flow ratio": [
+   "causes/bridge-flow-or-speed-wrong",
+   "key/bridge_flow_ratio"
+  ],
+  "bridge speed": [
+   "key/bridge_speed"
+  ],
+  "brim width": [
+   "key/brim_width"
+  ],
+  "brittle filament snaps": [
+   "causes/brittle-filament"
+  ],
+  "broken non manifold model": [
+   "causes/non-manifold-mesh"
+  ],
+  "broken wire": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "bruecken haengen durch": [
+   "defects/bridging-overhangs"
+  ],
+  "brueckenfluss": [
+   "causes/bridge-flow-or-speed-wrong"
+  ],
+  "build surface prep handling": [
+   "tuning/build-surface"
+  ],
+  "bulging": [
+   "defects/bulging"
+  ],
+  "bumpy lines": [
+   "defects/inconsistent-extrusion"
+  ],
+  "calibration matrix and dependency order": [
+   "tuning/calibration-matrix"
+  ],
+  "carbon fiber pc": [
+   "materials/pc-cf"
+  ],
+  "chamber temperature": [
+   "key/chamber_temperature"
+  ],
+  "chamber too cold for the material": [
+   "causes/chamber-too-cold"
+  ],
+  "chamber too hot for the material": [
+   "causes/chamber-too-hot-for-material"
+  ],
+  "cheap filament": [
+   "causes/poor-filament-quality"
+  ],
+  "clogged extruder": [
+   "causes/partial-clog"
+  ],
+  "clogged nozzle": [
+   "causes/partial-clog"
+  ],
+  "contaminated build surface": [
+   "causes/contaminated-build-surface"
+  ],
+  "cooling and layer times": [
+   "tuning/cooling-layer-times"
+  ],
+  "corner lifting": [
+   "defects/warping"
+  ],
+  "cracks in tall objects": [
+   "defects/poor-layer-adhesion"
+  ],
+  "curling corners": [
+   "defects/warping"
+  ],
+  "curling or rough corners": [
+   "defects/overheating"
+  ],
+  "current klipper calibration and compatibility notes": [
+   "firmware/klipper-current"
+  ],
+  "damaged nozzle": [
+   "causes/nozzle-worn-or-leaking"
+  ],
+  "damp filament": [
+   "causes/wet-filament"
+  ],
+  "debris under sheet": [
+   "causes/sheet-not-seated"
+  ],
+  "defektes modell": [
+   "causes/non-manifold-mesh"
+  ],
+  "delamination": [
+   "defects/poor-layer-adhesion"
+  ],
+  "deretract speed": [
+   "key/deretract_speed"
+  ],
+  "diagonal scars": [
+   "defects/top-surface-scars"
+  ],
+  "diameter variation": [
+   "causes/poor-filament-quality"
+  ],
+  "dimensional accuracy": [
+   "defects/dimensional-inaccuracy"
+  ],
+  "dimensional inaccuracy": [
+   "defects/dimensional-inaccuracy"
+  ],
+  "dreck unter der platte": [
+   "causes/sheet-not-seated"
+  ],
+  "droopy overhangs": [
+   "defects/bridging-overhangs"
+  ],
+  "druck klebt am bett": [
+   "defects/part-stuck-to-bed"
+  ],
+  "druck klebt fest": [
+   "causes/adhesion-too-strong"
+  ],
+  "druckbett zu heiss": [
+   "causes/bed-temp-too-high"
+  ],
+  "druckbett zu kalt": [
+   "causes/bed-temp-too-low"
+  ],
+  "duenne waende fehlen": [
+   "defects/thin-walls-and-small-features"
+  ],
+  "duese kollidiert": [
+   "causes/nozzle-strike-on-curled-part"
+  ],
+  "duese nicht vorgefuellt": [
+   "causes/extruder-not-primed"
+  ],
+  "duese zu gross": [
+   "causes/nozzle-too-large-for-detail"
+  ],
+  "duese zu hoch": [
+   "causes/z-offset-too-high"
+  ],
+  "duese zu tief": [
+   "causes/z-offset-too-low"
+  ],
+  "duesentemperatur zu hoch": [
+   "causes/nozzle-temp-too-high"
+  ],
+  "duesentemperatur zu niedrig": [
+   "causes/nozzle-temp-too-low"
+  ],
+  "e steps": [
+   "prusa-fw/e_steps"
+  ],
+  "echoes": [
+   "defects/ringing"
+  ],
+  "ecken heben sich": [
+   "defects/warping"
+  ],
+  "elefant foot compensation": [
+   "key/elefant_foot_compensation"
+  ],
+  "elefantenfuss": [
+   "defects/elephant-foot"
+  ],
+  "elefantenfuss kompensation fehlt": [
+   "causes/elephant-foot-compensation-missing"
+  ],
+  "elefantenfuss kompensation zu hoch": [
+   "causes/elephant-foot-compensation-too-high"
+  ],
+  "elephant foot": [
+   "defects/elephant-foot"
+  ],
+  "elephant foot compensation too high": [
+   "causes/elephant-foot-compensation-too-high"
+  ],
+  "elephants foot": [
+   "defects/elephant-foot"
+  ],
+  "empty spool": [
+   "causes/out-of-filament"
+  ],
+  "enable dynamic overhang speeds": [
+   "key/enable_dynamic_overhang_speeds"
+  ],
+  "engineering materials and reinforced filaments": [
+   "materials/engineering-materials"
+  ],
+  "erste schicht zu duenn": [
+   "causes/first-layer-lines-too-thin"
+  ],
+  "erste schicht zu schnell": [
+   "causes/first-layer-too-fast"
+  ],
+  "excessive z hop": [
+   "causes/zhop-too-high"
+  ],
+  "external perimeter acceleration": [
+   "key/external_perimeter_acceleration"
+  ],
+  "external perimeter extrusion width": [
+   "key/external_perimeter_extrusion_width"
+  ],
+  "external perimeter speed": [
+   "key/external_perimeter_speed"
+  ],
+  "external perimeter too narrow": [
+   "causes/external-perimeter-too-narrow"
+  ],
+  "external perimeters first": [
+   "key/external_perimeters_first"
+  ],
+  "extruder backlash": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "extruder calibration rotation distance e steps": [
+   "tuning/extruder-calibration"
+  ],
+  "extruder clicking": [
+   "defects/extruder-skipping"
+  ],
+  "extruder gear backlash play or wear": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "extruder klickt": [
+   "defects/extruder-skipping"
+  ],
+  "extruder motor current wrong": [
+   "causes/extruder-motor-current"
+  ],
+  "extruder motorstrom": [
+   "causes/extruder-motor-current"
+  ],
+  "extruder nicht kalibriert": [
+   "causes/extruder-not-calibrated"
+  ],
+  "extruder not calibrated": [
+   "causes/extruder-not-calibrated"
+  ],
+  "extruder not primed": [
+   "causes/extruder-not-primed"
+  ],
+  "extruder rutscht durch": [
+   "defects/extruder-skipping"
+  ],
+  "extruder skipping clicking": [
+   "defects/extruder-skipping"
+  ],
+  "extruder spiel": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "extruder stepper current": [
+   "causes/extruder-motor-current"
+  ],
+  "extrudiert nicht am anfang": [
+   "defects/no-extrusion-at-start"
+  ],
+  "extrusion multiplier": [
+   "key/extrusion_multiplier"
+  ],
+  "extrusion multiplier flow": [
+   "tuning/extrusion-multiplier"
+  ],
+  "extrusion multiplier too high": [
+   "causes/em-too-high"
+  ],
+  "extrusion multiplier too low": [
+   "causes/em-too-low"
+  ],
+  "extrusion patterns wood grain": [
+   "defects/extrusion-patterns"
+  ],
+  "extrusion stoppt": [
+   "defects/extrusion-stops"
+  ],
+  "extrusion stops mid print": [
+   "defects/extrusion-stops"
+  ],
+  "extrusion width": [
+   "key/extrusion_width"
+  ],
+  "extrusionsmultiplikator zu hoch": [
+   "causes/em-too-high"
+  ],
+  "extrusionsmultiplikator zu niedrig": [
+   "causes/em-too-low"
+  ],
+  "extrusionsmuster": [
+   "defects/extrusion-patterns"
+  ],
+  "faeden": [
+   "defects/stringing"
+  ],
+  "faedenziehen": [
+   "defects/stringing"
+  ],
+  "fake pei": [
+   "causes/unsuitable-build-surface"
+  ],
+  "falscher filamentdurchmesser": [
+   "causes/wrong-filament-diameter"
+  ],
+  "fan below layer time": [
+   "key/fan_below_layer_time"
+  ],
+  "fan too high": [
+   "causes/excessive-cooling"
+  ],
+  "fdm print defect diagnostic matrix": [
+   "troubleshooting/diagnostic-matrix"
+  ],
+  "fehlender support": [
+   "causes/missing-supports"
+  ],
+  "feuchtes filament": [
+   "causes/wet-filament"
+  ],
+  "feuchtigkeit": [
+   "causes/wet-filament"
+  ],
+  "filament bricht": [
+   "causes/brittle-filament"
+  ],
+  "filament deretract speed": [
+   "key/filament_deretract_speed"
+  ],
+  "filament diameter": [
+   "key/filament_diameter"
+  ],
+  "filament diameter mismatch": [
+   "causes/wrong-filament-diameter"
+  ],
+  "filament drying and moisture": [
+   "materials/filament-moisture"
+  ],
+  "filament leer": [
+   "causes/out-of-filament"
+  ],
+  "filament max volumetric speed": [
+   "key/filament_max_volumetric_speed"
+  ],
+  "filament retract length": [
+   "key/filament_retract_length"
+  ],
+  "filament retract lift": [
+   "key/filament_retract_lift"
+  ],
+  "filament retract speed": [
+   "key/filament_retract_speed"
+  ],
+  "filament shrinkage compensation xy": [
+   "key/filament_shrinkage_compensation_xy"
+  ],
+  "filament tension or path drag": [
+   "causes/filament-tension-or-drag"
+  ],
+  "filament toleranz": [
+   "causes/poor-filament-quality"
+  ],
+  "filament verheddert": [
+   "causes/filament-tension-or-drag"
+  ],
+  "filament wipe": [
+   "key/filament_wipe"
+  ],
+  "fill density": [
+   "key/fill_density"
+  ],
+  "fine detail not printing": [
+   "defects/thin-walls-and-small-features"
+  ],
+  "fingerabdruecke": [
+   "causes/contaminated-build-surface"
+  ],
+  "fingerprints": [
+   "causes/contaminated-build-surface"
+  ],
+  "firmware retraction": [
+   "klipper/firmware_retraction"
+  ],
+  "first layer bed temperature": [
+   "key/first_layer_bed_temperature"
+  ],
+  "first layer extrusion width": [
+   "key/first_layer_extrusion_width"
+  ],
+  "first layer inconsistency": [
+   "defects/first-layer-inconsistency"
+  ],
+  "first layer lines too thin": [
+   "causes/first-layer-lines-too-thin"
+  ],
+  "first layer not sticking": [
+   "defects/poor-bed-adhesion"
+  ],
+  "first layer printed too fast": [
+   "causes/first-layer-too-fast"
+  ],
+  "first layer speed": [
+   "key/first_layer_speed"
+  ],
+  "first layer squish z offset": [
+   "tuning/first-layer-squish"
+  ],
+  "first layer temperature": [
+   "key/first_layer_temperature"
+  ],
+  "first layer width too small": [
+   "causes/first-layer-lines-too-thin"
+  ],
+  "flexible filament": [
+   "materials/tpu"
+  ],
+  "flexibles filament": [
+   "materials/tpu"
+  ],
+  "flow too high": [
+   "causes/em-too-high"
+  ],
+  "flow too low": [
+   "causes/em-too-low"
+  ],
+  "flow zu hoch": [
+   "causes/em-too-high"
+  ],
+  "flow zu niedrig": [
+   "causes/em-too-low"
+  ],
+  "frame thermal drift": [
+   "causes/frame-thermal-drift"
+  ],
+  "gantry out of square": [
+   "causes/bed-not-level-or-unmeshed"
+  ],
+  "gaps between infill and outer wall": [
+   "defects/infill-wall-gaps"
+  ],
+  "gaps between infill and outline": [
+   "defects/infill-wall-gaps"
+  ],
+  "gaps between infill and walls": [
+   "defects/infill-wall-gaps"
+  ],
+  "gaps between lines": [
+   "defects/under-extrusion"
+  ],
+  "gaps in floor corners": [
+   "defects/top-surface-gaps"
+  ],
+  "gaps in thin walls": [
+   "defects/thin-walls-and-small-features"
+  ],
+  "gaps in top layers": [
+   "defects/top-surface-gaps"
+  ],
+  "gaps or pillowing in top layers": [
+   "defects/top-surface-gaps"
+  ],
+  "geisterbilder": [
+   "defects/ringing"
+  ],
+  "geschmolzene details": [
+   "defects/overheating"
+  ],
+  "geschwindigkeit zu hoch": [
+   "causes/print-speed-too-high"
+  ],
+  "ghosting": [
+   "defects/ringing"
+  ],
+  "greasy bed": [
+   "causes/contaminated-build-surface"
+  ],
+  "grinding filament": [
+   "defects/extruder-skipping"
+  ],
+  "haftet nicht": [
+   "defects/poor-bed-adhesion"
+  ],
+  "hairy prints": [
+   "defects/stringing"
+  ],
+  "heat creep": [
+   "causes/heat-creep"
+  ],
+  "heatbreak too hot": [
+   "causes/heat-creep"
+  ],
+  "holzmaserung": [
+   "defects/extrusion-patterns"
+  ],
+  "horizontal lines": [
+   "defects/z-banding"
+  ],
+  "hotend cant keep up": [
+   "causes/volumetric-flow-exceeded"
+  ],
+  "hotend temperature fluctuation": [
+   "causes/temperature-fluctuation"
+  ],
+  "hotend too cold": [
+   "causes/nozzle-temp-too-low"
+  ],
+  "hotend too hot": [
+   "causes/nozzle-temp-too-high"
+  ],
+  "hotend zu langsam": [
+   "causes/volumetric-flow-exceeded"
+  ],
+  "idler tension": [
+   "causes/filament-tension-or-drag"
+  ],
+  "inconsistent extrusion": [
+   "defects/inconsistent-extrusion"
+  ],
+  "infill extrusion width": [
+   "causes/infill-line-too-thin",
+   "key/infill_extrusion_width"
+  ],
+  "infill ghosting": [
+   "defects/infill-visible-through-walls"
+  ],
+  "infill lines too thin": [
+   "causes/infill-line-too-thin"
+  ],
+  "infill linien zu duenn": [
+   "causes/infill-line-too-thin"
+  ],
+  "infill messy and incomplete": [
+   "defects/weak-infill"
+  ],
+  "infill overlap": [
+   "causes/infill-overlap-wrong",
+   "key/infill_overlap"
+  ],
+  "infill percentage too low": [
+   "causes/infill-too-sparse"
+  ],
+  "infill perimeter overlap": [
+   "tuning/infill-perimeter-overlap"
+  ],
+  "infill perimeter overlap wrong": [
+   "causes/infill-overlap-wrong"
+  ],
+  "infill printed too fast": [
+   "causes/infill-too-fast"
+  ],
+  "infill scheint durch": [
+   "defects/infill-visible-through-walls"
+  ],
+  "infill speed": [
+   "key/infill_speed"
+  ],
+  "infill speed too high": [
+   "causes/infill-too-fast"
+  ],
+  "infill too sparse": [
+   "causes/infill-too-sparse"
+  ],
+  "infill ueberlappung": [
+   "causes/infill-overlap-wrong"
+  ],
+  "infill visible from outside": [
+   "defects/infill-visible-through-walls"
+  ],
+  "infill visible through walls": [
+   "defects/infill-visible-through-walls"
+  ],
+  "infill zu schnell": [
+   "causes/infill-too-fast"
+  ],
+  "inner perimeters first": [
+   "causes/perimeter-order"
+  ],
+  "input shaper": [
+   "klipper/input_shaper"
+  ],
+  "input shaper fehlt": [
+   "causes/resonance-uncompensated"
+  ],
+  "input shaper not calibrated": [
+   "causes/resonance-uncompensated"
+  ],
+  "input shaping": [
+   "tuning/input-shaping"
+  ],
+  "insufficient part cooling": [
+   "causes/insufficient-cooling"
+  ],
+  "kabelbruch": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "kaputtes stl": [
+   "causes/non-manifold-mesh"
+  ],
+  "kein bed mesh": [
+   "causes/bed-not-level-or-unmeshed"
+  ],
+  "kein heat soak": [
+   "causes/chamber-too-cold"
+  ],
+  "kein z hop": [
+   "causes/no-z-hop"
+  ],
+  "kissenbildung": [
+   "defects/top-surface-gaps"
+  ],
+  "kleine auflageflaeche": [
+   "causes/small-contact-area"
+  ],
+  "kleine deckflaechen rau": [
+   "defects/small-infill-overextruded"
+  ],
+  "kleine inseln": [
+   "causes/small-island-geometry"
+  ],
+  "klipper operating boundaries": [
+   "firmware/klipper-operating-boundaries"
+  ],
+  "kratzer auf der oberflaeche": [
+   "defects/top-surface-scars"
+  ],
+  "layer height": [
+   "key/layer_height"
+  ],
+  "layer height and extrusion width": [
+   "fundamentals/layer-height-extrusion-width"
+  ],
+  "layer height too large for the nozzle": [
+   "causes/layer-height-too-large"
+  ],
+  "layer height too small": [
+   "causes/layer-height-too-small"
+  ],
+  "layer separation": [
+   "defects/poor-layer-adhesion"
+  ],
+  "layer shifting": [
+   "defects/layer-shift"
+  ],
+  "layer splitting": [
+   "defects/poor-layer-adhesion"
+  ],
+  "layer time too short": [
+   "causes/layer-time-too-short"
+  ],
+  "layer too thick": [
+   "causes/layer-height-too-large"
+  ],
+  "layers dont line up": [
+   "defects/layer-shift"
+  ],
+  "layers splitting": [
+   "defects/poor-layer-adhesion"
+  ],
+  "leerfahrt zu langsam": [
+   "causes/travel-too-slow"
+  ],
+  "leerfahrten ueber luecken": [
+   "causes/travel-over-open-space"
+  ],
+  "linear advance": [
+   "prusa-fw/linear_advance"
+  ],
+  "linear advance too high": [
+   "causes/pa-too-high"
+  ],
+  "linear advance too low": [
+   "causes/pa-too-low"
+  ],
+  "lines on the side of print": [
+   "defects/z-banding"
+  ],
+  "lines or ridges on the sides z banding": [
+   "defects/z-banding"
+  ],
+  "load along layer lines orientation": [
+   "causes/load-along-layer-lines"
+  ],
+  "lockere riemenscheibe": [
+   "causes/loose-mechanics"
+  ],
+  "loecher in der deckschicht": [
+   "defects/top-surface-gaps"
+  ],
+  "loecher in der wand": [
+   "defects/pockmarks"
+  ],
+  "loose belts pulleys or toolhead parts": [
+   "causes/loose-mechanics"
+  ],
+  "loose grub screw": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "loose pulley": [
+   "causes/loose-mechanics"
+  ],
+  "loose toolhead": [
+   "causes/loose-mechanics"
+  ],
+  "luecken zwischen infill und wand": [
+   "defects/infill-wall-gaps"
+  ],
+  "luefter zu schwach": [
+   "causes/insufficient-cooling"
+  ],
+  "luefter zu stark": [
+   "causes/excessive-cooling"
+  ],
+  "masse stimmen nicht": [
+   "defects/dimensional-inaccuracy"
+  ],
+  "masshaltigkeit": [
+   "defects/dimensional-inaccuracy"
+  ],
+  "material shrinkage stress": [
+   "causes/material-shrinkage"
+  ],
+  "max accel": [
+   "klipper/max_accel"
+  ],
+  "max fan speed": [
+   "key/max_fan_speed"
+  ],
+  "max flow exceeded": [
+   "causes/volumetric-flow-exceeded"
+  ],
+  "max volumetric flow": [
+   "tuning/max-volumetric-flow"
+  ],
+  "max volumetric speed": [
+   "key/max_volumetric_speed"
+  ],
+  "mechanical strength and test interpretation": [
+   "mechanical-properties/strength-and-testing"
+  ],
+  "melted and deformed": [
+   "defects/overheating"
+  ],
+  "melted features": [
+   "defects/overheating"
+  ],
+  "messy bridges": [
+   "defects/bridging-overhangs"
+  ],
+  "messy first layer": [
+   "defects/first-layer-inconsistency"
+  ],
+  "messy overhangs": [
+   "defects/bridging-overhangs"
+  ],
+  "min fan speed": [
+   "key/min_fan_speed"
+  ],
+  "min print speed": [
+   "key/min_print_speed"
+  ],
+  "minimum layer time": [
+   "causes/layer-time-too-short"
+  ],
+  "model errors non manifold geometry": [
+   "defects/model-errors"
+  ],
+  "modellfehler": [
+   "defects/model-errors"
+  ],
+  "moisture": [
+   "causes/wet-filament"
+  ],
+  "naht blob": [
+   "causes/seam-start-stop-pressure"
+  ],
+  "naht sichtbar": [
+   "defects/zits-blobs"
+  ],
+  "nasses filament": [
+   "causes/wet-filament"
+  ],
+  "no bed mesh": [
+   "causes/bed-not-level-or-unmeshed"
+  ],
+  "no elephant foot compensation": [
+   "causes/elephant-foot-compensation-missing"
+  ],
+  "no extrusion at print start": [
+   "defects/no-extrusion-at-start"
+  ],
+  "no heat soak": [
+   "causes/chamber-too-cold"
+  ],
+  "no input shaper": [
+   "causes/resonance-uncompensated"
+  ],
+  "no supports": [
+   "causes/missing-supports"
+  ],
+  "no z hop over printed surfaces": [
+   "causes/no-z-hop"
+  ],
+  "non manifold edges": [
+   "causes/non-manifold-mesh"
+  ],
+  "not enough fan": [
+   "causes/insufficient-cooling"
+  ],
+  "not enough retraction": [
+   "causes/retraction-insufficient"
+  ],
+  "not extruding at start of print": [
+   "defects/no-extrusion-at-start"
+  ],
+  "not sticking to the bed": [
+   "defects/poor-bed-adhesion"
+  ],
+  "nozzle collision": [
+   "causes/nozzle-strike-on-curled-part"
+  ],
+  "nozzle diameter too big": [
+   "causes/nozzle-too-large-for-detail"
+  ],
+  "nozzle drag marks": [
+   "defects/top-surface-scars"
+  ],
+  "nozzle drags on top": [
+   "causes/no-z-hop"
+  ],
+  "nozzle hits curled print": [
+   "causes/nozzle-strike-on-curled-part"
+  ],
+  "nozzle leak": [
+   "causes/nozzle-worn-or-leaking"
+  ],
+  "nozzle not primed": [
+   "causes/extruder-not-primed"
+  ],
+  "nozzle selection": [
+   "hardware/nozzle-selection"
+  ],
+  "nozzle temperature too high": [
+   "causes/nozzle-temp-too-high"
+  ],
+  "nozzle temperature too low": [
+   "causes/nozzle-temp-too-low"
+  ],
+  "nozzle too close to print bed": [
+   "causes/z-offset-too-low"
+  ],
+  "nozzle too close to the bed": [
+   "causes/z-offset-too-low"
+  ],
+  "nozzle too far from the bed": [
+   "causes/z-offset-too-high"
+  ],
+  "nozzle too large for the detail": [
+   "causes/nozzle-too-large-for-detail"
+  ],
+  "nylon pa": [
+   "materials/nylon"
+  ],
+  "only retract when crossing perimeters": [
+   "key/only_retract_when_crossing_perimeters"
+  ],
+  "oozing": [
+   "defects/stringing"
+  ],
+  "out of filament": [
+   "causes/out-of-filament"
+  ],
+  "outer wall too thin": [
+   "causes/external-perimeter-too-narrow"
+  ],
+  "over extrusion": [
+   "defects/over-extrusion"
+  ],
+  "overextrusion": [
+   "defects/over-extrusion"
+  ],
+  "overextrusion flow": [
+   "causes/em-too-high"
+  ],
+  "overhang speed": [
+   "causes/overhang-too-fast"
+  ],
+  "overhangs printed too fast": [
+   "causes/overhang-too-fast"
+  ],
+  "overheating driver": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "overheating esp pla in enclosures": [
+   "defects/overheating"
+  ],
+  "pa": [
+   "materials/nylon"
+  ],
+  "pa glaettung zu lang": [
+   "causes/pa-smooth-time-too-high"
+  ],
+  "pa zu hoch": [
+   "causes/pa-too-high"
+  ],
+  "pa zu niedrig": [
+   "causes/pa-too-low"
+  ],
+  "part orientation and anisotropy": [
+   "mechanical-properties/part-orientation"
+  ],
+  "partial clog": [
+   "causes/partial-clog"
+  ],
+  "pc": [
+   "materials/pc-cf"
+  ],
+  "pc pc cf": [
+   "materials/pc-cf"
+  ],
+  "perimeter acceleration": [
+   "key/perimeter_acceleration"
+  ],
+  "perimeter loesen sich": [
+   "defects/perimeter-separation"
+  ],
+  "perimeter order pushes walls out": [
+   "causes/perimeter-order"
+  ],
+  "perimeter reihenfolge": [
+   "causes/perimeter-order"
+  ],
+  "perimeter separation": [
+   "defects/perimeter-separation"
+  ],
+  "perimeter speed": [
+   "key/perimeter_speed"
+  ],
+  "perimeters": [
+   "key/perimeters"
+  ],
+  "perimeters not bonding": [
+   "defects/perimeter-separation"
+  ],
+  "pet g": [
+   "materials/petg"
+  ],
+  "petg": [
+   "materials/petg"
+  ],
+  "petg sticks too well": [
+   "defects/part-stuck-to-bed"
+  ],
+  "pickel": [
+   "defects/zits-blobs"
+  ],
+  "pid not tuned": [
+   "causes/temperature-fluctuation"
+  ],
+  "pillowing": [
+   "defects/top-surface-gaps"
+  ],
+  "pinholes on walls": [
+   "defects/pockmarks"
+  ],
+  "pits": [
+   "defects/pockmarks"
+  ],
+  "pits in top layer": [
+   "defects/top-surface-gaps"
+  ],
+  "pla": [
+   "materials/pla"
+  ],
+  "pla in enclosure": [
+   "causes/chamber-too-hot-for-material"
+  ],
+  "pla overheating": [
+   "defects/overheating"
+  ],
+  "pockennarben": [
+   "defects/pockmarks"
+  ],
+  "pockmarks": [
+   "defects/pockmarks"
+  ],
+  "polyamid": [
+   "materials/nylon"
+  ],
+  "polyamide": [
+   "materials/nylon"
+  ],
+  "polycarbonat": [
+   "materials/pc-cf"
+  ],
+  "polycarbonate": [
+   "materials/pc-cf"
+  ],
+  "polyethylenterephthalat glykol": [
+   "materials/petg"
+  ],
+  "polylactid": [
+   "materials/pla"
+  ],
+  "poor bed adhesion": [
+   "defects/poor-bed-adhesion"
+  ],
+  "poor bridges overhangs": [
+   "defects/bridging-overhangs"
+  ],
+  "poor bridging": [
+   "defects/bridging-overhangs"
+  ],
+  "poor layer adhesion": [
+   "defects/poor-layer-adhesion"
+  ],
+  "poor or degraded filament": [
+   "causes/poor-filament-quality"
+  ],
+  "poor surface above or below supports": [
+   "defects/support-surface-quality"
+  ],
+  "poor surface above supports": [
+   "defects/support-surface-quality"
+  ],
+  "pressure advance": [
+   "klipper/pressure_advance"
+  ],
+  "pressure advance linear advance": [
+   "tuning/pressure-advance"
+  ],
+  "pressure advance smooth time": [
+   "klipper/pressure_advance_smooth_time"
+  ],
+  "pressure advance smooth time too high": [
+   "causes/pa-smooth-time-too-high"
+  ],
+  "pressure advance smoothing too long": [
+   "causes/pa-smooth-time-too-high"
+  ],
+  "pressure advance too high": [
+   "causes/pa-too-high"
+  ],
+  "pressure advance too low": [
+   "causes/pa-too-low"
+  ],
+  "pressure advance zu hoch": [
+   "causes/pa-too-high"
+  ],
+  "pressure advance zu niedrig": [
+   "causes/pa-too-low"
+  ],
+  "print bows out at bottom": [
+   "defects/elephant-foot"
+  ],
+  "print doesnt stick to bed": [
+   "defects/poor-bed-adhesion"
+  ],
+  "print edges bending": [
+   "defects/warping"
+  ],
+  "print leans": [
+   "defects/layer-shift"
+  ],
+  "print looks wrong": [
+   "defects/model-errors"
+  ],
+  "print offset in some places": [
+   "defects/layer-shift"
+  ],
+  "print speed too high": [
+   "causes/print-speed-too-high"
+  ],
+  "print stuck to bed": [
+   "causes/adhesion-too-strong"
+  ],
+  "print stuck to the bed": [
+   "defects/part-stuck-to-bed"
+  ],
+  "print welded to bed": [
+   "defects/part-stuck-to-bed"
+  ],
+  "printing too cold": [
+   "causes/nozzle-temp-too-low"
+  ],
+  "printing too fast": [
+   "causes/print-speed-too-high"
+  ],
+  "printing too hot": [
+   "causes/nozzle-temp-too-high"
+  ],
+  "prusaslicer profile to knowledge map": [
+   "slicer/profile-knowledge-map"
+  ],
+  "querrillen": [
+   "defects/z-banding"
+  ],
+  "random seam": [
+   "causes/seam-random"
+  ],
+  "random seam placement": [
+   "causes/seam-random"
+  ],
+  "resonance not compensated": [
+   "causes/resonance-uncompensated"
+  ],
+  "resonanz": [
+   "causes/resonance-uncompensated"
+  ],
+  "restart extra": [
+   "causes/seam-start-stop-pressure"
+  ],
+  "retract before travel": [
+   "key/retract_before_travel"
+  ],
+  "retract length": [
+   "key/retract_length"
+  ],
+  "retract lift": [
+   "key/retract_lift"
+  ],
+  "retract lift too high": [
+   "causes/zhop-too-high"
+  ],
+  "retract restart extra": [
+   "key/retract_restart_extra"
+  ],
+  "retract speed": [
+   "key/retract_speed"
+  ],
+  "retraction": [
+   "tuning/retraction"
+  ],
+  "retraction too long or too fast": [
+   "causes/retraction-excessive"
+  ],
+  "retraction too short or too slow": [
+   "causes/retraction-insufficient"
+  ],
+  "retraktion zu gering": [
+   "causes/retraction-insufficient"
+  ],
+  "retraktion zu stark": [
+   "causes/retraction-excessive"
+  ],
+  "riemenspannung": [
+   "causes/loose-mechanics"
+  ],
+  "riemenzahn artefakte": [
+   "causes/belt-or-pulley-artifacts"
+  ],
+  "ringing": [
+   "defects/ringing"
+  ],
+  "ringing ghosting": [
+   "defects/ringing"
+  ],
+  "rippling": [
+   "defects/ringing"
+  ],
+  "rotation distance": [
+   "klipper/rotation_distance"
+  ],
+  "rough small top areas": [
+   "defects/small-infill-overextruded"
+  ],
+  "rough surface beneath supports": [
+   "defects/support-surface-quality"
+  ],
+  "rueckzug zu kurz": [
+   "causes/retraction-insufficient"
+  ],
+  "rueckzug zu lang": [
+   "causes/retraction-excessive"
+  ],
+  "run current": [
+   "klipper/run_current"
+  ],
+  "sagging bridges": [
+   "defects/bridging-overhangs"
+  ],
+  "scaling error": [
+   "causes/shrinkage-uncompensated"
+  ],
+  "scars on top surfaces": [
+   "defects/top-surface-scars"
+  ],
+  "schichthaftung": [
+   "defects/poor-layer-adhesion"
+  ],
+  "schichthoehe zu gross": [
+   "causes/layer-height-too-large"
+  ],
+  "schichthoehe zu klein": [
+   "causes/layer-height-too-small"
+  ],
+  "schichtversatz": [
+   "defects/layer-shift"
+  ],
+  "schichtzeit zu kurz": [
+   "causes/layer-time-too-short"
+  ],
+  "schlechtes filament": [
+   "causes/poor-filament-quality"
+  ],
+  "schrumpfung": [
+   "causes/material-shrinkage"
+  ],
+  "schrumpfung nicht kompensiert": [
+   "causes/shrinkage-uncompensated"
+  ],
+  "schwaches infill": [
+   "defects/weak-infill"
+  ],
+  "schwergaengige achse": [
+   "causes/worn-or-binding-motion-parts"
+  ],
+  "seam blob": [
+   "causes/seam-start-stop-pressure"
+  ],
+  "seam position": [
+   "key/seam_position"
+  ],
+  "seam start stop pressure": [
+   "causes/seam-start-stop-pressure"
+  ],
+  "sheet not seated flat": [
+   "causes/sheet-not-seated"
+  ],
+  "shifted layers": [
+   "defects/layer-shift"
+  ],
+  "shrinkage not compensated": [
+   "causes/shrinkage-uncompensated"
+  ],
+  "skirts": [
+   "key/skirts"
+  ],
+  "slicer flow width and firmware output": [
+   "slicer/flow-width-and-gcode"
+  ],
+  "slow travel": [
+   "causes/travel-too-slow"
+  ],
+  "slowdown below layer time": [
+   "key/slowdown_below_layer_time"
+  ],
+  "small contact area": [
+   "causes/small-contact-area"
+  ],
+  "small features not printed": [
+   "defects/thin-walls-and-small-features"
+  ],
+  "small footprint": [
+   "causes/small-contact-area"
+  ],
+  "small infill areas": [
+   "causes/small-island-geometry"
+  ],
+  "small infill areas look overextruded": [
+   "defects/small-infill-overextruded"
+  ],
+  "small top islands inherent": [
+   "causes/small-island-geometry"
+  ],
+  "snapped filament": [
+   "causes/brittle-filament"
+  ],
+  "some layers missing": [
+   "defects/under-extrusion"
+  ],
+  "spider webs": [
+   "defects/stringing"
+  ],
+  "spinnweben": [
+   "defects/stringing"
+  ],
+  "spool drag": [
+   "causes/filament-tension-or-drag"
+  ],
+  "sproedes filament": [
+   "causes/brittle-filament"
+  ],
+  "spule hakt": [
+   "causes/filament-tension-or-drag"
+  ],
+  "spule leer": [
+   "causes/out-of-filament"
+  ],
+  "square corner velocity too high": [
+   "causes/acceleration-too-high"
+  ],
+  "stepper driver or wiring fault": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "stepper driver tuning artifacts": [
+   "causes/stepper-driver-tuning"
+  ],
+  "stops extruding mid print": [
+   "defects/extrusion-stops"
+  ],
+  "stringing oozing": [
+   "defects/stringing"
+  ],
+  "stringy and droopy": [
+   "defects/over-extrusion"
+  ],
+  "stringy infill": [
+   "defects/weak-infill"
+  ],
+  "stripped filament": [
+   "defects/extruder-skipping"
+  ],
+  "support abstand": [
+   "causes/support-interface-settings"
+  ],
+  "support bricht ab": [
+   "defects/supports-fail"
+  ],
+  "support contact distance": [
+   "causes/support-interface-settings"
+  ],
+  "support density too low": [
+   "causes/support-too-weak"
+  ],
+  "support interface or gap wrong": [
+   "causes/support-interface-settings"
+  ],
+  "support material": [
+   "key/support_material"
+  ],
+  "support material contact distance": [
+   "key/support_material_contact_distance"
+  ],
+  "support material interface layers": [
+   "key/support_material_interface_layers"
+  ],
+  "support material spacing": [
+   "key/support_material_spacing"
+  ],
+  "support material xy spacing": [
+   "key/support_material_xy_spacing"
+  ],
+  "support oberflaeche rau": [
+   "defects/support-surface-quality"
+  ],
+  "support zu schwach": [
+   "causes/support-too-weak"
+  ],
+  "supports fail during the print": [
+   "defects/supports-fail"
+  ],
+  "supports fell apart": [
+   "defects/supports-fail"
+  ],
+  "supports too weak": [
+   "causes/support-too-weak"
+  ],
+  "tangled filament": [
+   "causes/filament-tension-or-drag"
+  ],
+  "teilverstopfung": [
+   "causes/partial-clog"
+  ],
+  "temperature": [
+   "key/temperature"
+  ],
+  "temperature tuning": [
+   "tuning/temperature-tuning"
+  ],
+  "temperaturschwankung": [
+   "causes/temperature-fluctuation"
+  ],
+  "thermal contraction": [
+   "causes/material-shrinkage"
+  ],
+  "thermal drift enclosed klipper printers": [
+   "tuning/thermal-drift"
+  ],
+  "thermal expansion": [
+   "causes/frame-thermal-drift"
+  ],
+  "thermische drift": [
+   "causes/frame-thermal-drift"
+  ],
+  "thin wall": [
+   "causes/wall-thinner-than-line-width"
+  ],
+  "thin walls": [
+   "key/thin_walls"
+  ],
+  "thin walls and small features missing": [
+   "defects/thin-walls-and-small-features"
+  ],
+  "tmc tuning": [
+   "causes/stepper-driver-tuning"
+  ],
+  "too few perimeters": [
+   "causes/too-few-perimeters"
+  ],
+  "too few top solid layers": [
+   "causes/top-layers-insufficient"
+  ],
+  "too little squish": [
+   "causes/z-offset-too-high"
+  ],
+  "too many retractions": [
+   "causes/too-many-retractions"
+  ],
+  "too much part cooling": [
+   "causes/excessive-cooling"
+  ],
+  "too much retraction": [
+   "causes/retraction-excessive"
+  ],
+  "too much squish": [
+   "causes/z-offset-too-low"
+  ],
+  "top fill pattern": [
+   "key/top_fill_pattern"
+  ],
+  "top layers too thin": [
+   "causes/top-layers-insufficient"
+  ],
+  "top solid infill speed": [
+   "key/top_solid_infill_speed"
+  ],
+  "top solid layers": [
+   "key/top_solid_layers"
+  ],
+  "top solid min thickness": [
+   "key/top_solid_min_thickness"
+  ],
+  "tpe": [
+   "materials/tpu"
+  ],
+  "tpu flexible": [
+   "materials/tpu"
+  ],
+  "travel crosses open air": [
+   "causes/travel-over-open-space"
+  ],
+  "travel moves too slow": [
+   "causes/travel-too-slow"
+  ],
+  "travel over gaps": [
+   "causes/travel-over-open-space"
+  ],
+  "travel speed": [
+   "key/travel_speed"
+  ],
+  "treiber tuning": [
+   "causes/stepper-driver-tuning"
+  ],
+  "treiber ueberhitzt": [
+   "causes/stepper-driver-or-wiring"
+  ],
+  "tuning order": [
+   "tuning/tuning-order"
+  ],
+  "ueberextrusion": [
+   "defects/over-extrusion"
+  ],
+  "ueberhaenge": [
+   "defects/bridging-overhangs"
+  ],
+  "ueberhang zu schnell": [
+   "causes/overhang-too-fast"
+  ],
+  "ueberhitzung": [
+   "defects/overheating"
+  ],
+  "under extrusion": [
+   "defects/under-extrusion"
+  ],
+  "underextrusion": [
+   "defects/under-extrusion"
+  ],
+  "undichte duese": [
+   "causes/nozzle-worn-or-leaking"
+  ],
+  "uneven extrusion": [
+   "defects/inconsistent-extrusion"
+  ],
+  "uneven first layer": [
+   "defects/first-layer-inconsistency"
+  ],
+  "ungeeignete druckplatte": [
+   "causes/unsuitable-build-surface"
+  ],
+  "ungleichmaessige erste schicht": [
+   "defects/first-layer-inconsistency"
+  ],
+  "ungleichmaessige extrusion": [
+   "defects/inconsistent-extrusion"
+  ],
+  "uniformly thin layers": [
+   "defects/under-extrusion"
+  ],
+  "unnecessary retractions": [
+   "causes/too-many-retractions"
+  ],
+  "unnoetige retraktionen": [
+   "causes/too-many-retractions"
+  ],
+  "unsuitable build surface": [
+   "causes/unsuitable-build-surface"
+  ],
+  "unsupported overhang or bridge": [
+   "causes/missing-supports"
+  ],
+  "unterextrusion": [
+   "defects/under-extrusion"
+  ],
+  "verschlissene duese": [
+   "causes/nozzle-worn-or-leaking"
+  ],
+  "verschlissene lager": [
+   "causes/worn-or-binding-motion-parts"
+  ],
+  "verschmutztes druckbett": [
+   "causes/contaminated-build-surface"
+  ],
+  "verschobene schichten": [
+   "defects/layer-shift"
+  ],
+  "verstopfte duese": [
+   "causes/partial-clog"
+  ],
+  "vertical fine artifacts": [
+   "defects/vfas"
+  ],
+  "vertical lines on walls": [
+   "defects/vfas"
+  ],
+  "vertikale linien": [
+   "defects/vfas"
+  ],
+  "very low layer height": [
+   "causes/layer-height-too-small"
+  ],
+  "verzug": [
+   "defects/warping"
+  ],
+  "vfas vertical fine artifacts": [
+   "defects/vfas"
+  ],
+  "vibrations": [
+   "defects/ringing"
+  ],
+  "visible seam": [
+   "defects/zits-blobs"
+  ],
+  "volumenstrom zu hoch": [
+   "causes/volumetric-flow-exceeded"
+  ],
+  "volumetric flow above the hotend limit": [
+   "causes/volumetric-flow-exceeded"
+  ],
+  "voron thermal and motion mechanics": [
+   "hardware/voron-thermal-mechanics"
+  ],
+  "waermekriechen": [
+   "causes/heat-creep"
+  ],
+  "wall separation": [
+   "defects/perimeter-separation"
+  ],
+  "wall thinner than the extrusion width": [
+   "causes/wall-thinner-than-line-width"
+  ],
+  "walls bulge": [
+   "defects/bulging"
+  ],
+  "walls too thin": [
+   "causes/too-few-perimeters"
+  ],
+  "wand duenner als linienbreite": [
+   "causes/wall-thinner-than-line-width"
+  ],
+  "warping corner lifting": [
+   "defects/warping"
+  ],
+  "weak or messy infill": [
+   "defects/weak-infill"
+  ],
+  "web like strings": [
+   "defects/stringing"
+  ],
+  "wet filament": [
+   "causes/wet-filament"
+  ],
+  "whiskers": [
+   "defects/stringing"
+  ],
+  "wipe": [
+   "key/wipe"
+  ],
+  "wood grain": [
+   "defects/extrusion-patterns"
+  ],
+  "worn bearing": [
+   "causes/worn-or-binding-motion-parts"
+  ],
+  "worn dirty or leaking nozzle": [
+   "causes/nozzle-worn-or-leaking"
+  ],
+  "worn drive gear": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "wrong e steps": [
+   "causes/extruder-not-calibrated"
+  ],
+  "wrong filament diameter setting": [
+   "causes/wrong-filament-diameter"
+  ],
+  "wrong plate side": [
+   "causes/unsuitable-build-surface"
+  ],
+  "wrong rotation distance": [
+   "causes/extruder-not-calibrated"
+  ],
+  "wrong size": [
+   "defects/dimensional-inaccuracy"
+  ],
+  "xy size compensation": [
+   "key/xy_size_compensation"
+  ],
+  "z banding": [
+   "defects/z-banding"
+  ],
+  "z drift": [
+   "causes/frame-thermal-drift"
+  ],
+  "z hop too high": [
+   "causes/zhop-too-high"
+  ],
+  "z hop zu hoch": [
+   "causes/zhop-too-high"
+  ],
+  "z offset": [
+   "klipper/z_offset",
+   "prusa-fw/z_offset"
+  ],
+  "z offset too high": [
+   "causes/z-offset-too-high"
+  ],
+  "z offset too low": [
+   "causes/z-offset-too-low"
+  ],
+  "zahnradspiel": [
+   "causes/extruder-gear-backlash-or-wear"
+  ],
+  "zits": [
+   "defects/zits-blobs"
+  ],
+  "zits blobs visible seam": [
+   "defects/zits-blobs"
+  ],
+  "zu heiss gedruckt": [
+   "causes/nozzle-temp-too-high"
+  ],
+  "zu kalt gedruckt": [
+   "causes/nozzle-temp-too-low"
+  ],
+  "zu schnell gedruckt": [
+   "causes/print-speed-too-high"
+  ],
+  "zu stark gequetscht": [
+   "causes/z-offset-too-low"
+  ],
+  "zu viel kuehlung": [
+   "causes/excessive-cooling"
+  ],
+  "zu viel material": [
+   "defects/over-extrusion"
+  ],
+  "zu wenig gequetscht": [
+   "causes/z-offset-too-high"
+  ],
+  "zu wenig infill": [
+   "causes/infill-too-sparse"
+  ],
+  "zu wenig kuehlung": [
+   "causes/insufficient-cooling"
+  ],
+  "zu wenig material": [
+   "defects/under-extrusion"
+  ],
+  "zu wenige deckschichten": [
+   "causes/top-layers-insufficient"
+  ],
+  "zu wenige waende": [
+   "causes/too-few-perimeters"
+  ],
+  "zufaellige naht": [
+   "causes/seam-random"
+  ]
+ }
+}
