@@ -43,12 +43,26 @@ Facts that live neither in the profiles nor in the knowledge library belong in *
    |---|---|---|---|---|---|---|
 
    Recommend changing **one thing at a time** and suggest a quick test print (e.g. a retraction test or two towers for stringing).
-6. **Apply only on request, and ask how for each change:**
+7. **Apply only on request, and ask how for each change:**
    - **In place:** `profiles.py set filament "<name>" key=value …`. This makes a backup in `backups/<timestamp>/` first.
    - **As a copy:** `profiles.py set filament "<name>" key=value … --copy "<name> - tuned"`. This is the only option for vendor presets, since vendor files are never written.
    - **A filament used on several printers:** prefer a per-printer copy (`"<name> @<PRINTER>"` with a `compatible_printers_condition` such as `printer_model=~/.*Voron_v2.*/`) over editing the shared original. Put printer-specific retraction tweaks in its `filament_retract_*` overrides, so the printer profile stays unchanged for other filaments.
    - Afterwards, tell the user to restart PrusaSlicer (the script warns if it is running). If PrusaSlicer is open with that preset modified, saving it in the GUI would overwrite the change.
    - To undo, copy the file back from `backups/`.
+
+## Workflow: calibrate a new filament (Ellis order)
+Use this for a new brand, type or (with an inconsistent brand) spool. It follows Ellis' Print Tuning Guide (`tuning/tuning-order.md`). Do one step per test print, change one variable at a time, and record each result in the user's own context (see "Integrating with your own printer context") before you move on.
+0. **Per printer, not per filament. Check, don't redo:** extruder calibration (`tuning/extruder-calibration.md`), build surface (`tuning/build-surface.md`), first layer squish (`tuning/first-layer-squish.md`, `test_prints("First_Layer_Patch")`). Redo them only after a hardware change, or when the first layer of step 4 shows a squish problem.
+1. **Material baseline:** `lookup` the material → `materials/*.md` for the drying, temperature window, enclosure and nozzle needs. Dry the filament first if the material doc says it is hygroscopic. Start from the vendor's temperature, and use `tuning/temperature-tuning.md` only when no trusted value exists. Check `max_temp` (workflow step 5).
+2. **Profile:** create a per-printer copy (`set_profile … copy_as`). Inherit from the closest generic preset of the same material, not from another brand's template. Before step 4, set `extrusion_multiplier = 1` (or the inherited value) and keep it there.
+3. **Max volumetric flow (optional, once per hotend × nozzle × material family):** `tuning/max-volumetric-flow.md` → `filament_max_volumetric_speed`. Do this first when the profile prints fast, since EM and PA drift when the hotend runs at its flow limit.
+4. **Pressure advance:** `tuning/pressure-advance.md`. Use the pattern generator, or the Klipper tower (`test_prints("square_tower")`). Save the value per filament in `start_filament_gcode` (`SET_PRESSURE_ADVANCE ADVANCE=…` on Klipper, edit the `M900 K` expression on Prusa).
+5. **Extrusion multiplier:** `tuning/extrusion-multiplier.md`, using `test_prints("EM_Cube")`. Do a 2 % sweep, then a 0.5 % sweep. Judge the widest top surface. Set the value in `extrusion_multiplier`.
+6. **Cooling and layer times:** `tuning/cooling-layer-times.md`. The fan and the minimum layer time are per material.
+7. **Retraction:** `tuning/retraction.md`, only if stringing remains after steps 1–6 and the filament is dry. Use the `filament_retract_*` overrides.
+8. **Cosmetic:** `tuning/infill-perimeter-overlap.md`, if pinholes remain on top surfaces.
+
+Re-tune PA (and check EM) after a nozzle, hotend or extruder change, a large temperature change, or an input-shaper or acceleration change. Show the planned sequence and the profile copy name before the first test print, and apply every value only after approval (workflow step 7).
 
 ## Key glossary (concept → key, profile type)
 - Temperature: `temperature`, `first_layer_temperature`, `bed_temperature`, `first_layer_bed_temperature`, `chamber_temperature` (filament)
