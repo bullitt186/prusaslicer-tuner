@@ -2,3 +2,5 @@ __pycache__/
 backups/
 build/
 .DS_Store
+test_prints/*
+!test_prints/fetch.sh

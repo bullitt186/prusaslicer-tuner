@@ -3,7 +3,7 @@
 Lets an AI agent read, explain, diff and (with your approval) edit **PrusaSlicer** printer, print and filament profiles, and diagnose print defects from photos or descriptions using a curated 3D-printing knowledge graph.
 
 - `profiles.py`: stdlib CLI with `list`, `show`, `diff` and `set`. It resolves vendor `inherits` chains (including vendor-scoped `*abstract*` parents) and built-in defaults, tags each value as `user`, `Vendor:Section` or `default`, and backs up profiles before editing them.
-- `server.py`: MCP server (stdio) exposing the profile tools plus `lookup`, `card` and `read_knowledge` over the knowledge graph. Its instructions are generated from `SKILL.md`.
+- `server.py`: MCP server (stdio) exposing the profile tools plus `lookup`, `card` and `read_knowledge` over the knowledge graph, and `test_prints` for the calibration STLs. Its instructions are generated from `SKILL.md`.
 - `SKILL.md`: the same workflow as a Claude Code skill.
 - `knowledge/`: topic-oriented OKF v0.2 bundle covering FDM fundamentals, defects, causes, tuning procedures, materials, hardware, firmware and mechanical behavior. It is mapped to PrusaSlicer keys and Klipper / Prusa firmware parameters.
 - `kg.py`: knowledge-graph compiler (`uv run kg.py check|fix|build|keys`). It validates `knowledge/` against `knowledge/schema.yaml`, generates the index, Relations blocks, views and `knowledge/graph.json`, and builds the viewer `build/graph.html`.
@@ -43,6 +43,7 @@ Tests: `python3 test_profiles.py` and `uv run test_kg.py`.
 
 - Code: [MIT](LICENSE).
 - `knowledge/` and `research/`: [CC BY 4.0](knowledge/LICENSE).
+- `test_prints/`: not redistributed. `test_prints/fetch.sh` downloads them from [Ellis' Print-Tuning-Guide repo](https://github.com/AndrewEllis93/Print-Tuning-Guide/tree/main/test_prints) (no license given, so all rights stay with the author) and the [Klipper PA tower](https://www.klipper3d.org/prints/square_tower.stl) (GPLv3).
 - Knowledge is paraphrased and attributed per document (`sources` frontmatter). Main sources:
   - [Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/)
   - the 3D printing Troubleshooting Guide dataset by J. Kang, K. Ahn and H. Kim (Konkuk University, CC BY 4.0)

@@ -25,5 +25,5 @@ See [first layer inconsistency](../defects/first-layer-inconsistency.md).
 <!-- generated:relations -->
 ## Relations
 - **Fixes:** [Frame thermal drift](../causes/frame-thermal-drift.md) (heat soak or compensate)
-- **Linked from:** [First layer inconsistency](../defects/first-layer-inconsistency.md)
+- **Linked from:** [First layer inconsistency](../defects/first-layer-inconsistency.md) · [First layer squish (Z offset)](first-layer-squish.md)
 <!-- /generated:relations -->

@@ -164,5 +164,16 @@ def read_knowledge(path: str = "index.md") -> str:
     return f.read_text(encoding="utf-8")
 
 
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
+def test_prints(match: str = "") -> str:
+    """List calibration test-print files (STL) with absolute paths, filtered by a substring of the path,
+    e.g. "First_Layer_Patch-0.25", "EM_Cube-0.95", "square_tower". When and how to use them: the
+    "Test prints" section of tuning/first-layer-squish.md, tuning/extrusion-multiplier.md, tuning/pressure-advance.md."""
+    files = sorted(p for p in (HERE / "test_prints").rglob("*.stl") if match.lower() in str(p.relative_to(HERE)).lower())
+    if not files:
+        return f"no test prints matching {match!r}. If the folder is empty, run {HERE / 'test_prints/fetch.sh'}"
+    return "\n".join(map(str, files))
+
+
 if __name__ == "__main__":
     mcp.run()  # ponytail: stdio only; remote (phone) needs streamable-http + auth in front

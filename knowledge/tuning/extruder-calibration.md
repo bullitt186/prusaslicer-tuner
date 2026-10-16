@@ -31,5 +31,5 @@ generated:
 ## Relations
 - **Fixes:** [Extruder not calibrated](../causes/extruder-not-calibrated.md) (calibrate rotation distance / e-steps)
 - **Calibrates:** `klipper/rotation_distance` · `prusa-fw/e_steps`
-- **Linked from:** [Under-extrusion](../defects/under-extrusion.md) · [Extrusion multiplier (flow)](extrusion-multiplier.md) · [Tuning order](tuning-order.md)
+- **Linked from:** [Under-extrusion](../defects/under-extrusion.md) · [Extrusion multiplier (flow)](extrusion-multiplier.md) · [Pressure advance / Linear advance](pressure-advance.md) · [Tuning order](tuning-order.md)
 <!-- /generated:relations -->
