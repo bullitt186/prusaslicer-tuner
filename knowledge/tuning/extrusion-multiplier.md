@@ -41,6 +41,7 @@ Get the files with the MCP tool `test_prints("EM_Cube")`. All cubes are 30×30×
 - **When:** for every new filament brand or type. Also for a new color or spool when the brand varies, and after a change of nozzle diameter, line width or layer height. Always do it **after** [pressure advance](pressure-advance.md) and [first layer squish](first-layer-squish.md). An oversquished first layer propagates up into the top surface.
 - **The label is a name tag only.** An STL carries no settings, so set `extrusion_multiplier` per cube yourself. PrusaSlicer has no per-object EM, so the cubes are printed one after another.
 - **How:** start with a coarse sweep in 2 % steps. Ellis starts at 0.92–0.98, which is a starting range and not a rule.[^ellis-extrusion-multiplier] Then refine around the best cube in 0.5 % steps by picking the matching labeled files. Use the slicer settings from *Procedure* above. If your layers are thick, scale the cube in Z, so that ≥ 2 infill layers remain under the top layers.
+- **One print instead of one per cube (Klipper/relative E):** place the cubes in a row (merged into one STL, or one object each), slice once at EM 1.0, then multiply the positive `E` of every XY move inside cube *i*'s X range by that cube's EM. Retract and deretract lines carry no XY and stay untouched. This saves the repeated start sequence (heat, mesh, homing) for each cube (field report).
 - Judge the center of each top surface. The edges always look a little overextruded.
 
 ## PrusaSlicer keys
