@@ -298,4 +298,9 @@ if __name__ == "__main__":
     if t != "stdio":
         mcp.settings.host = os.environ.get("MCP_HOST", "0.0.0.0")
         mcp.settings.port = int(os.environ.get("MCP_PORT", "8000"))
+        # DNS-rebinding protection stays on; name the Host headers a proxy sends, e.g. "mcp.example.org,10.0.0.5:*".
+        if os.environ.get("MCP_ALLOWED_HOSTS"):
+            from mcp.server.transport_security import TransportSecuritySettings
+            mcp.settings.transport_security = TransportSecuritySettings(
+                allowed_hosts=[h.strip() for h in os.environ["MCP_ALLOWED_HOSTS"].split(",") if h.strip()])
     mcp.run(transport=t)

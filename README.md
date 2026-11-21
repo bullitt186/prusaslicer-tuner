@@ -64,5 +64,6 @@ Tests: `python3 test_profiles.py` and `uv run test_kg.py`.
 | `SLICER_VERSION` | PrusaSlicer version on the server the 3MF is marked for, default `2.9.7` |
 | `PRUSALINK_<PRINTER>` | `http://user:password@host` for the PrusaLink fallback |
 | `MCP_TRANSPORT` | `stdio` (default) or `streamable-http`, with `MCP_HOST`/`MCP_PORT` |
+| `MCP_ALLOWED_HOSTS` | Host headers accepted over HTTP (comma-separated, `host:*` for any port); needed behind a proxy |
 
 `Dockerfile` runs it over streamable-http with the profile folder mounted read-only at `/profiles`. It has no auth of its own: keep it behind a gateway or an internal-only proxy. Tests: `uv run test_slicing.py` (set `PRUSA_SLICER=<binary>` to also slice for real).
