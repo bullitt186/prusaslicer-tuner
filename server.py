@@ -1,13 +1,14 @@
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["mcp>=1.2,<2"]  # ponytail: v1 FastMCP API; port to mcp 2.x MCPServer when v1 stops getting fixes
+# dependencies = ["mcp>=1.2,<2", "trimesh>=4", "numpy", "networkx"]  # ponytail: v1 FastMCP API; port to mcp 2.x MCPServer when v1 stops getting fixes
 # ///
 """MCP server exposing profiles.py + the knowledge library. Run: uv run server.py"""
-import contextlib, io, json, re, unicodedata
+import contextlib, io, json, os, re, tempfile, unicodedata, urllib.parse, urllib.request
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 import profiles
+import connect, slicing
 
 HERE = Path(__file__).resolve().parent
 KNOWLEDGE = HERE / "knowledge"
@@ -175,5 +176,126 @@ def test_prints(match: str = "") -> str:
     return "\n".join(map(str, files))
 
 
+# --- Slicing and printing through a self-hosted Prusa Connect (see connect.py for the env) ---
+MODELS = Path(os.environ.get("MODEL_CACHE", tempfile.gettempdir())) / "prusaslicer-tuner-models"
+
+
+def _fetch(model):
+    """Local path, http(s) URL or connect:<path in the Connect storage> -> local file."""
+    if model.startswith("connect:"):
+        f = MODELS / Path(model[8:]).name
+        f.parent.mkdir(parents=True, exist_ok=True); f.write_bytes(connect.download(model[8:]))
+        return f
+    if model.startswith(("http://", "https://")):
+        f = MODELS / (Path(urllib.parse.urlsplit(model).path).name or "model.stl")
+        f.parent.mkdir(parents=True, exist_ok=True)
+        with urllib.request.urlopen(model, timeout=120) as r:
+            f.write_bytes(r.read(200 * 1024 * 1024))
+        return f
+    f = Path(model).expanduser()
+    if not f.is_file():
+        raise FileNotFoundError(model)
+    return f
+
+
+def _safe(fn):
+    """Errors come back as text the model can act on, not as exceptions."""
+    try:
+        return fn()
+    except (connect.ConnectError, FileNotFoundError, ValueError, SystemExit) as e:
+        return f"error: {e}"
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
+def inspect_model(model: str) -> str:
+    """Size, triangle count, volume and watertightness of an STL/3MF/OBJ. `model`: local path,
+    http(s) URL, or connect:<path> for a file in the Prusa Connect storage."""
+    return _safe(lambda: json.dumps(slicing.inspect(_fetch(model))))
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
+def orient(model: str) -> str:
+    """Orientation candidates: as loaded, and each large flat face turned onto the bed, with height,
+    bed contact and overhang area (faces steeper than 45°). Pick one and pass its `rotation` to
+    slice(); explain the choice (strength direction, supports, surface quality) to the user."""
+    return _safe(lambda: json.dumps(slicing.orient_candidates(_fetch(model)), indent=1))
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
+def printers() -> str:
+    """Printers on the Prusa Connect server, with state and whether Connect can print on them."""
+    def go():
+        out = []
+        for d in connect.devices():
+            st = d.get("state") or {}
+            out.append({k: d.get(k) for k in ("id", "name", "model", "driver", "connected")} |
+                       {"state": st.get("/state"), "nozzle_c": st.get("/tools/0/nozzle_temp"),
+                        "bed_c": st.get("/temperature/bed"), "tools": st.get("/tool_count"),
+                        "can_print": "core.command.start_print" in d.get("capabilities", [])})
+        return json.dumps(out, indent=1)
+    return _safe(go)
+
+
+@mcp.tool(name="slice", annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False))
+def slice_model(model: str, printer: str, print_profile: str, filament: str, overrides: dict[str, str] | None = None,
+          rotation: list[list[float]] | None = None, slicer: str = "") -> str:
+    """Slice on the Prusa Connect server and return a preview; prints nothing.
+    printer/print_profile/filament: preset names from list_profiles. overrides: slicer keys -> values on top
+    (justify each from card()/lookup() and the user's calibration values). rotation: 3x3 from orient().
+    slicer: PrusaSlicer version on the server, empty = its default. Returns job_id for print()."""
+    def go():
+        src = _fetch(model)
+        version = slicer or os.environ.get("SLICER_VERSION", "2.9.7")
+        out = MODELS / f"{src.stem}.3mf"; out.parent.mkdir(parents=True, exist_ok=True)
+        built = slicing.build_3mf(src, out, printer, print_profile, filament, overrides, rotation, slicer_version=version)
+        stem = re.sub(r"[^A-Za-z0-9._-]+", "_", src.stem)[:60]
+        connect.upload(f"ai-slicing/{stem}.3mf", out.read_bytes())
+        j = connect.wait_job(connect.slice_job(f"ai-slicing/{stem}.3mf", f"ai-slicing/{stem}", slicer or None)["id"])
+        if j.get("state") != "done":
+            e = j.get("error") or {}
+            return f"slicing {j.get('state')}: {e.get('code')}: {e.get('message')}\n" + "\n".join((e.get("log") or [])[-15:])
+        r = j["result"]
+        return json.dumps({"job_id": j["id"], "file": r.get("path"), "slicer": r.get("slicer"),
+                           "print_time_min": round((r.get("estimated_seconds") or 0) / 60),
+                           "filament_g": r.get("filament_g"), "filament_type": r.get("filament_type"),
+                           "printer_model": r.get("printer_model"), "layer_height_mm": r.get("layer_height_mm"),
+                           "size_mm": built["size_mm"], "presets": [printer, print_profile, filament],
+                           "overrides": overrides or {}, "warnings": j.get("warnings") or []}, indent=1)
+    return _safe(go)
+
+
+@mcp.tool(name="print", annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True))
+def print_job(job_id: str, printer: str, confirm: bool = False, replace: bool = False) -> str:
+    """Start the G-code of a finished slice() job on a printer. Without confirm=true it only returns
+    what would happen: show that to the user (bed clear? right filament loaded?) and call again with
+    confirm=true only after they say yes. Falls back to PrusaLink when Connect cannot print there."""
+    def go():
+        j = connect.job(job_id)
+        if j.get("state") != "done":
+            return f"error: job {job_id} is {j.get('state')}, nothing to print"
+        r = j["result"]; name = Path(r["path"]).name
+        try:
+            d = connect.device(printer); dev_name = d.get("name")
+            can = "core.command.start_print" in d.get("capabilities", []) and d.get("connected")
+        except connect.ConnectError:
+            d, dev_name, can = None, printer, False
+        how = "Prusa Connect" if can else "PrusaLink fallback"
+        summary = (f"{name} on {dev_name} via {how}: {round((r.get('estimated_seconds') or 0) / 60)} min, "
+                   f"{r.get('filament_g')} g {r.get('filament_type')}, sliced for {r.get('printer_model')}")
+        if not confirm:
+            return "NOT STARTED. Confirm with the user, then call print(..., confirm=true):\n" + summary
+        if can:
+            connect.start_print(d["id"], r["path"], name, replace)
+        else:
+            connect.prusalink_print(printer, name, connect.download(r["path"]))
+        return "started: " + summary
+    return _safe(go)
+
+
 if __name__ == "__main__":
-    mcp.run()  # ponytail: stdio only; remote (phone) needs streamable-http + auth in front
+    # MCP_TRANSPORT=streamable-http for the homelab container; auth sits in front (gateway/Traefik).
+    t = os.environ.get("MCP_TRANSPORT", "stdio")
+    if t != "stdio":
+        mcp.settings.host = os.environ.get("MCP_HOST", "0.0.0.0")
+        mcp.settings.port = int(os.environ.get("MCP_PORT", "8000"))
+    mcp.run(transport=t)

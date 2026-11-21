@@ -51,3 +51,18 @@ Tests: `python3 test_profiles.py` and `uv run test_kg.py`.
   - community reports, cited per claim
 
   All trademarks belong to their owners.
+
+
+## Slicing and printing through Prusa Connect (optional)
+
+`slicing.py` builds a 3MF from your resolved presets (plus overrides and an orientation), `connect.py` sends it to a self-hosted [Prusa Connect](https://github.com/prusa3d/prusa-connect) with the official server-slicing extension and starts the print, PrusaLink as fallback. MCP tools: `inspect_model`, `orient`, `printers`, `slice`, `print` (needs `confirm=true`).
+
+| Env | Meaning |
+|---|---|
+| `CONNECT_URL`, `CONNECT_TOKEN` or `CONNECT_TOKEN_FILE` | Connect server and an API credential (operate scope) |
+| `CONNECT_STORAGE` | storage resource for projects and G-code, default `local` |
+| `SLICER_VERSION` | PrusaSlicer version on the server the 3MF is marked for, default `2.9.7` |
+| `PRUSALINK_<PRINTER>` | `http://user:password@host` for the PrusaLink fallback |
+| `MCP_TRANSPORT` | `stdio` (default) or `streamable-http`, with `MCP_HOST`/`MCP_PORT` |
+
+`Dockerfile` runs it over streamable-http with the profile folder mounted read-only at `/profiles`. It has no auth of its own: keep it behind a gateway or an internal-only proxy. Tests: `uv run test_slicing.py` (set `PRUSA_SLICER=<binary>` to also slice for real).

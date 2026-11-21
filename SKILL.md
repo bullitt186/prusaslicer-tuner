@@ -79,3 +79,11 @@ Re-tune PA (and check EM) after a nozzle, hotend or extruder change, a large tem
 
 ## Extending the knowledge library
 Rules: `knowledge/maintenance.md`; schema and controlled vocabularies: `knowledge/schema.yaml`. For a new source, put one raw report per URL under `research/raw/` (or a deterministic split script, like `research/import_troubleshooting_guide.py`), record it in `research/coverage.md`, write a mapping table (entry → existing concept / alias / new concept), then consolidate: prefer adding an edge with a new `source`, or an `altLabel`, over a new file. New problems need ranked `caused_by`; new causes need `check` and `fixed_by`; keys in `sets` must exist (`uv run kg.py keys` after regenerating `prusaslicer_defaults.ini`). Run `uv run kg.py fix`: it regenerates `graph.json` and the viewer `build/graph.html`, and refuses to write anything while any error exists. Never hand-edit `<!-- generated:… -->` blocks; never commit knowledge with `--no-verify`.
+
+## Slicing and printing (self-hosted Prusa Connect)
+Needs the MCP server with `CONNECT_URL` and `CONNECT_TOKEN` set, and the server-slicing extension installed on that Connect. No desktop PrusaSlicer involved: the server builds a 3MF from the user's own presets and Connect slices it with an empty datadir.
+1. `printers()`: which printers exist, their state, and whether Connect can start prints there (`can_print`).
+2. `inspect_model(model)` and `orient(model)`: `model` is a local path, an http(s) URL or `connect:<path>` in the Connect storage. Pick an orientation and say why (load direction, supports, visible faces).
+3. `list_profiles` → choose printer, print and filament presets that match the printer and the loaded spool. Use the user's own calibrated presets over vendor ones. Every override needs a reason from `card()`/`lookup()` or the user's calibration notes.
+4. `slice(model, printer, print_profile, filament, overrides, rotation)` → preview: time, grams, material, printer model, warnings. If it fails, read the slicer log it returns before changing anything.
+5. `print(job_id, printer)` **without** `confirm` first. Show the summary and ask: bed clear, right filament loaded, plate fitted? Only after an explicit yes call `print(..., confirm=true)`. Never confirm on the user's behalf.
