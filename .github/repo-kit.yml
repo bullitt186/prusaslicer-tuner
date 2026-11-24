@@ -1,0 +1,8 @@
+# repo-kit settings for PR hygiene. See https://github.com/bullitt186/repo-kit
+test_paths:
+  - test_*.py
+exempt_paths:          # not code: knowledge content, source reports, generated PrusaSlicer data
+  - knowledge/**
+  - research/raw/**
+  - prusaslicer_defaults.ini
+  - prusaslicer_keys.json

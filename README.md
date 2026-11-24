@@ -33,7 +33,7 @@ Keep facts about *your* printers (hardware, hosts, your own calibration values) 
 
 ## Contributing knowledge
 
-Enable the hooks once: `git config core.hooksPath .githooks`. They run `kg.py check` before commits and pushes, and CI repeats the checks. Rules: `knowledge/maintenance.md`.
+Enable the hooks once: `git config core.hooksPath .githooks`. They run `kg.py check` before commits and pushes, and CI repeats the checks. Rules: `knowledge/maintenance.md`. Coding agents and people: read [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md) (Definition of Done) first.
 
 **Optional privacy gate:** list regexes for your private hostnames and names in `~/.config/prusaslicer-tuner/private-patterns.txt` (or `$PRUSASLICER_TUNER_PRIVATE_PATTERNS`), and the pre-commit hook will refuse commits that add matching lines.
 
