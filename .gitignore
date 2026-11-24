@@ -4,3 +4,5 @@ build/
 .DS_Store
 test_prints/*
 !test_prints/fetch.sh
+.claude/settings.local.json
+.claude/worktrees/
