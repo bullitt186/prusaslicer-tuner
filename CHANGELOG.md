@@ -11,5 +11,5 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions: [Sem
   `AGENTS.md` is the single instruction file (`CLAUDE.md` imports it), `CONTRIBUTING.md` holds
   the Definition of Done that every pull request is reviewed against, a pull request template,
   issue forms, and architecture decision records in `docs/adr/` (ADR-0002 knowledge graph,
-  ADR-0003 personal printer facts). The new `PR hygiene` check fails when code changes come
+  ADR-0003 personal printer facts), and `docs/SCOPE.md` with purpose and non-goals. The new `PR hygiene` check fails when code changes come
   without a test or changelog change, or when an ADR or a Markdown link is broken.

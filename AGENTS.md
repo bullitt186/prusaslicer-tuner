@@ -89,6 +89,8 @@ issues and ADRs are not up for silent change.
 
 ### Purpose
 
+Scope and non-goals: [docs/SCOPE.md](docs/SCOPE.md)
+
 prusaslicer-tuner lets an AI agent read, explain, diff and (with the user's
 approval) edit PrusaSlicer printer, print and filament profiles, and diagnose
 print defects from a curated FDM knowledge graph. It ships as an MCP server
