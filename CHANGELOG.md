@@ -7,6 +7,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions: [Sem
 
 ### Contributors
 
+- The repo-kit CI standard is complete: CI lints and formats the Python scripts with Ruff and
+  type-checks them with mypy; the scripts' dependencies are pinned in `*.py.lock` files (`uv run`
+  uses them); a weekly workflow scans those locks for known vulnerabilities and runs mutation
+  testing (mutmut) on `kg.py` and `profiles.py`; workflows have read-only token permissions and
+  actions pinned to commit SHAs. The code was reformatted by Ruff; behaviour is unchanged.
 - One setup for all coding agents and people ([repo-kit](https://github.com/bullitt186/repo-kit)):
   `AGENTS.md` is the single instruction file (`CLAUDE.md` imports it), `CONTRIBUTING.md` holds
   the Definition of Done that every pull request is reviewed against, a pull request template,

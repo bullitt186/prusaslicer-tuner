@@ -8,6 +8,7 @@ Without a path the pinned commit is cloned into a temp dir. Output: research/raw
 Simplify3D (#1-27), Prusa Knowledge Base (#28-33), All3DP (#1-42). Resin/SLA entries are skipped.
 Raw files are research input, not knowledge: consolidate them into knowledge/ via the mapping table.
 """
+
 import re
 import subprocess
 import sys
@@ -19,13 +20,24 @@ COMMIT = "cedd5fb"
 FILE = "3D-Printer-Troubleshooting-Guide-Markdown.md"
 OUT = Path(__file__).resolve().parent / "raw" / "troubleshooting-guide"
 BLOCKS = {  # block id -> (title, original index URL)
-    "simplify3d": ("Simplify3D Print Quality Troubleshooting Guide", "https://www.simplify3d.com/resources/print-quality-troubleshooting/"),
-    "prusa-kb": ("Prusa Knowledge Base — Print quality troubleshooting", "https://help.prusa3d.com/category/print-quality-troubleshooting_225"),
-    "all3dp": ("All3DP — Common 3D printing problems", "https://all3dp.com/1/common-3d-printing-problems-troubleshooting-3d-printer-issues/"),
+    "simplify3d": (
+        "Simplify3D Print Quality Troubleshooting Guide",
+        "https://www.simplify3d.com/resources/print-quality-troubleshooting/",
+    ),
+    "prusa-kb": (
+        "Prusa Knowledge Base — Print quality troubleshooting",
+        "https://help.prusa3d.com/category/print-quality-troubleshooting_225",
+    ),
+    "all3dp": (
+        "All3DP — Common 3D printing problems",
+        "https://all3dp.com/1/common-3d-printing-problems-troubleshooting-3d-printer-issues/",
+    ),
 }
 SLA = {("prusa-kb", 30), ("prusa-kb", 31), ("prusa-kb", 32), ("prusa-kb", 33)} | {("all3dp", n) for n in range(35, 43)}
-CITATION = ("Kang, J., Ahn, K., Kim, H. (Konkuk University): 3D Printing Troubleshooting Guide dataset, "
-            "CC BY 4.0, https://data.mendeley.com/datasets/88pcwt65yp")
+CITATION = (
+    "Kang, J., Ahn, K., Kim, H. (Konkuk University): 3D Printing Troubleshooting Guide dataset, "
+    "CC BY 4.0, https://data.mendeley.com/datasets/88pcwt65yp"
+)
 
 
 def slug(s):
@@ -69,12 +81,13 @@ def main():
             skipped.append(f"{block} #{n} {title}")
             continue
         name = f"{block}-{n:02d}-{slug(title)}.md"
-        causes = [re.sub(r"^#+\s*\d*\\?\)?\s*", "", l).strip() for l in body if l.startswith("## ")]
+        causes = [re.sub(r"^#+\s*\d*\\?\)?\s*", "", line).strip() for line in body if line.startswith("## ")]
         body_text = re.sub(r"\n{3,}", "\n\n", "\n".join(body)).strip()
         (OUT / name).write_text(
-            f"---\nsource_block: {block}\nentry: {n}\ntitle: \"{title}\"\norigin: {BLOCKS[block][1]}\n"
-            f"dataset: {REPO}/blob/{COMMIT}/{FILE}\ncitation: \"{CITATION}\"\n---\n# {title}\n\n{body_text}\n",
-            encoding="utf-8")
+            f'---\nsource_block: {block}\nentry: {n}\ntitle: "{title}"\norigin: {BLOCKS[block][1]}\n'
+            f'dataset: {REPO}/blob/{COMMIT}/{FILE}\ncitation: "{CITATION}"\n---\n# {title}\n\n{body_text}\n',
+            encoding="utf-8",
+        )
         kept.append((name, title, causes))
     with open(OUT / "_index.md", "w", encoding="utf-8") as f:
         f.write(f"# Troubleshooting Guide dataset, split ({REPO} @ {COMMIT})\n\n{CITATION}\n\n")

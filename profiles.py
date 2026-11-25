@@ -11,8 +11,17 @@
 Config dir: $PRUSASLICER_DIR, else PrusaSlicer's default data dir for this OS
 (macOS ~/Library/Application Support/PrusaSlicer, Linux ~/.config/PrusaSlicer, Windows %APPDATA%/PrusaSlicer).
 """
-import argparse, os, re, shutil, subprocess, sys, time
+
+import argparse
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
 from pathlib import Path
+from typing import Any
+
 
 def _default_root():
     if sys.platform == "darwin":
@@ -42,7 +51,7 @@ def parse_kv(text):
 
 def load_vendors(root=None):
     """{vendor: {(type, name): dict}}. Abstract parents (*common* ...) are only unique per vendor."""
-    vendors = {}
+    vendors: dict[str, Any] = {}
     for f in sorted(((root or ROOT) / "vendor").glob("*.ini")):
         secs, cur = vendors.setdefault(f.stem, {}), None
         for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
@@ -91,8 +100,9 @@ def resolve_vendor(typ, name, vendors, hint=None, root=None):
     if name.endswith(" @Template"):
         name, cands = name[: -len(" @Template")], ["Templates"]
     else:
-        cands = sorted((v for v in vendors if (typ, name) in vendors[v]),
-                       key=lambda v: (v == "Templates", v != "PrusaResearch", v))
+        cands = sorted(
+            (v for v in vendors if (typ, name) in vendors[v]), key=lambda v: (v == "Templates", v != "PrusaResearch", v)
+        )
     cands = [v for v in cands if (typ, name) in vendors.get(v, {})]
     if not cands:
         raise SystemExit(f"not found: {typ} '{name}' (no user file, no vendor section)")
@@ -111,8 +121,11 @@ def resolve(typ, name, vendors, root=None):
         return resolve_vendor(typ, name, vendors, root=root)
     own, eff = parse_kv(f.read_text(encoding="utf-8")), _defaults(typ, root)
     for parent in filter(None, (p.strip() for p in own.get("inherits", "").split(";"))):
-        eff.update(resolve(typ, parent, vendors, root) if user_file(typ, parent, root).exists()
-                   else resolve_vendor(typ, parent, vendors, own.get("compatible_printers_condition"), root))
+        eff.update(
+            resolve(typ, parent, vendors, root)
+            if user_file(typ, parent, root).exists()
+            else resolve_vendor(typ, parent, vendors, own.get("compatible_printers_condition"), root)
+        )
     for k, v in own.items():
         if k not in eff or eff[k][0] != v:
             eff[k] = (v, "user")
@@ -192,20 +205,33 @@ def cmd_set(a):
     dst = apply_set(a.type, a.name, changes, a.copy)
     print(f"wrote: {dst}")
     if subprocess.run(["pgrep", "-if", "PrusaSlicer"], capture_output=True).returncode == 0:
-        print("NOTE: PrusaSlicer is running - restart it to load the change; saving that preset in the GUI would overwrite it.")
+        print(
+            "NOTE: PrusaSlicer is running - restart it to load the change; saving that preset in the GUI would overwrite it."
+        )
 
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("list").set_defaults(f=cmd_list)
-    s = sub.add_parser("show"); s.add_argument("type"); s.add_argument("name")
-    s.add_argument("--grep"); s.add_argument("--overrides", action="store_true", help="only keys differing from parent")
+    s = sub.add_parser("show")
+    s.add_argument("type")
+    s.add_argument("name")
+    s.add_argument("--grep")
+    s.add_argument("--overrides", action="store_true", help="only keys differing from parent")
     s.set_defaults(f=cmd_show)
-    d = sub.add_parser("diff"); d.add_argument("type"); d.add_argument("a"); d.add_argument("b"); d.add_argument("--grep")
+    d = sub.add_parser("diff")
+    d.add_argument("type")
+    d.add_argument("a")
+    d.add_argument("b")
+    d.add_argument("--grep")
     d.set_defaults(f=cmd_diff)
-    e = sub.add_parser("set"); e.add_argument("type"); e.add_argument("name"); e.add_argument("changes", nargs="+")
-    e.add_argument("--copy", metavar="NEW_NAME"); e.set_defaults(f=cmd_set)
+    e = sub.add_parser("set")
+    e.add_argument("type")
+    e.add_argument("name")
+    e.add_argument("changes", nargs="+")
+    e.add_argument("--copy", metavar="NEW_NAME")
+    e.set_defaults(f=cmd_set)
     a = p.parse_args(argv)
     a.f(a)
 

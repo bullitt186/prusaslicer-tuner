@@ -1,0 +1,10 @@
+# Ruff lint and format (repo-kit CI standard, category 2): `uvx ruff check . && uvx ruff format --check .`
+line-length = 120
+target-version = "py310"
+
+[lint]
+select = ["E4", "E7", "E9", "F", "W", "B", "UP", "I"]
+
+[lint.per-file-ignores]
+# The test scripts set up fixtures (kg.ROOT, PROFILES_BACKUP_DIR) before importing the module under test.
+"test_*.py" = ["E402"]

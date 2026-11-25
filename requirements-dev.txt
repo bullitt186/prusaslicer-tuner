@@ -1,0 +1,10 @@
+# Development tools for the checks in AGENTS.md (the scripts themselves pin their dependencies in
+# the PEP 723 header and the *.py.lock files). Exact versions; Dependabot (pip) proposes updates.
+# pyyaml and mcp match the script locks, for mypy and mutation testing.
+ruff==0.17.4
+mypy==2.4.1
+types-PyYAML==6.0.12.20261113
+pytest==9.2.0
+mutmut==3.8.1
+pyyaml==6.0.4
+mcp==1.30.0
