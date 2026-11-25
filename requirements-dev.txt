@@ -7,4 +7,4 @@ types-PyYAML==6.0.12.20261113
 pytest==9.2.0
 mutmut==3.8.1
 pyyaml==6.0.4
-mcp==1.30.0
+mcp==2.3.0
