@@ -3,10 +3,18 @@
 # dependencies = ["mcp>=1.2,<2"]  # ponytail: v1 FastMCP API; port to mcp 2.x MCPServer when v1 stops getting fixes
 # ///
 """MCP server exposing profiles.py + the knowledge library. Run: uv run server.py"""
-import contextlib, io, json, re, unicodedata
+
+import contextlib
+import io
+import json
+import re
+import unicodedata
 from pathlib import Path
+from typing import Any
+
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
+
 import profiles
 
 HERE = Path(__file__).resolve().parent
@@ -15,7 +23,9 @@ KNOWLEDGE = HERE / "knowledge"
 INSTRUCTIONS = (
     "Via MCP: `profiles.py list/show/diff/set` = tools list_profiles/show_profile/diff_profiles/set_profile; "
     "`knowledge/<path>` = read_knowledge(path). Firmware config (Klipper printer.cfg, Marlin/Prusa settings) isn't "
-    "accessible via this server; obtain it with the user's own tools or ask the user what to check.\n" + (HERE / "SKILL.md").read_text(encoding="utf-8").split("---", 2)[2])
+    "accessible via this server; obtain it with the user's own tools or ask the user what to check.\n"
+    + (HERE / "SKILL.md").read_text(encoding="utf-8").split("---", 2)[2]
+)
 
 mcp = FastMCP("prusaslicer-tuner", instructions=INSTRUCTIONS)
 
@@ -62,7 +72,7 @@ def set_profile(type: str, name: str, changes: dict[str, str], copy_as: str = ""
     return _cli(*argv, *(["--copy", copy_as] if copy_as else []))
 
 
-_graph: dict = {"mtime": None, "g": None}
+_graph: dict[str, Any] = {"mtime": None, "g": None}
 
 
 def _g():
@@ -87,9 +97,11 @@ def lookup(term: str) -> str:
     g, q = _g(), _norm(term)
     if not q:
         return "empty term"
-    hits = {}
+    hits: dict[str, Any] = {}
     for lab, ids in g["aliases"].items():
-        score = 3 if lab == q else 2 if lab.startswith(q) or q.startswith(lab) else 1 if q in lab or lab in q else 0
+        score: float = (
+            3 if lab == q else 2 if lab.startswith(q) or q.startswith(lab) else 1 if q in lab or lab in q else 0
+        )
         if not score and set(q.split()) & set(lab.split()) - {"of", "the", "and", "to", "on", "in"}:
             score = 0.5
         for i in ids if score else []:
@@ -97,10 +109,14 @@ def lookup(term: str) -> str:
                 hits[i] = (score, lab)
     if not hits:
         return f"no concept matches '{term}'. Try a shorter term or read_knowledge('index.md')."
-    ranked = sorted(hits.items(), key=lambda kv: (-kv[1][0], g["nodes"][kv[0]]["type"] in ("key", "firmware_param"), len(kv[1][1])))[:12]
+    ranked = sorted(
+        hits.items(), key=lambda kv: (-kv[1][0], g["nodes"][kv[0]]["type"] in ("key", "firmware_param"), len(kv[1][1]))
+    )[:12]
     n = g["nodes"]
-    return "\n".join(f"{i} [{n[i]['type']}] {n[i]['label']}" + (f"  (matched: {lab})" if lab != _norm(n[i]["label"]) else "")
-                     for i, (_, lab) in ranked)
+    return "\n".join(
+        f"{i} [{n[i]['type']}] {n[i]['label']}" + (f"  (matched: {lab})" if lab != _norm(n[i]["label"]) else "")
+        for i, (_, lab) in ranked
+    )
 
 
 _ARROW = {"up": "↑", "down": "↓", "set": "=", "enable": "on", "disable": "off", "check": "?"}
@@ -109,7 +125,10 @@ _ARROW = {"up": "↑", "down": "↓", "set": "=", "enable": "on", "disable": "of
 def _q(e):
     b = [f"#{e['rank']}"] if "rank" in e else []
     b += [e["evidence"]] if "evidence" in e else []
-    b += [f"when {k}=" + ",".join(x.split("/")[-1] for x in (v if isinstance(v, list) else [v])) for k, v in (e.get("when") or {}).items()]
+    b += [
+        f"when {k}=" + ",".join(x.split("/")[-1] for x in (v if isinstance(v, list) else [v]))
+        for k, v in (e.get("when") or {}).items()
+    ]
     b += [f"via {e['via']}"] if "via" in e else []
     b += [e["action"]] if e.get("action") else []
     b += ["src " + ",".join(e["source"] if isinstance(e["source"], list) else [e["source"]])] if e.get("source") else []
@@ -128,16 +147,26 @@ def card(id: str) -> str:
     n = g["nodes"].get(id)
     if not n:
         return f"unknown id '{id}'. Use lookup(term)."
-    lab = lambda i: f"{i} \"{g['nodes'][i]['label']}\"" if i in g["nodes"] else str(i)
+
+    def lab(i):
+        return f'{i} "{g["nodes"][i]["label"]}"' if i in g["nodes"] else str(i)
+
     out = [f"{id} [{n['type']}] {n['label']}"]
     if n.get("altLabel"):
         out.append("also: " + ", ".join(n["altLabel"]))
     for k in ("description", "check", "scope", "set_in"):
         if n.get(k):
             out.append(f"{k}: {n[k]}")
-    inv = {"caused_by": "causes", "fixed_by": "fixes", "prone_to": "affects", "calibrates": "calibrated_by",
-           "broader": "narrower", "related": "related", "overrides": "overridden_by"}
-    rel = {}
+    inv = {
+        "caused_by": "causes",
+        "fixed_by": "fixes",
+        "prone_to": "affects",
+        "calibrates": "calibrated_by",
+        "broader": "narrower",
+        "related": "related",
+        "overrides": "overridden_by",
+    }
+    rel: dict[str, Any] = {}
     for e in g["edges"]:
         if e["s"] == id:
             rel.setdefault(e["p"], []).append((e.get("rank", 99), (lab(e["o"]) if e["o"] else "(settings)") + _q(e)))
@@ -150,7 +179,7 @@ def card(id: str) -> str:
         out.append(f"{p}:")
         out += [f"  - {t}" for _, t in sorted(items)]
     if n.get("path"):
-        out.append(f"article: read_knowledge(\"{n['path']}\")")
+        out.append(f'article: read_knowledge("{n["path"]}")')
     return "\n".join(out)
 
 
@@ -160,7 +189,9 @@ def read_knowledge(path: str = "index.md") -> str:
     then e.g. defects/stringing.md, tuning/retraction.md, materials/petg.md."""
     f = (KNOWLEDGE / path).resolve()
     if not f.is_relative_to(KNOWLEDGE) or f.suffix != ".md" or not f.is_file():
-        return f"not found: {path}. Docs: " + json.dumps(sorted(str(p.relative_to(KNOWLEDGE)) for p in KNOWLEDGE.rglob("*.md")))
+        return f"not found: {path}. Docs: " + json.dumps(
+            sorted(str(p.relative_to(KNOWLEDGE)) for p in KNOWLEDGE.rglob("*.md"))
+        )
     return f.read_text(encoding="utf-8")
 
 
@@ -169,7 +200,9 @@ def test_prints(match: str = "") -> str:
     """List calibration test-print files (STL) with absolute paths, filtered by a substring of the path,
     e.g. "First_Layer_Patch-0.25", "EM_Cube-0.95", "square_tower". When and how to use them: the
     "Test prints" section of tuning/first-layer-squish.md, tuning/extrusion-multiplier.md, tuning/pressure-advance.md."""
-    files = sorted(p for p in (HERE / "test_prints").rglob("*.stl") if match.lower() in str(p.relative_to(HERE)).lower())
+    files = sorted(
+        p for p in (HERE / "test_prints").rglob("*.stl") if match.lower() in str(p.relative_to(HERE)).lower()
+    )
     if not files:
         return f"no test prints matching {match!r}. If the folder is empty, run {HERE / 'test_prints/fetch.sh'}"
     return "\n".join(map(str, files))

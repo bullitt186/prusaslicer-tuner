@@ -1,0 +1,51 @@
+name: Weekly checks
+
+# Scheduled categories of the repo-kit CI standard; reporting only, never on pull requests.
+# - vulnerability scan: osv-scanner over the script lockfiles (*.py.lock) and requirements-dev.txt
+# - mutation testing: mutmut over kg.py and profiles.py (scripts/mutate.sh --all)
+
+on:
+  schedule:
+    - cron: "29 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  osv-scanner:
+    name: Vulnerability scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Scan
+        uses: google/osv-scanner-action/osv-scanner-action@32d3cd482bdadfb38b186c0ad1b031902d55d932 # v2.7.1
+        with:
+          scan-args: |-
+            --lockfile=uv.lock:kg.py.lock
+            --lockfile=uv.lock:server.py.lock
+            --lockfile=uv.lock:test_kg.py.lock
+            --lockfile=requirements.txt:requirements-dev.txt
+
+  mutation:
+    name: Mutation testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+      - name: mutmut
+        run: bash scripts/mutate.sh --all | tee mutate.log
+      - name: Report mutation score
+        if: always()
+        run: |
+          {
+            echo "## Mutation testing (kg.py, profiles.py)"
+            echo
+            grep '^Score:' mutate.log || echo "No score: the run did not finish."
+            echo
+            echo '```'
+            uv run --no-project --with-requirements requirements-dev.txt mutmut results 2>/dev/null \
+              | grep -v ': not checked$' | head -200 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -165,11 +165,14 @@ their own printers. See `README.md`.
 | Task | Command |
 |---|---|
 | Install / set up | Python 3.10+ and [uv](https://docs.astral.sh/uv/); once per clone `git config core.hooksPath .githooks` |
-| Fast check (before every commit, also the stop hook) | `uv run kg.py check && uv run test_kg.py && python3 test_profiles.py` |
-| Full check (before every pull request; what CI `knowledge-graph` runs) | `uv run kg.py check && uv run kg.py fix -q && git diff --exit-code -- knowledge && uv run test_kg.py && python3 test_profiles.py` |
-| Mutation testing of changed code | not set up yet (no tool chosen; #3) |
+| Fast check (before every commit, also the stop hook) | `uv run --locked kg.py check && uv run --locked test_kg.py && python3 test_profiles.py && scripts/lint.sh` (`scripts/lint.sh`: `ruff check`, `ruff format --check`, `mypy`) |
+| Full check (before every pull request; what CI `knowledge-graph` runs) | `uv run --locked kg.py check && uv run --locked kg.py fix -q && git diff --exit-code -- knowledge && uv run --locked test_kg.py && python3 test_profiles.py && scripts/lint.sh` |
+| Mutation testing of changed code | `scripts/mutate.sh` (mutmut on `kg.py`/`profiles.py` when changed against `origin/main`; `--results` lists survivors; weekly in `scheduled.yml`) |
 
-There is no linter, formatter or type checker yet (#3).
+Lint, format and type check: Ruff (`ruff.toml`) and mypy (`mypy.ini`, strict except that
+functions without annotations are allowed; annotate a function when you change it), in the
+versions of `requirements-dev.txt`. The scripts pin their dependencies in `*.py.lock`
+(`uv lock --script <file>`); refresh a lock with `--upgrade` after changing the PEP 723 header.
 
 ### Rules specific to this repository
 
